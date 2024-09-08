@@ -1,0 +1,78 @@
+1. Quantum field theory
+
+    It's a change in picture 
+    Instead of considering dot matter or objects, we consider fields of them 
+    It's a complete change in viewpoint, more generalized 
+
+2. Correlation functions
+
+    They are the new equiv of scattering matrix or Hamiltonian in QM
+
+3. OPE and algebra
+
+    what is OPE, how do we get an equiv algebra
+
+4. Conformal field theories
+
+5. 2D CFTs and chirality
+
+6. RCFTs
+
+7. W algebras
+
+    Def
+    W algebra can be written W(2, ...)
+    There is always a 2
+    Removing the 1
+    1.5, 2.5, etc
+    We don't know which exist and which don't, above writing not unique
+
+
+
+8. Objective
+
+9. The Sigma model
+
+10. Sigma model on Lie algebras
+
+11. Conformality at two levels
+
+12. Geometrical obstruction
+
+13. The topological term
+
+14. The WZW model
+
+
+
+15. Toda field theory
+
+16. Generalizing conditions
+
+17. First-classness of the conditions
+
+18. Conformality of the reduction
+
+19. Other conditions
+
+    Conditions for algorithm, for positive mass, for logic, for BRST
+
+20. Good gradings
+
+    We simplify everything in good gradings
+
+20.1. W^k(g,x,f)
+
+
+
+21. Good gradings
+
+    What is a good grading? Diagram of injective surjective of ad f 
+
+22. From shifting constant to blocks
+
+23. From Hamiltonian term to pyramids
+
+24. Reading a pyramid
+
+25. Infinite W algebra

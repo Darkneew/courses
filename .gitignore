@@ -6,3 +6,9 @@
 *.aux
 *.blg
 *.bbl
+*.nav
+*.fls
+*.fdb_latexmk
+*.run.xml
+*.synctex.gz
+*.snm

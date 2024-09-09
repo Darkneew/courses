@@ -1,78 +1,160 @@
-1. Quantum field theory
+0.5. Introduction 
+    We will start by giving an introduction to the field of 2D CFTs
 
-    It's a change in picture 
-    Instead of considering dot matter or objects, we consider fields of them 
-    It's a complete change in viewpoint, more generalized 
+1. Quantum field theory
+    From QM, it's a change of picture 
+    Fields of matter instead of dot matter or objects
+    We can get back QM with specific fields using adapted Lagrangians
+    Two visions: operator and path-integral
 
 2. Correlation functions
+    They are the equiv to scattering matrix or Hamiltonian in QM
+    Explain formulas on slide
+    It can be negative and doesn't have a defined density. 
+    It is the natural generalization of statistic's correlation.
 
-    They are the new equiv of scattering matrix or Hamiltonian in QM
+3. Conformal field theories
+    Poincaré algebra preserved by QFT
+    Symmetry gives information on the theory
+    What is conformal transformation 
+    Hence what is a conformal symmetry
 
-3. OPE and algebra
-
-    what is OPE, how do we get an equiv algebra
-
-4. Conformal field theories
+4. Conformal Generators
+    There is the Lorentz group, the translations
+    Dilatations and special conformal transformations
 
 5. 2D CFTs and chirality
+    DRAW
+    Now let's consider a 2D theory
+    If 2D => C, it is just particles moving in 1D
+    If 2D => manifold, string moving in manifold, on the surface of which there can be excitations 
+    Particles in 1D + massless => speed = c
+    Particles either go left or right, decoupled
+    We take chiral coordinates 
+    As a manifestation of this, energy-momentum tensor also decouples 
+    It is the momentum of particles going left or right
 
-6. RCFTs
+6. Virasoro algebra
+    We also have the local conformal group represented in the theory
+    In 2D, it is infinite dimensional: Virasoro algebra, decomposition of the energy-momentum tensor 
+    This leads to a partition of the CFT in Verma modules
 
-7. W algebras
+6.1 RCFTs
+    Chiral algebra
+    For any CFT we don't know if there is a chiral algebra
+    The modules are all physically possible (positive mass etc) modules of the chiral algebra
+    There is always a Virasoro algebra inside 
+    Hence what are the algebras that can do this? 
 
-    Def
-    W algebra can be written W(2, ...)
-    There is always a 2
-    Removing the 1
+7 OPE and algebra
+    I speak of algebra but what algebra
+    OPE, only makes sense inside of a correlation function
+    There is always I such that i > I, C_i = 0
+    This structure is called in mathematics a vertex operator algebra
+    Now a chiral algebra with additional restrictrions (generated from a finite number of primary fields and by the energy momentum tensor) is called a W algebra. We write 
+    W(2, \dots)
+    Ex: Zaclamidov W(2, 3) algebra 
+    There is always a 2 since it is the energy momentum tensor
+    We will see after how 1s are generated, and any 1 can be generated this way
     1.5, 2.5, etc
     We don't know which exist and which don't, above writing not unique
 
 
 
-8. Objective
+8. The WZW model Transition slide
+    Now, the objective will be to generate W algebras
+    W algebras are hard to generate, hard to study
+    We know some series, some isolated W algebras, but we are far from knowing them all
+    The idea is to use the rich theory of Lie structures to build W algebras
+    We want a 2D RCFT modelling particles on a Lie group for exemple
 
 9. The Sigma model
+    Very basic model describing a variety of situations
+    accounts for the momentum and only the momentum (aka massless)
+    basically an embedding of Sigma on X accounting for the geometry
 
 10. Sigma model on Lie algebras
+    The model can be defined on a Lie algebra. Then, taking the exponential map, we can get it back on a Lie group
+    The Cartan Maurer form appear, symbol of the geometry of G
 
 11. Conformality at two levels
+    Ofc should be conformal: we can zoom the string itself
+    But should also be conformal on the Lie group, can zoom or dezoom the group 
+    At least it is the case on a flat space 
+    Similar to cft where we have T thanks to translation symmetry which decouples, we should have a momentum of the string on the Lie algebra, going left or right 
+    In fact, there is  a GxG symmetry (left and right translation) but weird bc of the symmetry of the Lie algebra 
+
 
 12. Geometrical obstruction
+    In a CFT, we have \partial T + \partial T = 0 as cons eq, but vanish separately thanks to tracelessness?
+    Here, both vanishing separately would imply a flat geometry, which is already known
 
 13. The topological term
+    The idea is to first compact the space (explain what becomes the string)
+    Apparently this doesn't change the physics much
+    But then expand the base manifold of the field, such that excitations can diseappear in the sphere and reappear somewhere else upon facing an obstruction
+    From this idea, the additional term is natural
+    account for momentum in the ball 
+    Just 3 times the wedge of cartan maurer forms
 
 14. The WZW model
-
-
+    Sur un niveau classique, le terme topologique est invariant homotopique
+    Mais si on prend les sauts en compte (sur un niveau quantique) c'est plus le cas. 
+    Il y a un saut de xx, donc on multiplie par la bonne constante pour que ca change rien 
+    equiv de la velocité du saut 
+    Apres, il y a le k qui apparait dans l'equation de conservation de mouvement, on match les constantes pour faire disparaitre un terme
+    k facteur topologique, niveau de la théorie
+    The algebra underlying is the affine kac moody algebra, fundamental to many things in maths
 
 15. Toda field theory
+    Very natural model of particles on Lie group, with a single constraint
+
+    It turns out it is equivalent to a reduced WZW-model, where we imposed the same condition on the WZW-model
+    The algebra underlying is a W algebra, with not currents but real additional primary fields of k>2 conformal dimension. 
+    For exemple, for g = An, we get the celebrated casimir algebra, W(2, 3, 4.., n)
+    So by reducing WZW, we can obtain highly non-trivial W algebra
 
 16. Generalizing conditions
+    In the same kind of vein, how can we put conditions on the WZW-model
+    We consider only one side obv, we want to restrict the velocity of the particles 
+    We can just write the velocity as M + j
+    in term of Lagrangian multiplier, this is the below formula
 
 17. First-classness of the conditions
+    How do we know if such general conditions can result in a consistent theory? 
+    The idea first is to simplify this to first class constraints, so there is no redundancy in the theory
 
 18. Conformality of the reduction
+    We also want the resulting theory to be conformal
+    We want to make sure that there is still a conformal action
+    To do so we can modify the actual conformal action such that it leaves the constrained surface invariant
+    We add a potential term to create a valley in which the particles stay 
 
-19. Other conditions
+18.5 Conditions on H
+    We see that modifying the conformal action this way leaves the constrained surface invariant iff 
+    The last condition leaves us thinking that we should have [H, M] + M = 0 
+    This is a possible choice of M if H is diagonalizable so we take H diag and [H, M] = -M
 
-    Conditions for algorithm, for positive mass, for logic, for BRST
+19. The Drinfield-Sokolov gauge
+    Now, with these conditions, can we compute a coherent algebra? 
+    Actually, someone found an algorithm to compute the algebra under 2 more conditions very natural, in the Drinfield Sokolov gauge
+
+19.5 Last conditions
+    Based off this idea, we can find two last conditions
+    Actually, under these conditions, we have a polynomial algorithm finding explicitely the algebra
+    So the algebra exists for sure
 
 20. Good gradings
-
-    We simplify everything in good gradings
-
-20.1. W^k(g,x,f)
+    We simplify everything in good gradings. What's more, good grading allows for (is necessecary for) BRST procedure. We thus have a very simple way of computing the algebra. 
 
 
 
 21. Good gradings
-
     What is a good grading? Diagram of injective surjective of ad f 
 
 22. From shifting constant to blocks
 
 23. From Hamiltonian term to pyramids
-
-24. Reading a pyramid
+    After explaining how to read e, we can give an interpretation of the pyramid
 
 25. Infinite W algebra

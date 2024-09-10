@@ -1,0 +1,44 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {../img/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{Statistical field theory and applications}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+\end{document}

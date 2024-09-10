@@ -148,13 +148,19 @@
     We simplify everything in good gradings. What's more, good grading allows for (is necessecary for) BRST procedure. We thus have a very simple way of computing the algebra. 
 
 
-
 21. Good gradings
     What is a good grading? Diagram of injective surjective of ad f 
+    Idea of Kac and Evashvili
 
 22. From shifting constant to blocks
 
 23. From Hamiltonian term to pyramids
-    After explaining how to read e, we can give an interpretation of the pyramid
+    After explaining how to read e, 
 
-25. Infinite W algebra
+24. Reading pyramids 
+    we can give an interpretation of the pyramid
+    Dynkin grading correspond to symmetric W algebras
+    Where to read Gamma 
+    Where to read the Drinfield Sokolov Gauge
+    Reading the conformal dimension off the pyramid
+    From this knowledge, we may have a good interpretation of W_infinity

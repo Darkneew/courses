@@ -26,6 +26,9 @@
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
 
 % bibliography %
 \bibliography{bibliography} 
@@ -40,5 +43,196 @@
 \tableofcontents
 
 \chapter{Introduction}
+Email adress: adam.nahum@phys.ens.fr \newline 
+TDman: xiangyu.cao@phys.ens.fr \par  \bigskip 
+
+Books 
+\begin{enumerate}
+    \item Cardy, but condensed
+\end{enumerate} \bigskip
+
+Statistical field theory: just applying statistical mechanics idea to systems 
+
+\section{Renormalization group (preview)}
+
+Very general tool from 20th century physics to understand complex systems (spatially extended and many degrees of freedom). Explains why QFT is so powerful in high energy physics and statistical physics 
+
+\begin{example}
+    Classical lattice models, modelizes magnetism for example
+    \begin{equation}
+        Z = \sum_{\{S\}e-\beta E(s)} \qquad \beta = \frac{1}{k_B T}
+    \end{equation}
+\end{example}
+\begin{example}
+    Statistical field theory
+    \begin{equation}
+        Z = \int \mathcal{D}\varphi(x) e^{-\mathcal{H}(\varphi)}
+    \end{equation}
+\end{example}
+\begin{example}
+    Qauntum lattice model, chain with spin up or down for example 
+    \begin{equation}
+        Z = \text{Tr}(e^{-\beta H})
+    \end{equation}
+\end{example}
+\begin{example}
+    Quantum field theories
+    \begin{equation}
+        Z = \int \mathcal{D}\varphi(x, t)e^{-\mathcal{S}(\varphi)}
+    \end{equation}
+    with 
+    \begin{equation}
+        \mathcal{S}(\varphi) = \int \text{d}^d x \int^\beta_0 \text{d}t [(\partial_t\varphi)^2 + (\triangledown  \varphi)^2\dots ]
+    \end{equation}
+\end{example}
+
+\underline{Renormalization group}: \newline 
+Key idea: The useful theoretical description is different at different scales. \newline 
+Aim: understand how description changes as we "zoom out".\newline 
+Objective of finding a universal description and forgetting useless information\par \medskip 
+
+A simple SFT and complicated microscopic model may be the same at large scales: might be easier to study the SFT in this case. \bigskip
+
+Consider a theory space (heuristic). We can imagine any kind of space of theories. We start with a point $\mathcal{H}$ in the space, which is a microscopic theory we know well. The objective is to then  zoom out and try to describe the new zoomed out theory by a new theory in the theory space. By doing this and this and this again, we get a flow which eventually accumulates somewhere $\mathcal{H}_*$, which would be the most macroscopic description of the model. For example, the description of a molecule of water would end up to the navier-stokes equations. Then, maybe starting with another point (another theory), we can arrive at the same point (different fluids are all described by navier stokes equation). $\mathcal{H}_*$ has the property that when zooming out, it is fixed. Invariant under zooming out. Eventually, we find a lot of theories flowing to  $\mathcal{H}_*$. It is called the Basin of attraction of  $\mathcal{H}_*$. It leads to the notion of universality of  $\mathcal{H}_*$. \par 
+
+If we go far enough, we might escape the basin of attraction of  $\mathcal{H}_*$. We then may find another fixed point,  $\mathcal{H}_*'$. Between two basins of attraction there is a limit, at which occurs a phase transition. Different phases just have different fixed points. \par \bigskip 
+
+Different kind of phases: \newline 
+Disordered vs Ordered
+\begin{example}
+    Liquid vs Solid
+\end{example}
+\begin{example}
+    Paramagnet vs Ferromagnet
+\end{example}\medskip 
+
+Phase transition theories also correspond to fixed points, but they are unstable fixed points. \par 
+
+The key notion is \underline{Universality}. If we understand the fixed points, we understand a large class of models at once, wether the models are field theories, lattice models, magnets, gases, whatever \par
+
+\begin{remark}
+    Status of RG: It is not a set of formula, but more of a paradigm very vague and heuristic. It is a way of thinking, that has to be tailored for each theory. Only in special cases we can follow the standard algorithmic procedure. There are some very special cases (ex: weakly interacting field theories)
+\end{remark}
+
+\section{The central limit theorem: toy exemple of RG}
+
+Let $N$ identical independant random variables $X_1, \dots, X_N \in \mathbb{R}$. We can think of them as the degrees of freedom of the system. For exemple, we can imagine a chain where each point has a magnetisation described by $X_i$, and where each cell is non-interacting. \par\medskip 
+
+The "microscopic model" is the probability distribution of each $X$. We assume 
+\begin{equation}
+    <x> = 0 \qquad <x^2> = \sigma^2
+\end{equation}
+There are a vast amount of such laws, from discrete to continous to non-compactly supported laws. \par \medskip 
+
+The "coarse-grained" variables are 
+\begin{equation}
+    X = \frac{1}{N}\sigma^N_{i = 0} x_i 
+\end{equation}
+We zoom out of the chain. This variables will have distributions, $p_N(x)$. \par \medskip 
+
+The central limit theorem says that under some weak assumptions ($\sigma < \infty$), as $N \rightarrow \infty$, $p_N(x)$ converges pointwise to a gaussian law of standard deviation $\sigma / \sqrt{N}$. \par \bigskip 
+
+\underline{Aside}: Cumulants \newline 
+CLT proved by computing cumulants \newline 
+\begin{equation}
+    <e^{\mu x}> = 1 + \mu<x> + \frac{\mu^2}{2!}<x^2> + \dots
+\end{equation}
+The moments of $x$ are the $<x^n>$, appearing in the developpement above. 
+\begin{equation}
+    <e^{\mu x}> = e^\wedge[\mu <x> + \frac{\mu^2}{2!}(<x^2> - <x>^2) + \dots]
+\end{equation}
+The terms in $x$ are the cumulants. \bigskip 
+
+In term of RG, in the space of distributions, a lot of distribution laws converge to a gaussian. However, if we go sufficiently far, we can avoid ending up in the gaussian limit. To do so, we can create interactions between the variables (but they must be sufficiently strong/long range). We can also have non identical distributions, and dominate everything with only a few of the variables. We can have a variance going to infinity (rare in physics, but it exists, ex: Levy-stable distributions). 
+
+\section{Ising model and $O(N)$ model}
+
+Family of models important in the history of statistical field theory, still studied. It is rich enough to feature the key ideas of phase transitions and RG flows. It is classical stat mech (no plank constant).
+\begin{equation}
+    Z = \int_{\text{configs}} e^{-\beta E}
+\end{equation}
+The degrees of freedom in the $O(N)$ model are made by the spins vector $\vec{S}$:
+\begin{equation}
+    \begin{aligned}
+        &\vec{S} = (S^1, S^2, \dots, S^n) \\ 
+        &\vec{S}^2 = 1
+    \end{aligned}
+\end{equation}
+We place such a spin at each point $i$ of an hypercubic lattice in $d$ dimensions. 
+\begin{equation}
+    -\beta E = J\sum_{<i, j>} \vec{S}_i \dot \vec{S}_j
+\end{equation}
+$\beta$ is absorbed in $J$, $J$ is dimensionless, $J>0$ ferromagnetic, $<i, j>$ goes through the links of the lattice. \par \medskip
+
+Low $T$ implies high $\beta$ implies large $J$. In this case, the energy is the lowest when the spins are aligned. The sign of $J$ doesn't matter if the lattice is bipartite.\par \medskip 
+
+The model is called $O(N)$ because there is a global $O(N)$ symmetry, the global rotation of the spins. $E$ is invariant under this symmetry. $O(N)$ is defined by $R^TR = 1 \Rightarrow$, there are two kinds of such matrices: rotations and reflections (times rotations). \par \medskip 
+
+To solve it, we can study 
+\begin{enumerate}
+    \item Mean field approximation 
+    \item Real space RG
+    \item "$4-\epsilon$" expansion
+    \item "$2+\epsilon$" expansion
+    \item Large $n$ approximation 
+    \item Transfer matrix 
+    \item Duality
+    \item \dots
+\end{enumerate}
+
+\section{First look at the Ising model: order and disorder}
+
+We take $d=2, n = 1$. We have $s \pm 1$\newline 
+There is only a $\mathbb{Z}_2$ symmetry, $S_i \rightarrow -S_i$
+\begin{equation}
+    Z_{\text{ising}} = \sum_{\{S\}}e^{J\sum_{<ij>}S_i S_j}
+\end{equation}
+The simplest model having a transtion between ordered and disordered phase. If $J\rightarrow \infty$, all spins will align, either up or down. If $J = 0$, each spin will be independantly up or down. These are the two extreme limits of two different phases, separated by a critical point $J_c$. \par \medskip 
+
+How can we distinguish the phases? 
+\begin{itemize}
+    \item correlation function $<S_i S_j>$, for $i$ and $j$ far away.
+\end{itemize}
+
+
+For \underline{$J < J_c$}: \newline
+It is the disordered phase
+\begin{equation}
+    <S_i S_j> \sim e^{-r/\xi}
+\end{equation}
+where $r$ is the distance between $i$ and $j$. \newline 
+The exponential decay is characteristic of a weakly interacting system. \newline 
+We can understand by perturbation in $J$.\newline 
+$\xi$ is the \textit{correlation length}.\par \medskip 
+For \underline{$J > J_c$}: \newline
+It is the ordered phase
+\begin{equation}
+    \lim_{r \rightarrow \infty} <S_iS_j> = M^2
+\end{equation}
+with $M>0$. It is the magnetisation. \bigskip 
+
+\begin{equation}
+    \bar{S} = \frac{1}{L^2}\sum_i S_i
+\end{equation}
+In the disordered phase, $\bar{S}$ follows a gaussian centered on 0, it is the CLT. In the ordered phase, $\bar{S}$ accumulates as gaussians on $M$ or $-M$. \par \medskip 
+
+In the ordered phase, we consider the fluctuations around $\bar{S}$, which are exponentially decaying. 
+\begin{equation}
+    <S_i S_j> = M^2 + Ae^{-r/\xi}
+\end{equation}
+We define $\delta S_i = S_i - \bar{S}$, with $\bar{S} = \pm M$. Then 
+\begin{equation}
+    <\delta S_i~ \delta S_j> = Ae^{-r/\xi}
+\end{equation}\medskip 
+
+At \underline{$J = J_c$}
+\begin{equation}
+    <S_i S_j> \simeq \frac{B}{r^{2x}} \qquad x=\frac{1}{8}
+\end{equation}
+We can't understand this using the perturbation theory. We need to use RG. \par\medskip 
+
+We zoom out: We turn squares of 3 by 3 (9 cells) into 1 single square, with as spin the majority spin in the square of 9 spins. This is the majority rule. We suppose for simplicity that $L = \infty$. With this rescaling, we can heuristically expect that the correlation length gets reduced by 3. \par 
+
+If we do this from the disordered phase, we will approach the configurations of $J=0$. Similarly, if we do this from the ordered phase, we will approach the configurations of $J \sim \infty$. If we start from the critical point, neither of these things happen. Actually, we approach a scale invariant configuration. There are non-trivial correlations that don't change under coarse-graining.
 
 \end{document}

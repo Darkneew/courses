@@ -456,7 +456,28 @@ Now, the question is wether or not it is possible to obtain an equation similar 
     This is only possible because there are several orders of difference between the water molecules and the colloid. The correlation length of water molecules is about 10\r{A}, so we can do packages of size 100\r{A} and still have around a hundred packages envelopping the colloid. The following thinking couldn't be possible if there was no such difference in magnitude.
 \end{remark}
 
-blableh
+When such division into packages is possible, we can assert that the strength put by the water molecules onto the colloid is equal to 
+\begin{equation}
+    \begin{aligned}
+        \vec{F}_b = \sum_i \vec{F}_i &= \sum_{\text{region}} \sum_{i \in \text{region}} \vec{F}_i  \\
+        &\simeq <\vec{F}_b> + \text{gaussian fluctuation}
+    \end{aligned}
+\end{equation}
+where $<\vec{F}_b>$ corresponds to the visquous friction, and is an average at fixed $(\vec{R}, \vec{P})$ over all possible $(\vec{r}_i, \vec{p}_i)$. \par \medskip 
+
+In view of this, we expect that after coarse-graining, we get something like 
+\begin{equation}
+    M\frac{\text{d}^2\vec{R}}{\text{d} t^2} = -\frac{\partial \mathscr{H}_0}{\partial\vec{R}} + <\vec{F}_b> + \text{noise}
+\end{equation}
+where the first term is due to the physics of the colloid itself, the second one corresponds to the drag, and the last term corresponds to the random action of the water particles on the body. 
+
+\section{Master equation, again}
+\subsection{For one and several continuous variables}
+
+We now denote a config $\mathscr{C}$ by a $d$-dimensional vector $x$. We will often assume $d=1$, as the generalisation can be done easily. The master equation writes
+\begin{equation}
+    \partial_t P(x, t) = \int \text{d}x' w(x' \rightarrow x) P(x', t) - \int \text{d}x' w(x \rightarrow x') P(x, t)
+\end{equation}
 
 
 \chapter{Time-reversal}

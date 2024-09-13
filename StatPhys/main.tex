@@ -1,0 +1,472 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd, mathrsfs}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{Advanced statistical physics and new applications}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+Frédérid van Wijland: fvw@u-paris.fr \newline
+studies statistical physics / field theory applied to stat phys, glass, active matter, \dots \par \medskip 
+
+We don't believe it right now, but this course will be useful to us. \par \medskip 
+
+We will have the notes allowed in the exam, but only hand written notes. \par \medskip 
+
+The lecture notes are oversized, to help us find things we like, to feed us with interesting things. However, only what we see during the course is to be known in the exam. 
+
+\chapter{Statistical dynamics}
+
+We know stat mechs in equilibrium (stationnary and reversible?). We want to do stat mechs including time. \par \bigskip 
+
+There is always a level of description of our system described by what is called the "Master equation". 
+
+\section{The physics behind a master equation}
+
+\subsection{Phase space and Liouville equation}
+Imagine a physical system described by its phase space coordinates $\Gamma = \{q, p\}$, and its evolution is governed by Hamilton's equations of motion 
+\begin{equation}
+    q = \frac{\partial \mathscr{H}}{\partial p}, \quad p = - \frac{\partial \mathscr{H}}{\partial q}
+\end{equation}
+where $\mathscr{H}$ is the Hamiltonian encoding all dynamical informations of the system. \par \medskip 
+
+Let $\rho(\Gamma, t)$ be the phase space density. Then we have a conservation equation in the phase space 
+\begin{equation}
+    \partial_t \rho + \partial_\Gamma \cdot (\rho \dot{\Gamma}) = 0
+\end{equation}
+By expanding, we obtain 
+\begin{equation}
+    \partial_t \rho = \{\mathscr{H}, \rho\}
+\end{equation}
+Because $\partial_\Gamma \cdot \dot\Gamma = 0$, the phase space flow is incompressible. This is the Liouville equation. \par \medskip 
+Sometimes, we write it 
+\begin{equation}
+    \partial_t \rho = -i \mathscr{L} \rho
+\end{equation}
+as a linear operator, where $-i \mathscr{L}\cdot = \{\mathscr{H}, \cdot\}$
+
+\subsection{Projection operator} 
+If at the microscopic level some degrees of freedom $c$ have a distribution $\rho(c, t)$, then what happens to a "coarse-grained" quantity 
+\begin{equation}
+    C(c): \mathbb{P}(\mathscr{C}, t) = \text{Prob}\{C(c) = \mathscr{C} \text{ at time } t\}
+\end{equation}
+What we know is the evolution of $\rho(c, t)$:
+\begin{equation}
+    \partial_t \rho = w\rho = \sum_{c'}w_{cc'}\rho(c', t)
+\end{equation}
+with $w$ some linear operator. How can we find an evolution for $\mathbb{P}(\mathscr{C}, t)$? \par \medskip 
+
+First, we can relate $P$ to $\rho$: 
+\begin{equation}
+    P(\mathscr{C}, t) = \sum_c \delta_{\mathscr{C}, C(c)}\rho(c, t)
+\end{equation}
+Idea: 
+\begin{equation}
+    \mathscr{P}f(c) = \frac{1}{\Omega(C(c))}\sum_{c'}\delta_{C(c), C(c')}f(c')
+\end{equation}
+where 
+\begin{equation}
+    \Omega(\mathscr{C}) = \sum_c \delta_{\mathscr{C}, C(c)}
+\end{equation}
+We can check that $\mathscr{P}^2 = \mathscr{P}$. 
+Let $\bar{p}(c, t) = \mathscr{P}p(c, t)$, then one can access $P(\mathscr{C}, t)$ via 
+\begin{equation}
+    P(\mathscr{C}, t) = \sum_c \delta_{\mathscr{C}, C(c)}\bar{p}(c, t)
+\end{equation}
+Now we split $p = \bar{p} + q$ with $\bar{p} = \mathscr{P}$, $q = (1-\mathscr{P})p$. and we can start from $\partial_t p = wp$ and thus arrive at 
+\begin{equation}
+    \begin{aligned}
+        &\partial_t \bar{p} = \mathscr{P} w(\bar{p} + q) \\ 
+        &\partial_t q = (1- \mathscr{P})w(\bar{p} + q) \Rightarrow \partial_t q - (1-\mathscr{P})wq = (1-\mathscr{P})w\bar{p}
+    \end{aligned}
+\end{equation}
+We solve the equation for $q$, and inject $q$ as a functional of $\bar{p}$ into 
+\begin{equation}
+    \partial_t\bar{p} = \mathscr{P}w\bar{p} + \mathscr{P}wq
+\end{equation}
+we get 
+\begin{equation}
+    \partial_t \bar{p} = \mathscr{P}w\bar{p} + \int_{0}^{t} \bar{d}t' ~ \mathscr{P}we^{(1-\mathscr{P})w(t-t')}(1-\mathscr{P})w\bar{p}(t')
+\end{equation}
+There is the emergence of a memory loss $e^{(1-\mathscr{P})w(t-t')}$. We can reconstruct an equation for $P(\mathscr{C}, t)$, which has the general form 
+\begin{equation}
+    \partial_t P = M^{(1)}P + \frac{0}{t}\text{d}t' M^{(2)}P(t')
+\end{equation}
+where $M^{(2)}$ encodes the memory of the degrees of freedom lost in the description 
+\begin{equation}
+    \text{"}M^{(2)}(t) \propto e^{(1-\mathscr{P})wt} \text{"}
+\end{equation}
+If the eigenvalues of $(1-\mathscr{P})wt$ are very large, this means that this memory is quickly lost 
+\begin{equation}
+    e^{-\frac{t}{\tau}} \sim_{\tau \sim 0} \tau \delta(t)
+\end{equation}
+and then the equation for $P$ reads 
+\begin{equation}
+    \partial_t P = M_{\text{eff}}P
+\end{equation}
+
+If the physical system of interest is such that its typical time scale are much larger than those characterizing the interactions with the environment, then we end up on a linear, 1st order in time, diff equation for $P$. This is a master equation. \par \medskip 
+
+See lecture notes for more details 
+
+\section{Master equation}
+
+The best book talking of the master equation is the one by N. Van Kampen, stochastic processes... libgen
+
+\subsection{Rates}
+
+We will use the notation $\mathscr{C}$ to refer to "microscopic" configs. Let 
+\begin{equation}
+    W(\mathscr{C} \rightarrow \mathscr{C}', t)\text{d}t
+\end{equation}
+be the probability that the system hops from config $\mathscr{C}$ to config $\mathscr{C}'$ between $t$ and $t+\text{d}t$. Then the rate $r(\mathscr{C})$ at which the system escapes config $\mathscr{C}$ is 
+\begin{equation}
+    r(\mathscr{C}) = \sum_{\mathscr{C}'}W(\mathscr{C}\rightarrow\mathscr{C}')
+\end{equation}
+
+Then it is possible to write the evolution equation for $P(\mathscr{C}, t)$: 
+\begin{equation}
+    P(\mathscr{C}, t+\text{d}t) = P(\mathscr{C}, t)(1- r(\mathscr{C})\text{d}t) + \sum_{\mathscr{C}'}P(\mathscr{C}', t)W(\mathscr{C}'\rightarrow\mathscr{C})\text{d}t
+\end{equation}
+Implying 
+\begin{equation}
+    \partial_t P(\mathscr{C}, t) = \sum_{\mathscr{C}'}W(\mathscr{C}'\rightarrow\mathscr{C})P(\mathscr{C}', t) - r(\mathscr{C})P(\mathscr{C}, t)
+\end{equation}
+This expresses a random walk on a directed graph with vertices $\mathscr{C}$ and weights over edges given by the $W(\mathscr{C}, \mathscr{C}')$'s. 
+
+It is sometimes convenient to introduce 
+\begin{equation}
+    \begin{aligned}
+        &W(\mathscr{C}' \rightarrow \mathscr{C}) \quad \text{if } \mathscr{C} \neq \mathscr{C}' \\ 
+        W_{\mathscr{C}\mathscr{C}'} =&\\
+        &-r(\mathscr{C}) \quad \text{if }\mathscr{C} = \mathscr{C}
+    \end{aligned}
+\end{equation}
+A posteriori, we see that, of course, there is a probability conservation 
+\begin{equation}
+    \frac{d}{dt}\sum_{\mathscr{C}}P(\mathscr{C}, t) = \sum_{\mathscr{C}\mathscr{C}'}W_{\mathscr{C}\mathscr{C}'} P(\mathscr{C}', t) = 0
+\end{equation}
+because 
+\begin{equation}
+    \forall \mathscr{C}', \quad \sum_\mathscr{C} W_{\mathscr{C}\mathscr{C}'} = 0 = \sum_{\mathscr{C}}\left[W(\mathscr{C}'\rightarrow \mathscr{C}) - r(\mathscr{C})\delta_{\mathscr{C}\mathscr{C}'}\right]
+\end{equation}
+Let $p_\mathscr{C} = 1$ for all $\mathscr{C}$, then 
+\begin{equation}
+    \sum_\mathscr{C} p_\mathscr{C} W_{\mathscr{C}\mathscr{C}'} = 0, \quad p^\dagger W = 0
+\end{equation}
+
+Hence the $p$ vector is a left eigenvector of $W$ with eigenvalue 0, hence there exists a right eigenvector $P_ss$ with eigenvalue 0. This is describing a steady-state. Let's restrict ourselves to strongly connected graphs of configurations (with irreducible dynamics), so as to avoid stationary probabilities being drained towards a specific subgraph. \par \medskip 
+
+If we write 
+\begin{equation}
+    P(t + \text{d}t) = (1 + W\text{d}t)P(t)
+\end{equation}
+we apply the Perron-Frobenius theorem to $M = (1 + W\text{d}t)$, and we can conclude that there exists a positive  number $\rho$ that is an eigenvalue and all others are smaller. 
+\begin{equation}
+    l = \min_{\mathscr{C}} \sum_{\mathscr{C}'} M^\dagger_{\mathscr{C}\mathscr{C}'} \leq \rho \leq \max_{\mathscr{C}} \sum_{\mathscr{C}'}M^\dagger_{\mathscr{C}\mathscr{C}'} = 1
+\end{equation}
+
+Hence 0 is the largest eigenvalue of $W$, and the unique corresponding vector $P_ss$ has all its components of the same sign (we choose +).
+
+\subsection{Averages}
+In practice, given a master equation and a physical observable $B(\mathscr{C})$, it is possible to find the evolution of $<B>$:
+\begin{equation}
+    <B> = \sum_{\mathscr{C}} B(\mathscr{C})P(\mathscr{C}, t)
+\end{equation}
+such that 
+\begin{equation}
+    \begin{aligned}
+        \frac{\text{d}<B>}{\text{d}t} &= \sum_{\mathscr{C}\mathscr{C}'} B(\mathscr{C})W_{\mathscr{C}\mathscr{C}'}P(\mathscr{C}', t) \\
+        &= p^\dagger BWP \\ 
+        &= p^\dagger [B, W]P
+    \end{aligned}
+\end{equation}
+and a formal solution reads 
+\begin{equation}
+    <B(t)> = \sum_{\mathscr{C}\mathscr{C}'}B(\mathscr{C})(e^{Wt})_{\mathscr{C}\mathscr{C}'} P(\mathscr{C}', 0)
+\end{equation}
+Similarly, 
+\begin{equation}
+    <A(t_1)B(t_2)> = p^\dagger Ae^{W(t_1, t_2)}Be^{Wt_2}P_{\text{init}}
+\end{equation}
+
+\subsection{Trajectories and histories}
+
+Let's see what the existence of rate actually mean: when the system is in state $\mathscr{C}$, then it stays there for a random duration before hopping to configuration $\mathscr{C}'$. \par \medskip 
+
+Let $\Pi(\tau, \mathscr{C})\text{d}\tau$ be the probability to stay in state $\mathscr{C}$ for a duration $\tau$ and to hop to some other state between $\tau$ and $\tau + \text{d}\tau$
+\begin{equation}
+    \Pi(\tau, \mathscr{C}) = f(\mathscr{C}, \tau)r(\mathscr{C})\text{d}\tau
+\end{equation}
+where $f$ is the probability to stay a duration $\tau$ in state $\mathscr{C}$. 
+\begin{equation}
+    \begin{aligned}
+        f(\mathscr{C},& \tau + \text{d}\tau) = f(\mathscr{C}, \tau)(1-r(\mathscr{C})\text{d}\tau) \\ 
+        f(\mathscr{C},& 0) = 1 \\
+        &\quad \Rightarrow f(\mathscr{C}, \tau) = e^{-r(\mathscr{C})\tau}
+    \end{aligned}
+\end{equation}
+
+Let's look at a typical realization of the Markov process over some time window $[0, t_{\text{obv}}]$.
+\begin{equation}
+    \mathscr{C}_0 \rightarrow^{\tau_0} \mathscr{C}_1 \rightarrow^{\tau_1} \mathscr{C}_2 \rightarrow^{\tau_2} \dots \rightarrow^{\tau_{K-1}} \mathscr{C}_K\rightarrow^{\tau_{K}} \mathscr{C}_K
+\end{equation}
+with $K$ the number of hops over $[0, t_{\text{obs}}]$, which is a random variable. So $K$ is random, the $\tau_i$'s are random, and the $\mathscr{C}_i$'s are random. \par \medskip 
+
+The probability of observing this trajectory is 
+\begin{equation}
+    \begin{aligned}
+        \mathscr{P}[\text{traj}] = &P_{\text{init}}(\mathscr{C}_0) \Pi(\tau_0, \mathscr{C}_0) \text{d}\tau_0 \frac{W(\mathscr{C}_0 \rightarrow \mathscr{C}_1)}{r(\mathscr{C}_0)} \Pi(\tau_1, \mathscr{C}_1) \text{d}\tau_1 \frac{W(\mathscr{C}_1 \rightarrow \mathscr{C}_2)}{r(\mathscr{C}_1)} \dots\\ &\frac{W(\mathscr{C}_{K-1} \rightarrow \mathscr{C}_K)}{r(\mathscr{C}_{K-1})}f(\mathscr{C}_K, \tau_K)\delta(\tau_0 + \tau_1 + \dots + \tau_K - t_{\text{obs}})
+    \end{aligned}
+\end{equation}
+But simplifying everything, we can obtain easily as
+\begin{equation}
+    \mathscr{P}[\text{traj}] = P_{\text{init}}(\mathscr{C}_0) e^{-\sum_{j=0}^{K}r(\mathscr{C_j})\tau_j}\prod_{j=0}^{K-1}\text{d}\tau_j \delta(t_{\text{obs}} - \sum_j \tau_j) \prod_{j=0}^{K-1}W(\mathscr{C}_j \rightarrow \mathscr{C}_{j+1})
+\end{equation}
+
+For a given trajectory "traj" we can also consier the time reversed one traj$^R$: 
+\begin{equation}
+    \mathscr{P}[\text{traj}^R] = P_{\text{final}}(\mathscr{C}_K) e^{-\sum_{j=0}^{K}r(\mathscr{C_j})\tau_j}\prod_{j=0}^{K-1}\text{d}\tau_j \delta(t_{\text{obs}} - \sum_j \tau_j) \prod_{j=0}^{K-1}W(\mathscr{C}_{j+1} \rightarrow \mathscr{C}_{j})
+\end{equation}
+From these probabilities, we define 
+\begin{equation}
+    \bar{Q}[\text{traj}] = \ln \left(\frac{\mathscr{P}[\text{traj}]}{\mathscr{P}[\text{traj}^R]}\right)
+\end{equation}
+
+We want to show an intriguing property of $P(\bar{Q}, t) = \text{Prob}\{\bar{Q}[\text{traj}] = \bar{Q}\}$:
+\begin{equation}
+    P(\bar{Q}, t) = \sum_{\text{traj}}\delta (\bar{Q} - \bar{Q}[\text{traj}])\mathscr{P}[\text{traj}]
+\end{equation}
+Noticing $\mathscr{P}[\text{traj}] = \mathscr{P}[\text{traj}^R]e^{\bar{Q}[\text{traj}]}$ and $\bar{Q}[\text{traj}] = -\bar{Q}[\text{traj}^R]$:
+
+\begin{equation}
+    P(\bar{Q}, t) = \sum_{\text{traj}^R} \delta(\bar{Q} + \bar{Q}[\text{traj}]) e^{-\bar{Q}[\text{traj}^R]}\mathscr{P}[\text{traj}^R]
+\end{equation}
+such that 
+\begin{equation}
+    P(\bar{Q}, t) = e^{\bar{Q}}P(-\bar{Q}, t)
+\end{equation}
+(Eraus-Searles theorem, 1993)\newline 
+This leads to $<e^{-\bar{Q}}> = 1$. We see that 
+\begin{equation}
+    <\bar{Q}> = \sum_{\text{traj}} \bar{Q}[\text{traj}]\mathscr{P}[\text{traj}] = \sum_{\text{traj}} \mathscr{P}[\text{traj}] \ln\left(\frac{\mathscr{P}[\text{traj}]}{\mathscr{P}[\text{traj}]}\right)
+\end{equation}
+$\bar{Q}$ is somewhat a measure of how similar are the forward and backward processes. It is the Kullback-Lertler divergence/entropy. $<\bar{Q}>$ somewhat quantifies the asymmetry of the arrow of time. \par \medskip 
+Reminder: $D(p || q) = \sum_i p_i \ln(\frac{p_i}{q_i}) \geq 0$ with equality iff $p_i = q_i$ \par \bigskip 
+
+When we look at $\bar{Q}$, we see two contributions. 
+\begin{equation}
+    \bar{Q} = \ln\left(\frac{P_{\text{init}}(\mathscr{C}_0)}{P_{\text{final}}(\mathscr{C}_K)}\right) + \sum_{j=0}^{K-1} \ln\left(\frac{W(\mathscr{C}_j \rightarrow \mathscr{C}_{j+1})}{W(\mathscr{C}_{j+1} \rightarrow \mathscr{C}_j)}\right)
+\end{equation}
+The first term is a boundary term, whilst the second one (named $Q_s$) is time extensive since there are $K$ terms, and 
+\begin{equation}
+    \frac{\text{d}<K>}{\text{d}t} = <r(\mathscr{C})>
+\end{equation}
+
+We see that $Q_s$ does not contain any information on the $\tau_j$'s, it only depend on the sequence of visited states. We thus call it a history instead of a trajectory.
+
+\subsection{Evolution of the Shannon entropy}
+The Shannon entropy over the configs $\mathscr{C}$ is 
+\begin{equation}
+    S(t) = -\sum_\mathscr{C} P(\mathscr{C}, t) \ln(\mathscr{C}, t)
+\end{equation}
+Wether it makes sense or not, we can always, always define and consider it. This quantity evolves according to (after simplifications)
+\begin{equation}
+    \begin{aligned}
+        \frac{\text{d}S}{\text{d}t} = &\frac{1}{2}\sum_{\mathscr{C}\mathscr{C}'} \left[W(\mathscr{C} \rightarrow \mathscr{C}')P(\mathscr{C}, t) - W(\mathscr{C}' \rightarrow \mathscr{C})P(\mathscr{C}', t)\right] \times \ln \frac{W(\mathscr{C} \rightarrow \mathscr{C}')P(\mathscr{C}, t)}{W(\mathscr{C}' \rightarrow \mathscr{C})P(\mathscr{C}', t)} \\ 
+        &- \sum_{\mathscr{C}\mathscr{C}'} W(\mathscr{C} \rightarrow \mathscr{C}') \ln \frac{W(\mathscr{C} \rightarrow \mathscr{C}')}{W(\mathscr{C}' \rightarrow \mathscr{C})} P(\mathscr{C}, t)
+    \end{aligned}
+\end{equation}
+The first term $\sigma_{\text{irr}}$ is positive, and vanishes iff 
+\begin{equation}
+    W(\mathscr{C} \rightarrow \mathscr{C}')P(\mathscr{C}, t) = W(\mathscr{C}' \rightarrow \mathscr{C})P(\mathscr{C}', t)
+\end{equation}
+When $P(\mathscr{C}, t)$ becomes stationnary, this property is verified by $P_{ss}$, promotes $P_{ss}$ to the status of an "equilibrium definition"
+\begin{equation}
+    P_{\text{eq}}(\mathscr{C})W(\mathscr{C} \rightarrow \mathscr{C}') = P_{\text{eq}}(\mathscr{C}') W(\mathscr{C}' \rightarrow \mathscr{C})\text{ :  detailed balance}
+\end{equation}
+The second term, $\frac{\text{d}S}{\text{d}t} = \sigma_{\text{irr}} - J_s$
+\begin{equation}
+    \begin{aligned}
+        J_s &= \sum_{\mathscr{C}\mathscr{C}'} P(\mathscr{C}, t) W(\mathscr{C} \rightarrow \mathscr{C}') \ln \frac{W(\mathscr{C} \rightarrow \mathscr{C}')}{W(\mathscr{C}' \rightarrow \mathscr{C})} \\ 
+        &= <\frac{\text{d}Q_s}{\text{d}t}>
+    \end{aligned}
+\end{equation}
+
+In the steady-state, $\frac{\text{d}S}{\text{d}t} = 0$, 
+\begin{equation}
+    \sigma_{\text{irr}} = J_s \geq 0
+\end{equation}
+with equality iff detailed balance is fullfilled by $P_{ss}$.
+
+\subsection{One dimensional walkers on a lattice}
+
+Let's begin with $L$ sites with periodic boundary conditions, such that a particle hops to the left (i -= 1) with probability $p$ and to the right with probability $q$, and such that there is always maximum 1 particle per site. \par \medskip 
+
+Given $N$ particles and $L$ sites, $P(\{n_i\}, t)$. What is the steady-state? Is it equilibrium? \par \medskip 
+
+We can guess the steady state is a uniform distribution on each sites $P(\{n_i\}) = \frac{1}{\binom{L}{N}}$, and it is at equilibrium iff $p = q$. 
+
+Let's make sure our guess is good: 
+\begin{equation}
+    \begin{aligned}
+        \partial_t P(\mathscr{C}= \{n_i\}, t) &= p \sum_i n_i(1- n_{i+1}) P(\dots) \\ 
+        &+ q \sum_i n_i (1 - n_{i-1}) P(\dots) \\ 
+        &- p \sum_i n_i (1-n_i) P(\{n_i\}, t) - q \sum_i n_i (1 - n_{i+1})P(\{n_i\}, t)
+    \end{aligned}
+\end{equation}
+The two first terms account for particles coming there coming from elsewhere, and the two last account for particles leaving. And indeed, $P_{ss}(\{n_i\}) = \text{cst}$ solves it in the steady-state. \par \medskip 
+
+How about $\bar{Q}_s[\text{traj}]$?
+\begin{equation}
+    \begin{aligned}
+        \bar{Q}_s[\text{traj}] &= \sum_{i=0}^{K-1}\ln \frac{W(\mathscr{C}_j \rightarrow \mathscr{C}_{j+1})}{W(\mathscr{C}_{j+1} \rightarrow \mathscr{C}_j)} \\ 
+        &= \left(\ln \frac{q}{p}\right) \times (\text{nb of hops to the right}) + \left(\ln \frac{p}{q}\right) \times (\text{nb of hops to the left}) \\ 
+        &= \ln \frac{q}{p} \times \left(\text{Total integrated particle current}\right)
+    \end{aligned}
+\end{equation} 
+$\ln \frac{q}{p}$ is the driving force of the current, or the affinity in term of chemistry. We thus understand the $\bar{Q}$ as an entropy creation, as a force times a current. \par \medskip 
+
+If we parametrize $p = D_0e^{-E/2}$, $q=D_0e^{E/2}$ then 
+\begin{equation}
+    \frac{\text{d}<Q_s>}{\text{d}t} = J_s = E\times <\text{particle current}>
+\end{equation}
+
+\section{First passage properties and adjoint master equation}
+\subsection{Backward master equation}
+
+We are interested in $P(\mathscr{C}, t | \mathscr{C}', t')$ = the probability to be in state $\mathscr{C}$ at time $t$, starting from $\mathscr{C}'$ at time $t'$. 
+\begin{equation}
+    P(\mathscr{C}, t | \mathscr{C}', t) = \delta_{\mathscr{C}\mathscr{C}'}
+\end{equation}
+\begin{equation}
+    \partial_t P(\mathscr{C}, t | \mathscr{C}', t') = \sum_{\mathscr{C}''} W_{\mathscr{C}\mathscr{C}''} P(\mathscr{C}'', t | \mathscr{C}', t')
+\end{equation}
+\begin{equation}
+    P(\mathscr{C}, t | \mathscr{C}', t') = \left[e^{W(t-t')}\right]_{\mathscr{C}\mathscr{C}'}
+\end{equation}
+And it's possible to track the evolution 
+\begin{equation}
+    \begin{aligned}
+        \partial_{t'}P(\mathscr{C}, t | \mathscr{C}', t') &= \sum_{\mathscr{C}''} P(\mathscr{C}, t | \mathscr{C}'', t')W_{\mathscr{C}''\mathscr{C}'} \\ 
+        &= - (W^\dagger)_{\mathscr{C}'\mathscr{C}''}P(\mathscr{C}, t | \mathscr{C}'', t')
+    \end{aligned}
+\end{equation}
+Hence $W^\dagger$ propagates backward in time. 
+
+\subsection{First passage probability and first passage time}
+
+Let $\mathcal{A}$ be a set of absorbing configurations. We ask about the survival probability $S(\mathscr{C}, t)$ that starting from $\mathscr{C}$ such that $\mathscr{C} \notin \mathcal{A}$ the system is still alive at time $t$. In practice, 
+\begin{equation}
+    S(\mathscr{C}, t) = \sum_{\mathscr{C}'' \notin \mathcal{A}} P(\mathscr{C}'', t | \mathscr{C}, 0)
+\end{equation}
+with boundary conditions 
+\begin{equation}
+    \forall \mathscr{C} \in \mathcal{A}, S(\mathscr{C}, t) = 0, \qquad \forall \mathscr{C} \notin \mathcal{A}, S(\mathscr{C}, 0) = 1
+\end{equation}\par \medskip 
+
+Using the master equation, we see that 
+\begin{equation}
+    \begin{aligned}
+        \partial_t S(\mathscr{C}, t) &= \sum_{\mathscr{C}''} W_{\mathscr{C}''\mathscr{C}} S(\mathscr{C}'', t) \\
+        \partial_t S &= W^\dagger S
+    \end{aligned}
+\end{equation}
+
+We have the set of equations 
+\begin{equation}
+    \begin{aligned}
+        &S(\mathscr{C}, t) = 1 - \int_{0}^{t} \text{d}t' F_\mathcal{A}(\mathscr{C}, t') \\ 
+        & -\frac{\text{d}S}{\text{d}t} = F_\mathcal{A}
+    \end{aligned}
+\end{equation}
+
+We are interested in $T_\mathcal{A}(\mathscr{C})$ = average time of first passage to $\mathcal{A}$ starting from $\mathscr{C}$. 
+\begin{equation}
+    T_\mathcal{A} = \int_{0}^{+\infty} \text{d}t ~ t~ F_\mathcal{A}(\mathscr{C}, t)
+\end{equation}
+Because after an integration by part, 
+\begin{equation}
+    T_\mathcal{A}(\mathscr{C}) = \int_{0}^{+\infty} \text{d}t ~ S(\mathscr{C}, t)
+\end{equation}
+then we can show that 
+\begin{equation}
+    W^\dagger T_\mathcal{A} = -1
+\end{equation}
+or 
+\begin{equation}
+    (W^\dagger)_{\mathscr{C}\mathscr{C}'}T_\mathcal{A}(\mathscr{C}') = -1
+\end{equation}
+
+
+
+\chapter{Stochastic dynamics}
+
+\section{What is the question?}
+
+We start with a micro system, very very hard to describe. We consider a big colloid of the order of the $\mu m$ described by $(\vec{R}, \vec{P})$ in a bath of small molecules of water $i$ of size $\sim 3.4$\r{A} described by $(\vec{r}_i, \vec{p}_i)$. We can accurately write this system in term of a large Hamiltonian 
+\begin{equation}
+    \mathscr{H} = \mathscr{H}_0(\vec{R}, \vec{P}) + \mathscr{H}_1((\vec{r}_i, \vec{p}_i)_i) + \sum_i V_i(\vec{r}_i, \vec{p}_i, \vec{R}, \vec{P})
+\end{equation}
+where the first term describes the dynamics of the colloid, the second term describes the dynamics of the water molecules, and the last term describes the interactions between the two. Moreover, we know that at a higher level of description, if the system is static, we have 
+\begin{equation}
+    P(\vec{R}, \vec{P}) = \frac{1}{Z} e^{-\beta \mathscr{H}(\vec{R}, \vec{P})}
+\end{equation}
+where there is no information left about the bath whatsoever, no trivial information. This is in general the objective of statistical physics, discarding useless information. \par \medskip 
+Now, the question is wether or not it is possible to obtain an equation similar to the Boltzmann distribution, but describing the time evolution of the colloid. To do so, the idea is to split the molecules of water surrounding the colloid into multiple small regions, in packages sufficiently big to forget about the interactions between the packages, but sufficiently small to have a large number of them around the colloid. 
+\begin{remark}
+    This is only possible because there are several orders of difference between the water molecules and the colloid. The correlation length of water molecules is about 10\r{A}, so we can do packages of size 100\r{A} and still have around a hundred packages envelopping the colloid. The following thinking couldn't be possible if there was no such difference in magnitude.
+\end{remark}
+
+blableh
+
+
+\chapter{Time-reversal}
+
+\chapter{Metastability}
+
+\chapter{Mean-field}
+
+\chapter{Field theories}
+
+\chapter{Exactly solvable models}
+
+\end{document}

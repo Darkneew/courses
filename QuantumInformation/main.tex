@@ -1,0 +1,273 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd, mathrsfs}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{Quantum information}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+Email adress: jerome.esteve@cnrs.fr \newline 
+
+Romain Long: long@ekb.ens.fr
+
+\chapter{Open Quantum System}
+
+We know how to build quantum transistors, quantum this, quantum that, we know how to do a lot of things. But right now, we are in the middle of the second quantum revolution $\Leftrightarrow$ We want to use Entanglement as a ressource \par medskip 
+
+The question is: why is it so difficult? (spoiler alert: decoherence) \par \medskip 
+
+Consider a system which can only be in state $|0\rangle$ or $|1\rangle$. We expect the actuall state to be oscillating between $|0\rangle$ and $|1\rangle$, as a Rabi oscillation, oscillation which is a unitary evolution found by the Schrodinger equation. The Schrodinger equation tells us that the evolution is perfect, and that the oscillation never loses anything. However, in practice, we know that the oscillation decays and that the states become mixed and indistinguishable at some point. We want to know what is this decay. \par \bigskip 
+
+\begin{enumerate}
+    \item The state is not pure, we need to describe it by a density matrix $\rho$
+    \item What is the physical origin of the decay? The decay comes from the fact that the qubit is always somewhat a little bit coupled to the environment (there is not perfect isolated environment). However, we do not know the environment. 
+    \item We want to find closed equations to describe the qubit including the effect of the environment, although we don't know what the environment is like. 
+    \item Main idea: $\mathscr{H} = \mathscr{H}_S \otimes \mathscr{H}_E$ where $\mathscr{H}_S$ is the Hilbert space of the system, and $\mathscr{H}_E$ is the Hilbert space of the environment. We want to predict environments which are $M \otimes 1$
+\end{enumerate}
+
+Global state : $|\psi\rangle = \sum_{i, \mu} a_{i\mu}|i\rangle_S|\mu\rangle_E$
+\begin{equation}
+    \begin{aligned}
+        \langle\psi |M\otimes 1 | \rangle &= \sum_{i, \mu, j, \nu} a_{i\mu}a^*_{j\nu}\langle j|\langle \nu|M \otimes 1 |i \rangle \mu \rangle  \\
+        &= \sum_{i, j, \mu} a_{i\mu}a^*_{j\mu}\langle j|M|i\rangle 
+    \end{aligned}
+\end{equation}
+
+We define 
+\begin{equation}
+    \begin{aligned}
+        \rho &= \text{Tr}_E(|\psi \rangle \langle \psi |) \\
+        &= \text{Tr}_E(\sum_{i, j, \mu} a_{i\mu}a^*_{j\mu}|i\rangle\langle j| )
+    \end{aligned}
+\end{equation}
+We see that 
+\begin{equation}
+    <M> = \text{Tr}(\rho M)
+\end{equation}
+$\rho$ contains all the information about $S$. \par \bigskip 
+
+\underline{Properties of density matrix}
+\begin{enumerate}
+    \item $\text{Tr}(\rho) = 1$
+    \item $\rho$ is Hermitian
+    \item $\rho \geq 0$
+    \item It is a semidefinite operator 
+    \item $\forall |\psi\rangle, \langle\psi|\rho|\psi \rangle \geq 0$
+    \item Eigenvalues of $\rho \geq$ 
+    \item $\rho$ can be written 
+    \begin{equation}
+        \rho = \sum \rho_\mu |\varphi_\mu \rangle \langle \rho_\mu | 
+    \end{equation}
+    where $\rho_\mu$ is the probability to find $S$
+\end{enumerate}
+
+We can "purify" $\rho$ by $|\psi\rangle $ as 
+\begin{equation}
+    \rho = |\psi\rangle\langle \psi |
+\end{equation}
+One way to find such $|\psi\rangle$ is by 
+\begin{equation}
+    |\psi\rangle = \sum_\mu \sqrt{\rho_\mu} |\varphi_\mu\rangle |\mu\rangle 
+\end{equation}
+although this purification is not unique.\newline 
+$\rho$ is pure iff it can be purified, iff  
+\begin{enumerate}
+    \item $\rho^2 = \rho$
+    \item $\text{Tr}(rho^2) = 1$
+    \item $\rho$ has only one non-zero eigenvalue  
+\end{enumerate}
+
+\section{Quantum map (channel)}
+Most general evolution of a density matrix 
+\begin{equation}
+    \rho \rightarrow^\Lambda \Lambda[\rho]
+\end{equation}
+Expecting properties of $\Lambda$:
+\begin{enumerate}
+    \item Trace preserving (TP)
+    \item Conserve positivity (P)
+    \item Linear application 
+\end{enumerate}
+
+PTP maps may not lead to valid evolution. The map $\Lambda$ must CPTP where CP stands for completely positive. It means that the extension $1\otimes \Lambda$ should also be positive for any extension. 
+\begin{quote}
+    "The density matrix of the universe should remain positive"
+\end{quote}
+Model the map through the coupling to an environment and show that the resulting evolution is CPTP 
+
+\begin{equation}
+    \rho \otimes |0\rangle \langle 0|_E \rightarrow_{\text{unitary evolution}} U(\rho \otimes |0\rangle \langle 0|_E)U^\dagger
+\end{equation}
+Decompose $U$ as 
+\begin{equation}
+    U = \sum_{\mu\nu} U_{\mu\nu} \otimes |\mu \rangle \langle \nu|_E
+\end{equation}
+We obtain $\Lambda(\rho)$ by tracing over $E$
+\begin{equation}
+    \begin{aligned}
+        \Lambda(\rho) &= \text{Tr}_E(U(\rho \otimes |0\rangle \langle 0|_E)U^\dagger) \\
+        &= \sum_\mu U_{\mu 0} \rho U^\dagger_{\mu 0}
+    \end{aligned}
+\end{equation}
+We obtain a "Kraus decomposition" 
+\begin{equation}
+    \Lambda(\rho) = \sum_\mu K_\mu \rho K^\dagger_\mu
+\end{equation}
+The $K_\mu$s are called Kraus operators. They verify a normalisation property 
+\begin{equation}
+    \sum_\mu K_\mu K^\dagger_\mu = 1
+\end{equation}
+
+Kraus form of a $Q$ map
+\begin{enumerate}
+    \item $\rho \rightarrow \sum_\mu K_\mu \rho K^\dagger_\mu$
+    \item $K_mu$ can be any operator and are in general not unitary 
+    \item They verify $\sum_\mu K_\mu K^\dagger_\mu = 1$
+\end{enumerate}
+If one $K_\mu$ is unitary, then it is the unique operator in the Kraus decomposition $\Leftrightarrow$ the map is a unitary evolution. \par \medskip 
+
+A map in the Kraus form is CP. Conversely, any CPTP map can be written as a Kraus map. \par 
+
+\begin{example}
+    A qubit coupled to an environment which is a second qubit. Model the evolution going from a state
+    \begin{equation}
+        \begin{aligned}
+            &\alpha |0\rangle + \beta |1\rangle \\
+            &\rho_i = |\alpha|^2 |0\rangle\langle 0| + \beta^2 |1\rangle\langle 1| + \alpha \beta^* |0\rangle \langle 1 | + \alpha^*\beta |1\rangle\langle 0|
+        \end{aligned}
+    \end{equation}
+    to a state 
+    \begin{equation}
+        \rho_f = |\alpha|^2 |0\rangle\langle 0| + \beta^2 |1\rangle\langle 1|
+    \end{equation}
+    Guess a possible final state of qubit + environment such that there is decoherence 
+    \begin{equation}
+        \alpha |0\rangle\otimes|\tilde{0}\rangle  + \beta |1\rangle \otimes|\tilde{1}\rangle
+    \end{equation}
+    From this, we can imagine for exemple 
+    \begin{equation}
+        U = \begin{pmatrix}
+            1 & 0 & 0 & 0 \\ 
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1 \\
+            0 & 1 & 0 & 0
+        \end{pmatrix}
+    \end{equation}
+    with basis $(|0\tilde{0}\rangle, |1\tilde{0}\rangle, |0\tilde{1}\rangle, |1\tilde{1}\rangle, )$ \par 
+    Kraus operators are 
+    \begin{equation}
+        \begin{aligned}
+            &K_0 = \begin{pmatrix}
+                1 & 0 \\ 0 & 0
+            \end{pmatrix} = |0\rangle \langle 0|\\
+            &K_1 = \begin{pmatrix}
+                0 & 0 \\ 0 & 1
+            \end{pmatrix} = |1\rangle \langle 1|
+        \end{aligned}
+    \end{equation}
+    This completely kills the coherence. However, this is quite violent. We can try to have Kraus operators to obtain non-zero final coherence 
+    \begin{equation}
+        \begin{aligned}
+            &K_0 = 1 \otimes \sqrt{1-p} \\
+            &K_0\rho_i K^\dagger_0 \rightarrow (1-p)\rho_i \\
+            &K_1 = \sqrt{p}|0\rangle \langle 0| \\
+            &K_2 = \sqrt{p}|1\rangle \langle 1|
+        \end{aligned}
+    \end{equation}
+    This way, we can more or less slowly kill the coherence by varying $p$.
+\end{example}
+
+This modelizes very well errors in qubit, it is the "standard error" channel for a qubit 
+\begin{equation}
+    \begin{aligned}
+        &K_0 = \sqrt{1-p} 1 \\
+        &K_1 = \sqrt{p} \sigma_i
+    \end{aligned}
+\end{equation}
+where $\sigma_i$ is $X, Y, Z$ (Pauli matrices). 
+\begin{enumerate}
+    \item if $\sigma_i = X$: bit flip error 
+    \item if $\sigma_i = Z$: phase flip error 
+    \item if $\sigma_i = Y$: combined bit and phase flip error 
+\end{enumerate}
+
+Any quantum map (error channel) for a qubit can be decomposed as a series of the "standard error channels". W
+
+\section{Generalized POVN measurement}
+
+After the evolution of the system and the environment, we obtained 
+\begin{equation}
+    \rho \otimes |0\rangle \langle 0|_E \rightarrow \sum_{\mu\mu'} U_{\mu 0} \rho U^\dagger_{\mu 0} \otimes |\mu \rangle\langle \mu'|_E
+\end{equation}
+Instead of tracing out $E$, we do a projective measurement of the environment. We find the outcome $|\mu\rangle$ with probability 
+\begin{equation}
+\begin{aligned}
+    P_\mu &= \text{Tr}(U_{\mu 0} \rho U^\dagger_{\mu 0}) \\
+    &= \text{Tr}(U_{\mu 0}  U^\dagger_{\mu 0} \rho)    
+\end{aligned}
+\end{equation}
+We thus define $E_\mu = U_{\mu 0}  U^\dagger_{\mu 0}$. The set of operators $E_\mu$ such that $E_\mu \geq 0$, $\sum_\mu E_\mu = 1$ define a generalized measurement. With outcome $\mu$ with probability $P_\mu$ such that $\rho_\mu = \text{Tr}(E_\mu \rho)$ 
+
+\begin{enumerate}
+    \item Special case: Von Neumann projective measurement $E_\mu$ are orthogonal projectors 
+    \item But they can be something else, in particular they can be non-orthogonal projectors 
+    \item As befor, any generalized measurement can be constructed as a Von Neumann measurement in a bigger space 
+\end{enumerate}
+
+\section{Conclusion}
+
+Closed system: 
+\begin{enumerate}
+    \item State = $|\psi\rangle$
+    \item Evolution is unitary $|\psi_f\rangle = U|\psi_i\rangle$
+    \item projective measurement to obtain the probability to be in state $|1\rangle$
+\end{enumerate}
+Open system: 
+\begin{enumerate}
+    \item Density matrix $\rho$
+    \item Evolution is given by CPTP linear application $\rho_f = \Lambda \rho_i$
+    \item Useful decomposition: $\rho_f = \sum_\mu K_\mu \rho_i K^\dagger _\mu$
+    \item Generalised measurement with probability operatr $E_\mu$. 
+\end{enumerate}
+properties of open systems are obtained by considering a bigger space \par \medskip 
+
+In general, $\Lambda$ has no inverse. So we cannot revert the evolution of the state, unless $\Lambda$ is unitary. Tracing over $E$ leads to irreversibility. Decoherence happens when the environment is entangled to the system. 
+\end{document}

@@ -44,7 +44,7 @@
 
 \chapter{Introduction}
 Email adress: adam.nahum@phys.ens.fr \newline 
-TDman: xiangyu.cao@phys.ens.fr \par  \bigskip 
+TDman: xiangyu.cao@phys.ens.fr (he also has a website) \par  \bigskip 
 
 Books 
 \begin{enumerate}
@@ -235,4 +235,157 @@ We zoom out: We turn squares of 3 by 3 (9 cells) into 1 single square, with as s
 
 If we do this from the disordered phase, we will approach the configurations of $J=0$. Similarly, if we do this from the ordered phase, we will approach the configurations of $J \sim \infty$. If we start from the critical point, neither of these things happen. Actually, we approach a scale invariant configuration. There are non-trivial correlations that don't change under coarse-graining.
 
+\chapter{Lattice techniques}
+\begin{enumerate}
+    \item high T 
+    \item low T 
+    \item Duality (preview)
+    \item transfer matrix (1D)
+    \item Preview of quantum-classical correspondance 
+\end{enumerate}
+ 
+\section{High T}
+
+The High T expansion: two key ideas 
+\begin{enumerate}
+    \item This is a perturbative expansion from $T = \infty$, so $(J=0)$ 
+    \item high T expansion is a geometrical way of thinking about corrolations of spins 
+\end{enumerate}
+
+\subsection{Free energy}
+We consider a 2D square lattice without periodic boundary condition. We write $N = L^2$ the number of spins, and $N_b = 2L^2$ the number of bounds. The partition function takes the formula
+\begin{equation}
+    \begin{aligned}
+        Z &= e^{-\beta F} \\
+        &= \sum_{\{S\}} e^{J\sum_{<i, j>}S_iS_j} \\
+        &= \sum_{\{S\}} \prod_{<i, j>}e^{JS_iS_j} 
+    \end{aligned}
+\end{equation}
+observe that 
+\begin{equation}
+    e^{JS_iS_j} = \text{cosh}(J)[1 + \text{tanh}(JS_iS_j)] \qquad \forall S_i, S_j = \pm 1
+\end{equation}
+Plugging this in,
+\begin{equation}
+    Z = \sum_{\{S\}} \prod_{<i,j>} (1 + \mu S_iS_j) \times (\text{cosh}(J))^{N_b} 
+\end{equation}
+where 
+\begin{equation}
+    \mu  \equiv \text{tanh} (J) \sim J + O(J^2)
+\end{equation}
+We want to expand $\prod_{<i,j>} (1 + \mu S_iS_j)$ geometrically. We say a bond is occupied if we have $\mu S_iS_j$ on it. We call the collection of occupied bonds a graph, written $G$. 
+\begin{equation}
+    Z = (\text{cosh}(J))^{N_b}\sum_{\{S\}}\sum_G \prod_{<i,j>} \mu S_i S_j
+\end{equation}
+Then we sum over all spin configurations. We notice by some symmetry arguments that a graph leads a term 0 unless all sites are adjacent to an even number of occupied bonds. So $G$ survives iff $G$ is "closed". In general, 
+\begin{equation}
+    Z = (\text{cosh}(J))^{N_b}2^N\sum_{G\text{ closed}} \mu^{|G|}
+\end{equation}
+where $|G|$ is the number of closed bounds in $G$. This is exact on finite lattices, with 
+\begin{equation}
+    u = \text{tanh}(J) \qquad J = \frac{J_\text{phys}}{T}
+\end{equation}
+Now, we want to expand $f$. 
+\begin{equation}
+    Z = e^{-\beta F} \qquad F = -\frac{1}{\beta}\ln(Z)
+\end{equation}
+\begin{equation}
+    f = \lim_{L \rightarrow +\infty} \frac{F}{L^2}
+\end{equation}
+Using what we found above, 
+\begin{equation}
+    -\beta F = \ln(Z) = N\ln(2\text{cosh}(J)) + \ln(\sum_{G\text{ closed}}\mu^{|G|})
+\end{equation}
+Thinking about the graphs possible, we get
+\begin{equation}
+    \sum_G \mu^{|G|} = 1 + N\mu^4 + 2N\mu^6 + O(\mu^8)
+\end{equation}
+So 
+\begin{equation}
+    \ln(\sum_{G\text{ closed}}\mu^{|G|}) = N(\mu^4 + 2\mu^6) + O(\mu^8)
+\end{equation}
+So 
+\begin{equation}
+    -\beta f = \ln(2\text{cosh}(J)) + \mu^4 + 2\mu^6 + O(\mu^8)
+\end{equation}
+If we tried to expand $\mu$ more, we would get disconnected graphs, and as such we would have a factor in $N^2$, which is not extensive. $f$ would explode when going to $N\rightarrow 0$. As such, there must be some cancellation of these powers when taking the log. \par \medskip 
+
+At the order of $\mu^8$, there should be a term in $\frac{1}{2}N^2 \mu^8$. How does it cancels out? Idk, see lecture notes 
+
+\begin{remark}
+    \begin{enumerate}
+        \item $f \rightarrow^{\text{derivatives}} E, C_v$
+        \item high order high-T expansion is exact and allows to probe the model at $J \sim < J_c$
+        \item high-T expansion is general (eg 3D) but in 2D the sum over the closed graphs can be done exactly. 
+        \item For $O(n)$ model etc with continuous degrees of freedom the high-T expansion can still be done (see tutorial)
+        \item Useful for Monte-Carlo
+    \end{enumerate}
+\end{remark}
+
+\subsection{high-T expansion of correlation}
+\begin{equation}
+    \begin{aligned}
+        <S_iS_j> &= \frac{\sum_S e^{-H} S_iS_j}{\sum_S e^{-H}} \\
+        &= \frac{\sum_S e^{-H} S_iS_j}{2^N (\text{cosh}(J))^{N_b}\sum_G \mu^{|G|}}
+    \end{aligned}
+\end{equation}
+we focus on 
+\begin{equation}
+    \begin{aligned}
+        \sum_S e^{-H} S_iS_j &= (\text{cosh}(J))^{N_b}\sum_G \sum_{\{S\}} S_iS_j \prod_{<k, l> \in G} uS_kS_l \\ 
+        &= 2^N(\text{cosh}(J))^{N_b}\sum_{G (i \leftrightarrow j)} \mu^{|G|}
+    \end{aligned}
+\end{equation}
+So now survive the same graphs as above, but where the sites $i$ and $j$ have an odd number of occupied bounds instead of even number. \par 
+So we have 
+\begin{equation}
+    <S_iS_j> = \frac{\sum_{G (i \leftrightarrow j)} \mu^{|G|}}{\sum_{G } \mu^{|G|}}
+\end{equation}
+For $\mu \rightarrow 0$, 
+\begin{equation}
+    <S_iS_j> = \binom{x + y}{y}u^{x + y} + O(u^{x + y + 2})
+\end{equation}
+where $\binom{x + y}{y}$ corresponds to the number of possible shortest paths from $i$ to $j$. Using Stirling's formula, we have 
+\begin{equation}
+    <S_iS_j> = e^{r/\xi(\theta)}\frac{A(\theta)}{\sqrt{r}}
+\end{equation}
+with 
+\begin{equation}
+    \frac{1}{\xi(\theta)} = (c + s)\ln(\frac{1}{\mu}) + c\ln(c) + s\ln(s) - (c+s)\ln(c + s)
+\end{equation}
+where $\theta$ is the angle formed by $(x, y)$, and where 
+\begin{equation}
+    c = \cos(\theta) \qquad s = \sin(\theta) 
+\end{equation}
+There is no rotation symmetry!\par \bigskip 
+
+\section{Low T expansion}
+
+\begin{equation}
+    Z = \sum_{\{S\}} e^{J\sum_{<i,j>} S_iS_j}
+\end{equation}
+We want to describe the things in term of domain walls, which are graphs on the dual lattice. The domain walls are the walls between 2 different spins 
+\begin{equation}
+    \begin{aligned}
+        Z &= e^{JN_b}\sum_S \prod_{<i,j>} e^{S_iS_j - 1}J \\
+        &= e^{JN_b} \sum_{\{S\}}(e^{-J})^{|D.W|}
+    \end{aligned}
+\end{equation}
+where $|D.W|$ is the length of the domain wall. 
+\begin{equation}
+    Z = 2e^{JN_b} \sum_{\{G\}}\tilde{\mu}^{|G|}
+\end{equation}
+with $\tilde{\mu} = e^{-J}$. This is basically the low T expansion. \par \medskip 
+
+If $T\rightarrow 0, J \rightarrow +\infty, \tilde{\mu} \rightarrow 0$, we have 
+\begin{equation}
+    Z = 2e^{JN_b} (1 + N\tilde{\mu}^4 + O(\tilde{\mu}^6))
+\end{equation}
+
+section{Glimpse of Kramers-Wannier duality}
+\begin{enumerate}
+    \item High T: $Z = (2\text{cosh}^2(J)^{N_b})^N \sum_{G\text{ closed}} u^{|G|}$
+    \item Low T: $Z = 2e^{2JN} \sum_{G\text{ closed (on dual lattice)}} \tilde{u}^{|G|}$
+\end{enumerate}
+So they are essentially the same, except for a factor in front. From this, we can find the critical point (will be done in TD)
 \end{document}

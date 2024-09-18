@@ -42,6 +42,155 @@
 
 \tableofcontents
 
-\chapter{Introduction}
+\chapter{Classical field theory}
+\section{Lagrangian}
+We consider a system with $N$ particles, described by a position and momentum $\vec{X}, \vec{P}$, such that 
+\begin{equation}
+    \dot{P}_A = -\frac{\partial V}{\partial X^A}
+\end{equation}
+with $A = 1, \dots, 3N$. We can define a Lagrangian
+\begin{equation}
+    \mathcal{L}(\dot{X}^A, X^A) \equiv T(\dot{X}^A) - V(X^A)
+\end{equation}
+where $ V(X^A)$ is the potential, and $T(\dot{X}^A)$ the kinetic energy, usually 
+\begin{equation}
+    T(\dot{X}^A) = \sum_A \frac{1}{2}m_A (\dot{X}^A)^2
+\end{equation}
+We then define the action 
+\begin{equation}
+    \mathcal{S} = \int_{t_i }^{t_f }\text{d}t \mathcal{L}(\dot{X}^A, X^A, t)
+\end{equation}
+The principle of least action (extremum action) then says 
+\begin{equation}
+    \delta \mathcal{S} = 0
+\end{equation}
+where the extremum are fixed 
+\begin{equation}
+    X^A(t_{i,f}) = X^A_{i, f} \qquad \delta X^A(t_{i,f}) = 0
+\end{equation}
+To find the laws, we do a slight modification in the coordinates 
+\begin{equation}
+    X^A(t) = X^A(t) + \delta X^A(t)
+\end{equation}
+Putting this in the action, commuting time derivatives and $\delta$, and using integration by parts, we find 
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial X^A} - \frac{\text{d}}{\text{d}t} \frac{\partial \mathcal{L}}{\partial \dot{X}^A} = 0
+\end{equation}
+
+\section{Equation of motion for fields}
+
+This is already a strong result, but people generalized it to fields, with infinity many degrees of freedom 
+\begin{equation}
+    X^A(t) \rightarrow \phi (t, vec{x})
+\end{equation}
+
+We define 
+\begin{equation}
+    \mathcal{L} = \int \text{d} x^3 \mathcal{L}(\phi _a(t, \vec{x}), \partial_\mu \phi_a(t, \vec{x}))
+\end{equation}
+With 
+\begin{equation}
+    \mathcal{S} = \int \text{d}t \mathcal{L}(t)
+\end{equation}
+We still want to enforce on shell 
+\begin{equation}
+    \delta \mathcal{S} = 0
+\end{equation}
+So we take 
+\begin{equation}
+    \phi_a \rightarrow \phi_a + \delta \phi_a 
+\end{equation}
+And we fix the extremum. We do the same procedure (commutation of $\mu$ derivative and $\delta$, followed by integration by parts) and we get 
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial \phi_a} - \partial_\mu \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi_a)}
+\end{equation}
+
+\section{Symmetries}
+A Classical (infinitesimal) "Symmetry" is a infinitesimal change $\delta \phi_a$ such that under the transformation
+\begin{equation}
+    \phi_a \rightarrow \phi_a + \delta \phi_a 
+\end{equation}
+the Lagrangian changes as 
+\begin{equation}
+    \begin{aligned}
+        \delta \mathcal{L} &= \partial_\mu F^\mu \\
+        &= \frac{\partial \mathcal{L}}{\partial \phi_a} \delta \phi_a - \left(\partial_\mu \frac{\partial \mathcal{L}}{\partial \partial_\mu \phi_a}\right)\delta \phi_a + \partial_\mu \left(\frac{\partial \mathcal{L}}{\partial \partial_mu \phi_a}\delta\phi_a\right)
+    \end{aligned}
+\end{equation}
+This is called a symmetry because it leaves the action invariant: if $\phi_a$ is a solution of the equation of motion, then 
+\begin{equation}
+        \begin{aligned}
+            \delta \mathcal{L} &= \partial_\mu \left(\frac{\partial \mathcal{L}}{\partial \partial_\mu \phi_a}\delta \phi_a \right) \\
+            &= \partial-\mu F^\mu 
+        \end{aligned}
+\end{equation}
+and we can define the conserved current 
+\begin{equation}
+    J^\mu \equiv \frac{\partial \mathcal{L}}{\partial \partial_\mu \phi_a} \delta\phi_a - F^\mu 
+\end{equation}
+such that 
+\begin{equation}
+    \partial _\mu J^\mu = 0
+\end{equation}
+In this case, we can also define the conserved charge 
+\begin{equation}
+    Q \equiv \int_{\text{space}} \text{d}^3 x J^0
+\end{equation}
+
+And we have 
+\begin{equation}
+    \begin{aligned}
+        \frac{\text{d}Q}{\text{d}t} &= \int \text{d}^3 x \partial_t J^0 \\
+        &= \int \text{d}x^3 (\vec{\triangledown} \cdot \vec{J})\\
+        &= 0
+    \end{aligned}
+\end{equation}
+where the last equality comes from the assumption (almost always made) that $\phi_a \rightarrow 0$ at $\pm \infty$
+Let's do an exemple. We consider a symmetry transformation 
+\begin{equation}
+    \Lambda^\mu_\nu = \delta^\mu_\nu + \omega^\mu_\nu
+\end{equation}
+with $|\omega| << 1$. 
+\begin{equation}
+    \begin{aligned}
+        \phi'(x) &= \phi(\Lambda^{-1}x) \\
+        &= \phi(x^\mu - w^\mu_\nu x^\nu) \\
+        &\simeq \phi(x) - \omega ^\mu_\nu x^\nu \partial_\mu \phi(x) \\
+        &= \phi(x) - \omega {\rho\sigma} x^\sigma \partial^\rho \phi(x) 
+    \end{aligned}
+\end{equation}
+where we recognize $(\delta \phi_a)^{\rho\sigma} \simeq x^\sigma \partial^\rho \phi(x)$. 
+We have 
+\begin{equation}
+    \partial \mathcal{L} = -\omega^\mu_\nu x^\nu \partial_\mu \mathcal{L}
+\end{equation}
+Such that put in 
+\begin{equation}
+    J^\mu \equiv \frac{\partial \mathcal{L}}{\partial \partial_\mu \phi_a} \delta\phi_a - F^\mu 
+\end{equation}
+we have 
+\begin{equation}
+    \begin{aligned}
+        J^\mu &= (\partial^\mu\phi )[-\omega_{\rho\sigma}x^\sigma \partial^\rho \phi] - (-w^\rho_\sigma x^\sigma \mathcal{L} \\
+        &= -\omega_{\rho\sigma} \left[x^\sigma \partial^\mu \phi \partial^\rho \phi - \eta^{\sigma\mu}x^\rho\left(\frac{(\partial_\alpha \phi)^2}{2} - \frac{m^2}{2}\phi^2\right)\right]
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        \left(J^{\rho\sigma}\right)^\mu &= x^\sigma \partial^\mu \phi \partial^\rho \phi - \eta^{\sigma\mu}x^\rho\mathcal{L} - (\sigma \leftrightarrow \rho) \\
+        &= x^\rho T^{\sigma \mu} - x^\sigma T^{\rho \mu}
+    \end{aligned}
+\end{equation}
+where $T^{\rho\mu}$ is the stress-energy / energy-momentum tensor
+\begin{equation}
+    T^{\mu\nu} = \frac{\partial \mathcal{L}}{\partial \partial_\mu \phi} \partial^\nu \phi - \eta^{\mu\nu}\mathcal{L}
+\end{equation}
+\chapter{TD}
+
+\section{TD1}
+
+\begin{equation}
+    G(1+\omega, \epsilon) = \simeq 1 - \frac{i}{2}\omega_{\mu\nu}\Sigma^{\mu\nu} - i\epsilon_\mu P^\mu 
+\end{equation}
 
 \end{document}

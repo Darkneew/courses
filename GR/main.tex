@@ -261,5 +261,332 @@ We get
 \end{equation}
 Which is, for the particular part, exactly the Rindler metric. So the Rindler space modelizes at first order the exterior near horizon of a black hole.
 
+\section{Formalism}
+
+GR is based on 4 postulates 
+\begin{enumerate}
+    \item Spacetime is 4D Lorentzian manifold, equipped with a Levi-Civita connexion $(\Gamma^\mu_{\alpha\beta})$
+    \item Free particles follow time-like or null geodesics $(m > 0, \quad m = 0)$
+    \item The energy, momentum and stresses of matter are described by a symmetric tensor $T_{\mu\nu}$, which is covariantly conserved $\triangledown^\mu T_{\mu\nu} = 0$
+    \item The curvature of space time is related to $T_{\mu\nu}$ via the Einstein's equation $G_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$
+\end{enumerate}
+
+\underline{Differentiable manifold, scalars, vectors, tensors, forms}
+\begin{enumerate}
+    \item In GR, space time has a curved geometry; in general no particular symmetry and hence no preferred set of coords 
+    \item Furthermore, a single set of coords is not always sufficient to describe all of spacetime (ex. Schwarchild)
+    \item Manifold structure gives us the framework for smoothly meshing these coordinates together; and that any point $p$ on $\mathcal{M}$ can be thought in term of curvilinear coordinates on $\mathbb{R}^n$ (if $\mathcal{M}$ has dimension $n$)
+    \begin{equation}
+        \begin{aligned}
+            &x(p) = (x^1(p), x^2(p), \dots, x^n(p)) \\
+            &x'(p) = (x^{'1}(p), x^{'2}(p), \dots, x^{'n}(p)) 
+        \end{aligned}
+    \end{equation}
+    and the map between $x$ and $x'$ is smooth and invertible
+    \item  Scalars are invariant under coord transformations 
+    \item vectors are abstractly $(\bar{x} = x^\mu\partial_\mu)$, but we will think of them as $(x^\mu)$. They are defined on the tangent space $T_p$ at point $p$, for which a natural coordinate basis is $\partial_\mu \equiv \frac{\partial}{\partial x^\mu}$. $\bar{x}$ is invariant under coordinate transformations. Thus, under the change $x \rightarrow x'$, we have 
+    \begin{equation}
+        x^{'\mu}(x) = \frac{\partial x^{'\mu}}{\partial x^\alpha} x^\alpha(x)
+    \end{equation}
+    \item covectors have as natural coord basis $\text{d}x^\mu$; $\omega = \omega_\mu \text{d}x^\mu$. We have under the transformation of coordinate 
+    \begin{equation}
+        \omega_\mu'(x) = \frac{\partial x^\alpha}{\partial x^{'\mu}}\omega_\alpha(x)
+    \end{equation}
+    \item $(k, l)$ tensors transform as $k$ vectors and $l$ covectors. 
+    \item Principle of covariance: physical laws must be the same for all observers whatever their coord system. They must preserve their form under general coord transformations. For exemple, the equation for geodesics is invariant under coordinate systems 
+    \begin{equation}
+        \frac{\text{d}^2x^\mu}{\text{d}\tau^2} + \Gamma^\mu_{\alpha\beta} \frac{\text{d}x^\alpha}{\text{d}\tau}\frac{\text{d}x^\beta}{\text{d}\tau} = 0
+    \end{equation}
+    Writing it out gives us the transformation law of $\Gamma$. We find 
+    \begin{equation}
+        \Gamma{'\nu}_{\alpha\beta} = \frac{\partial x^{'\nu}}{\partial x^{\omega}}\frac{\partial x^{\mu}}{\partial x^{'\alpha}}\frac{\partial x^{\lambda}}{\partial x^{'\beta}}\Gamma{'\omega}_{\mu\lambda} + \frac{\partial x^{\mu}}{\partial x^{'\alpha}}\frac{\partial x^{\lambda}}{\partial x^{'\beta}} \frac{\partial^2 x^{'\nu}}{\partial x^\mu \partial x^{\lambda}}
+    \end{equation}
+    In particular, $\Gamma$ is not a tensor. 
+\end{enumerate}
+
+\subsection{(Anti-) symmetrisation of tensors}. \newline 
+Given some tensor $B_{\mu\nu}$, we can symmetrize it by taking 
+\begin{equation}
+    S_{\mu\nu} = \frac{1}{2}(B_{\mu\nu} + B_{\nu\mu})
+\end{equation}
+we can antisymmetrize it by taking 
+\begin{equation}
+    A_{\mu\nu} = \frac{1}{2}(B_{\mu\nu} - B_{\nu\mu})
+\end{equation}
+For a tensor with $n$ indices, we consider permutations, and we have 
+\begin{equation}
+    T_{(\mu_1, \dots, \mu_n)} = \frac{1}{n!}\sum_{\text{perm }\sigma} T_{\sigma(\mu_1), \dots, \sigma(\mu_n)} \qquad T_{[\mu_1, \dots, \mu_n]} = \frac{1}{n!}\sum_{\text{perm }\sigma} \text{sign}(\sigma) T_{\sigma(\mu_1), \dots, \sigma(\mu_n)} \qquad 
+\end{equation}
+where we write a tensor with indices in $()$ for a symmetrized tensor, and in $[]$ for an antisymmetrized tensor. \par \medskip 
+
+By convention, we write 
+\begin{equation}
+    T^{(\mu_1 \mu_2)}_{\qquad[\mu_3, \mu_4](\mu_5|\mu_6|\mu_7)}
+\end{equation}
+a tensor symmetric in $\mu_1 \leftrightarrow \mu_2$ and in $\mu_5 \leftrightarrow \mu_7$, and antisymmetric in $\mu_3 \leftrightarrow \mu_4$ \par \bigskip 
+
+\subsection{Derivatives}
+Since we haven't introduced a metric, we only have $\partial_\mu$.
+\begin{enumerate}
+    \item $\partial_\mu f$ transforms like a vector 
+    \item $\partial_\mu A^\nu$ does not transform as a $(1, 1)$ tensor 
+\end{enumerate}
+there is a class of tensors for which $\partial_\mu$ does take tensors to $(k, l+1)$ tensors. These are totally antisymmetric $(0, p)$ tensors $\omega_{\mu_1, \dots \mu_p} = \omega_{[\mu_1, \dots \mu_p]}$ known as $p$-forms. In dimension $n$, there are $\binom{n}{p}$ independant functions in a $p$-forms. \par \medskip 
+The exterior derivative $\text{d}$ takes a $p$-form to a $(p+1)$-form 
+\begin{equation}
+    (\text{d}A)_{\mu_1,\dots,\mu_{p+1}} = (p+1)\partial_{[\mu_1}A_{\mu_2, \dots, \mu_{p+1}]}
+\end{equation}
+$\text{d}A$ is a tensor. Also, $\text{d}^2 = 0$. GR cannot be only formulated in term of forms. 
+
+\subsection{Metric and tensor densities}
+\begin{enumerate}
+    \item Metric gives a notion of distance on the manifold 
+    \item $(0, 2)$ symmetric tensor $g_{\mu\nu} = g_{\nu\mu}$
+    \item non degenerate $g \equiv \det(g_{\mu\nu}) \neq 0$ (the det is not a scalar, it changes under coord transforms)
+    \item $g_{\mu\nu}$ can be diagonalized, diag elements are non-zero. We can rescale basis vectors, so the values are $\pm1$. Lorentzian manifolds have signature $(-+++\dots)$ 
+    \item Inverse metric $g^{\mu\nu}$ such that $g^{\mu\nu}g_{\nu\alpha} = \delta^\mu_\alpha$
+    \item Metric and inverse, raise and lower indices 
+    \item $A^\mu = g^{\mu\nu}A_\nu$
+    \item The distance between two space time points is invariant, distance between $x^\mu$ and $x^\mu + \text{d}x^\mu$ is $\text{d}s^2 = g_{\mu\nu}\text{d}x^\mu \text{d}x^\nu$
+    \item How does $g = \text{det}(g_{\mu\nu})$ change under coord transforms? 
+    \begin{equation}
+        g'_{\mu\nu} = \frac{\partial x^{\alpha}}{\partial x^{'\mu}}g_{\alpha\beta} \frac{\partial x^\beta}{\partial x^{'\nu}}
+    \end{equation}
+\end{enumerate}
+
+Writing $J^\alpha_\beta = \frac{\partial x^\alpha}{\partial x^{'\beta}}$, we have $g' = J^\dagger g J$, such that 
+\begin{equation}
+    \det(g') = \det(J)^2 \det(g) 
+\end{equation}
+So 
+\begin{equation}
+    \sqrt{-g'} = \sqrt{-g}\left|\frac{\partial x^\alpha}{\partial x^{'\beta}}\right|
+\end{equation}
+Since physics is coordinate invariant, any action $S$ must be a scalar, and thus must be of the form 
+\begin{equation}
+    S = \int \text{d}^4 x \sqrt{-g}\mathcal{L}(\phi, \triangledown \phi)
+\end{equation}
+with $\mathcal{L}$ a scalar. \par \medskip 
+
+\underline{Notation}: Given a tensor $T$, $\sqrt{-g}T$ is known as a tensor density. Later we will be varying the actions with $g_{\mu\nu}$ (which will define the stress energy tensor). We thus need to calculate 
+\begin{equation}
+    \begin{aligned}
+        \delta \sqrt{-g} &= \frac{1}{2}\sqrt{-g}g^{\alpha\beta}\delta g_{\alpha \beta} \\
+        &= -\frac{1}{2}\sqrt{-g}g_{\alpha\beta}\delta g^{\alpha \beta}
+    \end{aligned}
+\end{equation}
+
+\subsection{Geodesics and curves of extremal proper time}
+
+Which curve $x^\mu(\lambda)$ extremises the proper time between two fixed points $p$ ($\lambda = 0$) and $q$ ($\lambda = 1$)? 
+\begin{equation}
+    \tau = \int_{p}^{q} \text{d}\tau = \int_{0}^{1}\frac{\text{d}\tau}{\text{d}\lambda} \text{d}\lambda = \int_{0}^{1}\sqrt{I}\text{d}\lambda 
+\end{equation}
+where 
+\begin{equation}
+    I = -g_{\mu\nu}(x(\lambda)) \frac{\text{d}x^\mu}{\text{d}\lambda}\frac{\text{d}x^\nu}{\text{d}\lambda}
+\end{equation}
+since 
+\begin{equation}
+    \text{d}s^2 = -\text{d}\tau^2 = g_{\mu\nu}(x(\lambda)) \frac{\text{d}x^\mu}{\text{d}\lambda}\frac{\text{d}x^\nu}{\text{d}\lambda} \text{d}\lambda^2
+\end{equation}
+
+Euleur Lagrange equations are 
+\begin{equation}
+    \frac{\text{d}}{\text{d}\lambda} \left(\frac{\partial \sqrt{I}}{\partial \dot{x}^\mu}\right) = \frac{\partial \sqrt{I}}{\partial x^\mu}
+\end{equation}
+with $\dot{x}^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$
+\begin{equation}
+    \frac{\text{d}}{\text{d}\lambda} \left(\frac{\partial I}{\partial \dot{x}^\mu}\right) - \left(\frac{1}{I}\frac{\text{d}I}{\text{d}\lambda}\right)\frac{\partial I}{\partial \dot{x}^\mu} = \frac{\partial I}{\partial x^\mu}
+\end{equation}
+If we choose $I$ to be constant along the path, the term in $\frac{1}{I}\frac{\text{d}I}{\text{d}\lambda}$ diseappears, the proper time $\tau$ becomes an affine parameter of $\lambda$? somthing like that; and we have a simplified equation 
+\begin{equation}
+    \frac{\text{d}}{\text{d}\lambda}\left(\frac{\partial I}{\partial \dot{x}^\mu}\right) =  \frac{\partial I}{\partial x^\mu}
+\end{equation}
+Substituting somehting above gives 
+\begin{equation}
+    \frac{\text{d}^2x^\mu}{\text{d}\lambda^2} + \Gamma^\mu_{~\alpha\beta} \frac{\text{d}x^\alpha}{\text{d}\lambda}\frac{\text{d}x^\beta}{\text{d}\lambda} = 0
+\end{equation}
+It is very important to notice that we can easily compute the Christoffel symbol this way, by identification using the Euler-Lagrange equation. The Euler-Lagrange equation is easy to find. We also have 
+\begin{equation}
+    \Gamma^\mu_{\alpha\beta} = \frac{1}{2}g^{\mu\nu} (\partial_\alpha g_{\nu\beta} + \partial_\beta g_{\nu\alpha} - \partial_\nu g_{\alpha\beta})
+\end{equation}
+Notice that we obtain the same equation by considering the following action instead 
+\begin{equation}
+    S = \int \text{d}\lambda ~I
+\end{equation}
+We recall
+\begin{equation}
+    I = -g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu 
+\end{equation}
+It is common for time-like geodesics to set $I = -1$ $(m>0)$. Massless particles satisfy the same geodesic equation 
+\begin{equation}
+    \frac{\text{d}^2x^\mu}{\text{d}\lambda^2} + \Gamma^\mu_{~\alpha\beta} \frac{\text{d}x^\alpha}{\text{d}\lambda}\frac{\text{d}x^\beta}{\text{d}\lambda} = 0
+\end{equation}
+but $\lambda$ cannot be proper time since $\text{d}s^2 = 0$. We have $I = 0$ on null geodesics. Space-like geodesics, same equations, we can fix $I = 1$. 
+
+\begin{example}
+    In Minkoswki space, consider a curve $x^\mu(\lambda)$
+    \begin{equation}
+        x^\mu(\lambda) = (R\lambda, R\cos(\lambda), R\sin(\lambda), 0)
+    \end{equation}
+    Is it a light-like curve which is not a geodesic.
+\end{example}
+
+\subsection{Covariant derivatives $\triangledown_\mu$}
+
+\begin{enumerate}
+    \item acts from tensors $(k,l)$ to tensors $(k, l+1)$
+    \item reduces to $\partial_\mu$ on flat space
+    \item linear 
+    \item Leibnitz derivation 
+    \item On scalars $f$, $\triangledown_\mu f = \partial_\mu f$
+    \item When acting on a vector $v^\alpha$, these properties imply that 
+        \begin{equation}
+        \triangledown_\mu v^\alpha = \partial_\mu v^\alpha + (\gamma_\mu)^\alpha_{~\beta} v^\beta
+        \end{equation}
+    \item moreover, $(\gamma_\mu)^\alpha_{~\beta}$ must transform like the Christoffel symbol 
+    \item Since $v^\beta v_\beta$ is a scalr, we have $\triangledown_\mu (v^\alpha v_\alpha) = \partial_\mu (v^\alpha v_\alpha)$, we have 
+    \begin{equation}
+        \triangledown_\mu v_\alpha = \partial_\mu v_\alpha - (\gamma_\mu)^\alpha_{~\beta} v_\beta
+    \end{equation}
+    \item we can also find the transformation rule of $T^{\mu\nu}$ by contracting $T^{\mu\nu}v_{\mu}v_\nu$. 
+    \item The torsion tensor is $T^\lambda_{~\alpha\beta} = (\gamma_\alpha)^\lambda_{~\beta} - (\gamma_\beta)^\lambda_{~\alpha}$.
+\end{enumerate}
+
+In special relativitym we choose to have no torsion (it is assumed, some theories with torsion exist but they are not GR), aka $T^\lambda_{~\alpha\beta} = 0$. We also choose $\triangledown_\alpha g_{\mu\nu} = 0$, which is obvious in the rest frame (where we locally have a Minkoski spacetime), and which is true in any frame due to the equivalence principle. These two conditions result in 
+\begin{equation}
+    \gamma^\lambda_{~\alpha\beta} = \Gamma^\lambda_{~\alpha\beta}
+\end{equation}
+the Christoffel symbol. \par \bigskip 
+Check that $[\triangledown_\mu, \triangledown_\nu]f = 0$ for $f$ a scalar, amd that $\triangledown_\mu v^\mu = \frac{1}{\sqrt{-g}}\partial_\mu (\sqrt{-g}v^\mu)$. \par \bigskip 
+
+In this language, the geodesic equation rewrites 
+\begin{equation}
+    U^\mu \triangledown_\alpha U^\alpha = 0
+\end{equation}
+where $U^\alpha = \frac{\text{d}x^\alpha}{\text{d}\lambda}$
+
+\subsection{Directional covariant derivative}
+
+if a tensor is only defined on some curve $x^\mu(\lambda)$ (eg. momentum $P^\mu$ of a particle), then the directional covariant derivative $\frac{D}{\text{d}\lambda} = \frac{\text{d} x^\mu}{\text{d}\lambda} \triangledown_\mu$\par \medskip 
+
+$\frac{DT^{\mu\dots}_{\nu\dots}}{\text{d}\lambda}$ transforms as a tensor. Parrallel transport: $T$ is parrallel transported along $x^\mu(\lambda)$ if $\frac{DT}{\text{d}\lambda} = 0$
+
+
+\subsection{Geodesics deviation equation and the Riemann tensor}
+
+In flat spacetime, two intially parrallel straight lines (geodesics) remain parrallel. In curved spacetime, they converge / diverge. The objective is to find by how much they deviate. The idea is to consider two initially parrallel lines, $x^\mu(\lambda)$ and $\bar{x}^\mu(\lambda)$, where $\bar{x}^\mu(\lambda) = x^\mu(\lambda) + \xi^\mu(\lambda)$, $\xi^\mu << 1$. We then expand the geodesics equations at first order. \par \medskip 
+
+On rewriting $\frac{\text{d}^2\xi^\mu}{\text{d}\lambda^2}$ in terms of $\frac{D^2\xi^\mu}{\text{d}\lambda^2}$, we find 
+\begin{equation}
+    \frac{D^2 \xi^\rho}{\text{d}\lambda} + R^\rho_{\sigma \mu\nu} \xi^\nu \frac{\text{d}x^\sigma}{\text{d}\lambda}\frac{\text{d}x^\mu}{\text{d}\lambda} = 0
+\end{equation}
+where 
+\begin{equation}
+    R^\rho_{\sigma \mu\nu} = \partial_\mu \Gamma^\rho_{~\nu\sigma} - \partial_\nu \Gamma^\rho_{~\mu\sigma} + \Gamma^\rho_{~\mu\lambda}\Gamma^\lambda_{~\rho\sigma} - \Gamma^\rho_{~\nu\lambda}\Gamma^\lambda_{~\mu\sigma}
+\end{equation}
+is the Riemann curvature tensor, of second order in term of the metric. A necessary and sufficient condition for $g_{\mu\nu}$ to describe globally flat space time is that $R^\mu_{~\alpha \beta\gamma} = 0$. One can show that 
+\begin{equation}
+    \begin{aligned}
+        &[\triangledown_\mu, \triangledown_\nu] v^\rho = R^\rho_{\sigma \mu\nu} v^\sigma \\
+        &[\triangledown_\mu, \triangledown_\nu] \omega_\sigma = - R^\rho_{\sigma \mu\nu} \omega_\rho 
+    \end{aligned}
+\end{equation}\bigskip 
+
+\noindent Properties of the Riemman tensor: \newline
+symmetry two by two indices :
+\begin{equation}
+    R_{\lambda \mu\nu\kappa} = R_{\nu\kappa\lambda\mu}
+\end{equation}
+antisymmetry two first and two second
+\begin{equation}
+    R_{\lambda \mu\nu\kappa} = - R_{\lambda \mu\kappa\nu} = R_{\mu\lambda\kappa\nu}
+\end{equation}
+cyclicity of the 3 last indices
+\begin{equation}
+    R_{\lambda [\mu\nu\kappa]} = 0
+\end{equation}
+
+Bianchi identity:
+\begin{equation}
+    \triangledown_{[\gamma}R_{\mu\nu]\lambda\kappa} = 0
+\end{equation}
+
+There are multiple scalars or tensors that we can define 
+\begin{enumerate}
+    \item Ricci tensor: $R_{\alpha\beta} = R^\mu_{~\alpha\mu\beta}$, it is symmetric
+    \item Ricci scalar: $R = R^alpha_{~\alpha}$
+    \item Einstein tensor: $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$. We have $\triangledown^\mu G_{\mu\nu} = 0$
+    \item Kretschmann scalar: $K = R_{\alpha\beta\gamma\delta}R^{\alpha\beta\gamma\delta}$
+\end{enumerate}
+
+\begin{remark}
+    \begin{enumerate}
+        \item $n = 1$: no intrisc curvature possible 
+        \item $n=2$: 1 independant component of Riemann tensor, which is entirely defined by the Ricci scalar: $R_{\mu\nu} = Rg_{\mu\nu}$, $R_{\alpha\beta\gamma\delta} = R g_{\alpha[\gamma}g_{\delta]\beta}$
+        \item $n=3$: Riemann has 6 independant components, just like the Ricci tensor. So Einstein's equation completely fix the geometry of the space: no matter = flat space. 
+        \item $n=4$: Riemann has 20 independant components, whilst Ricci has 10 independant components. A lot more possibilities. 
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    $n = 2$:
+    \begin{enumerate}
+        \item 2 sphere: $\text{d}s^2 = a^2(\text{d}\theta^2 + \sin^2(\theta) \text{d}\phi^2)$. There is a constant positive curvature $R = 2/a^2$
+        \item flat space: $\text{d}s^2 = \text{d}x^2 + \text{d}y^2$, $R = 0$
+        \item 2D hyperbolic plane $\text{d}s^2 = \frac{a^2}{what}(\text{d}x^2 + \text{d}y^2)$ for $y>0$. There is a constant negative curvature $R = -2/a^2$
+    \end{enumerate}
+\end{example}
+
+\subsection{Lie Derivative}
+We don't need any supplementary structure (contrary to $\triangledown^\mu$ which required the connexion). Take a curve $\gamma$, tangent vector $U^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$, acceleration vector $A^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$. At a point $P$ on the curve, we have the coordinates $x^\mu$. A little bit later, we arrive at point $Q$, with coordinates $x^{'\mu} = x^\mu + U^\mu \text{d}\lambda$. We interpret this as an infinitesimal coordinate transformation. Under this transformation, 
+\begin{equation}
+    A^{'\alpha}(x') = \frac{\partial x^{'\alpha}}{\partial x^\beta} A^\beta (x) = (\delta^\alpha_\beta + (\partial_\beta U^\alpha)\text{d}\lambda) A^\beta(x)
+\end{equation}
+or in other words
+\begin{equation}
+    A^{'\alpha}(Q) = A^{\alpha}(P) + (\partial_\beta U^\alpha)\text{d}\lambda A^\beta(P)
+\end{equation}
+On the other hand, 
+\begin{equation}
+    A^\alpha(Q) = A^\alpha(P) + U^\beta (\partial_\beta A^\alpha)\text{d}\lambda
+\end{equation}
+
+In general, $A^{'\alpha}$ and $A^{\alpha}$ differ. Their difference defines the Lie derivative of $A^\alpha$ along the curve. 
+\begin{equation}
+    \mathcal{L}_U A^\alpha (P) = \lim_{\text{d}\lambda \rightarrow 0} \frac{A^\alpha(Q) - A^{'\alpha}(Q)}{\text{d}\lambda} = (\partial_\beta A^\alpha)U^\beta - (\partial_\beta U^\alpha) A^\beta
+\end{equation}
+\begin{enumerate}
+    \item for a vector, $\mathcal{L}_U A^\alpha = (\triangledown _\beta A^\alpha)U^\beta - (\triangledown_\beta U^{\alpha})A^{\beta}$
+    \item for a scalar, $\mathcal{L}_U\Phi = (\partial_\beta \Phi)U^\beta$
+    \item for a covector, $\mathcal{L}_U \omega_\alpha = (\triangledown _\beta \omega_\alpha)U^\beta + (\triangledown_\beta U^{\alpha})\omega_{\beta}$
+\end{enumerate}
+
+Holds true the Leibnitz rule for the Lie derivative
+\begin{equation}
+    \mathcal{L}_u(p^\alpha q_\beta) = (\mathcal{L}_u p^\alpha)q_\beta + p^\alpha \mathcal{L}_u  q_\beta
+\end{equation}
+
+\underline{Lie transport:} $\mathcal{L}_U T^{\alpha, \dots}_{\qquad \beta, \dots} = 0$. If this is satisfied, $T$ is Lie transported along $\gamma$. What are the properties of Lie transported tensors? \par \medskip 
+
+We can change the coordinates such that the first coordinate correspond to the path, and the others are constant along $\gamma$. Then, if the tensor is Lie transported along this path, then its derivative along the first coordinate will be null, ie it will be conserved along the first coordinate. 
+
+\begin{theorem}
+    \begin{enumerate}
+        \item for a $(k, l)$ tensor $T$, if $L_U T = 0$, then a coordinate system can be constructed such that in this coordinate system, $U^\alpha = \delta^\alpha_0$ and $\partial_0 T= 0$.
+        \item if in a given coordinate system, the coordinates of a tensor $T$ don't depend on some coordinate $x^0$ say, then $\mathcal{L}_{\partial_0} T= 0$.  
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Killing vectors} (Lie derivative applied to the metric)
+\begin{enumerate}
+    \item $k^\mu$ is a Killing vector if $\mathcal{L}_k g_{\mu\nu} = 0$, if $\triangledown _\beta k_\alpha + \triangledown _\alpha k_\beta = 0$ (killing equation)
+    \item if in a given coord system $g_{\mu\nu}$ doesn't depend on $x^0$, $\partial_0 g_{\mu\nu} = 0$, so $\mathcal{L}_{\partial_0}g_{\mu\nu} = 0$
+\end{enumerate}
+As expected, for each Killing vector, there is a coserved quantity along a geodesic 
+\begin{equation}
+    \frac{\text{d}}{\text{d}\lambda}\left(k_\mu \frac{\text{d}x^\mu}{\text{d}\lambda}\right) = 0
+\end{equation}
 
 \end{document}

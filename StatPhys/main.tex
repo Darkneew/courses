@@ -478,8 +478,214 @@ We now denote a config $\mathscr{C}$ by a $d$-dimensional vector $x$. We will of
 \begin{equation}
     \partial_t P(x, t) = \int \text{d}x' w(x' \rightarrow x) P(x', t) - \int \text{d}x' w(x \rightarrow x') P(x, t)
 \end{equation}
+We choose to write $w$ as a function of the length $w(x \rightarrow x') = w(x, x' - x)$.
+\begin{equation}
+    \partial_t P(x, t) = \int \text{d}r w(x-r, r) P(x-r, t) - \int \text{d}r w(x, r) P(x, t)
+\end{equation}
+We expand $w$ for low $r$
+\begin{equation}
+    \partial_t P(x, t) = \sum_{n\geq 1} \frac{(-1)^n}{n!} \partial^n_x \left[\int \text{d}r~ r^n w(x, r) P(x, t)\right]
+\end{equation}
+So defining 
+\begin{equation}
+    a_n(x) = \int \text{d}r ~ r^n w(x, r)
+\end{equation}
+The master equation rewrites 
+\begin{equation}
+    \partial_t P =  \sum_{n\geq 1} \frac{(-1)^n}{n!} \partial^n_x (a_n(x)P(x, t))
+\end{equation}
+So as expected from a conserved current, we have 
+\begin{equation}
+    \partial_t P = -\partial_\mu J^\mu
+\end{equation}
+Where 
+\begin{equation}
+    J^\mu = \text{ probability current}
+\end{equation}
+which is defined up to a quantity. There is a name for $a_n$: it is the Kramers-Moyal coefficient of order $n$. 
 
+\subsection{Infinitesimal jumps}
+Assume that at $t=t_0$, the system is at $x(t_0) = x_0$. Then rum over the dynamics over $[t_0, t_0 + \Delta t]$. Them ask about the random variable 
+\begin{equation}
+    \Delta x = x(t_0 + \Delta t) - x(t_0)
+\end{equation}
+when $\Delta t$ is small. We certainly want to solve 
+\begin{equation}
+    \partial_t P = -\partial_x J
+\end{equation}
+with $p(x, t | x_0, t_0)$ verifying 
+\begin{equation}
+    p(x, t_0 | x_0, t_0) = \delta(x - x_0)
+\end{equation}
+\begin{equation}
+    <\Delta x^k> = \int \text{d}x (x-x_0)^k p(x, t_0 + \Delta t | x_0, t_0)
+\end{equation}
+where 
+\begin{equation}
+    p(x, t_0 + \Delta t | x_0, t_0) = p(x, t_0 | x_0, t_0) + \Delta t \partial_t p + O(\Delta t^2)
+\end{equation}
+So $\forall k \geq 1$
+\begin{equation}
+    <\Delta x^k> = \Delta t \sum \frac{1}{n!}\int \text{d}x \frac{\text{d}^n}{\text{d}x^n} (x-x_0)^k \delta(x - x_0)a(x_0)
+\end{equation}
+Which gives 
+\begin{equation}
+    \frac{<\Delta x^k>}{\Delta t} =_{\Delta t \rightarrow 0} a_k(x_0)
+\end{equation}
+So $a_k(x_0)$ is the $k^{\text{th}}$ momentum of the displacement over $[t_0, t_0 + \Delta t]$ 
 
+\subsection{Approximation}
+If we think of the example of the colloid, we expect $\Delta x$ to be small with respect to the scale over which the colloid evolves. \par \medskip 
+
+As a first idea, we can truncate 
+\begin{equation}
+    \partial_t p = -\partial_x J = -partial_x a_1(x)p(x, t)
+\end{equation}
+because 
+\begin{equation}
+    a_n(x) = \int \text{d}r ~ r^n w(x, r)
+\end{equation}
+is small. At this level of truncation we end up on a deterministic propagation equation in which the probability cloud moves as a block. If we truncate at order 2:
+\begin{equation}
+    \partial_t  p = -\partial_x (a_1(x)p) + \frac{1}{2}\partial^2(a_2(x)p)
+\end{equation}
+This is a diffusion equation: Fokker-Planck equation. In high dimension, we see a diffusion equation on a curved spacetime, where the metric of the spacetime is encoded in $a_2$
+\begin{equation}
+    \partial_t  p = -\partial_\mu (a_1^\mu p) + \frac{1}{2}\partial_\mu\partial_\nu(a_2^{\mu\nu} p)
+\end{equation}
+However, we cannot expand at higher order: if we truncate at order $k\geq 3$, the positivity of $p$ is not ensured. This is very important, since $p$ is a probability. Hence, we have no choice but to keep our expansion (very limited) at order 1 or 2, or to keep the whole equation.
+
+\section{Langevin's equation}
+\subsection{Gaussian random variables}
+
+A Gaussian random variable $\xi$ has a probability density 
+\begin{equation}
+    P(\vec{\xi}) = \frac{1}{Z} e^{-\frac{1}{2}\xi^\dagger \Gamma \xi}
+\end{equation}
+with $\Gamma$ a positive definite symmetric matrix, and 
+\begin{equation}
+    Z = (2\pi)^{M/2}/\sqrt{\det \Gamma}
+\end{equation}
+where $M$ is the dimension of $\vec{\xi}$. 
+With this we can define 
+\begin{equation}
+    G[h] = <e^{h^\dagger \xi }> = e^{\frac{1}{2}h^\dagger \Gamma^{-1}h}
+\end{equation}
+
+We know picture a Gaussian variable as a discrete time process in which $m=1,\dots, M$ is viewed as a time slice index: $t_m = m\Delta t$. Eventually, we want to take the $\Delta t \rightarrow 0$ limit, or $M \rightarrow +\infty$, while keeping $t_\text{obs} = M\Delta t = \text{fixed}$. Hence, we write 
+\begin{equation}
+    \begin{aligned}
+        \text{d}^M\xi P(\xi) &= Z^{-1} \text{d}\xi^1\dots \xi_M e^{-\frac{1}{2} \sum_{mn} \xi_m \Gamma_{mn}\xi_n} \\
+        &=  Z^{-1} \text{d}\xi^1\dots \xi_M e^{-\frac{1}{2}\int \text{d}t\text{d}t' \xi(t)\Gamma(t, t')\xi(t')}
+    \end{aligned}
+\end{equation} 
+with $t = m\Delta t$, $\xi(t) = \frac{1}{\sqrt{\Delta t}}\xi_t$, $\Gamma(t, t') = \frac{1}{\Delta t}\Gamma_{tt'}$. \par \medskip 
+
+Usually, one writes 
+\begin{equation}
+    \frac{1}{Z}\text{d}\xi^1\dots \xi_M = \mathcal{D}\xi
+\end{equation}
+The matrix $\Gamma(t, t')$ is called a noise kernel, and if $G(t, t')$ (Green's propagator) is its inverse:
+\begin{equation}
+    \int \text{d}t'' \Gamma(t, t'')G(t'', t') = \delta (t-t')
+\end{equation}
+where we have introduced 
+\begin{equation}
+    G(t, t') = \frac{G_{t/\Delta t, t'/\Delta t}}{\Delta t} = <\xi(t), \xi(t')>
+\end{equation}
+If the $\Delta t \rightarrow 0$ limit exists when computing averagesand correlations of physical quantities, $\xi(t)$ is called a Gaussian process. \par \medskip 
+
+One exemple that will come back very often is one for which 
+\begin{equation}
+    \Gamma(t, t') = G(t, t') = \delta(t-t')
+\end{equation}
+In this case, $\xi$ is a Gaussian white noise. For instance, if we are interested in 
+\begin{equation}
+    x_M = \Delta t^{1/2} \sum_{m=1}^M \xi_m 
+\end{equation}
+then for $\Gamma_{nm} = \delta_{nm}$ we have 
+\begin{equation}
+    \begin{aligned}
+        &<x_M> = 0 \\
+        &<x^2_M> = M\Delta t = t_{\text{obs}}
+    \end{aligned}
+\end{equation}
+This can be recovered with the continuum limit 
+\begin{equation}
+    x(t_{\text{obs}}) = \int_{0}^{t_{\text{obs}}}\text{d}s \xi(s)
+\end{equation}
+
+\subsection{Stochastic Differential Equation}
+Let $x_0$ be fixed, and define $x_n$ via the following recursion relation 
+\begin{equation}
+    x_{n+1} = x_n + f(x_n)\Delta t + g(x_n)\sqrt{\Delta t} \eta_n
+\end{equation}
+with $f, g$ given functions, and $\eta_n$ a Gaussian process such that $<\eta_n\eta_m> = \delta_{nm}$. \par \medskip 
+
+In the continuum limit, this reads, with $x(t) = x_{t/\Delta t}$
+\begin{equation}
+    \Delta x = x(t + \Delta t) - x(t) = f(x(t))\Delta t + g(x(t))\sqrt{\Delta t}\eta_m 
+\end{equation}
+where 
+\begin{equation}
+    \sqrt{\Delta t}\eta_m  = \Delta\eta = \int_{t}^{t + \Delta t}\text{d}s~ \eta(s)
+\end{equation}
+with 
+\begin{equation}
+    \eta(s) = \frac{\eta_{s/\Delta t}}{\sqrt{\Delta t}}
+\end{equation}
+$\Delta \eta$ is Gaussian with variance $\Delta t$
+\begin{equation}
+    \begin{aligned}
+        &<\Delta \eta> = 0 \\
+        &<\Delta \eta ^2> = \int_{t}^{t+\Delta t} \text{d}s\text{d}s' <\eta(s)\eta(s')> = \Delta t
+    \end{aligned}
+\end{equation}
+It is tempting and natural to write 
+\begin{equation}
+    \frac{\text{d}x}{\text{d}t} = f(x(t)) + g(x(t))\eta(t)
+\end{equation}
+We immediatly see that it is NOT fine to assume $x$ is differentiable: 
+\begin{equation}
+    \frac{\Delta x}{\Delta t} \sim O(\frac{1}{\sqrt{\Delta t}})
+\end{equation}
+it explodes. The continuum limit of 
+\begin{equation}
+    \Delta x = f(x(t)) \Delta t + g(x(t)) \Delta \eta \Rightarrow \dot{x} = f + g\eta
+\end{equation}
+is full of traps. Suppose we are given $\alpha \in [0,1]$, then 
+\begin{equation}
+    \Delta x = f(x(t) + \alpha \Delta x) \Delta t + g(x(t) + \alpha \Delta x)\Delta \eta
+\end{equation}
+then it looks like as $\Delta t \rightarrow 0$, $\dot{x} = f + g\eta$. So given an equation of the form $\dot{x} = f + g\eta$, we do not have a way of a priori knowing what is the intended discretized form, so we make it explicit by dressing the $=$ sign with $\alpha$
+
+\subsection{Infinitesimal jumps}
+Let's focus on the statistics of the infinitesimal jumps $\Delta x = x(t_0 + \Delta t) - x_0$, with $x(t_0) = x_0 = \text{fixed}$. We assume that 
+\begin{equation}
+    \begin{aligned}
+        &\Delta x = f(x(t_0))\Delta t + g(x(t_0))\Delta \eta \\
+        &\Rightarrow <\Delta x> = f(x(t_0)) \Delta t \Rightarrow \lim_{\Delta t \rightarrow 0} \frac{<\Delta x>}{\Delta t} = f(x_0) \\ 
+        &\Rightarrow \lim_{\Delta t \rightarrow 0} \frac{<\Delta x^2>}{\Delta t} = g^2(x_0)
+    \end{aligned}
+\end{equation}
+Moreover, we can compute that for any $k\geq 3$, we have $ \lim_{\Delta t \rightarrow 0} \frac{<\Delta x^k>}{\Delta t} = 0$ \par \medskip
+
+We know that the statistical properties of $x(t)$ are identical to those of a process governed by the following master's equation 
+\begin{equation}
+    \partial_t p = -\partial_x (a_1 (x)p ) + \frac{1}{2}\partial^2_x (a_2(x)p)
+\end{equation}
+in which we have chosen 
+\begin{equation}
+    a_1(x) = f(x) \qquad a_2(x) = g^2(x)
+\end{equation}
+
+\subsection{Stochastic calculus}
+
+Since there is a variety of discretized proesses that lead to the same (visually speaking) continuous SDE (stochastic differential equation), we'd like to understand better the connections between these various discretizations. We shall now take $0 \leq \alpha \leq 1$, and consider 
+\begin{equation}
+    \Delta x = x(t + \Delta t) - x(t) = f(x(t) + \alpha\Delta t) \Delta t + g(x(t) + \alpha \Delta x)\Delta \eta  
+\end{equation}
+Our goal is to find, if it exists, the corresponding Fokker-Planck equation. 
 \chapter{Time-reversal}
 
 \chapter{Metastability}

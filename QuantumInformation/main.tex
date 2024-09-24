@@ -270,4 +270,131 @@ Open system:
 properties of open systems are obtained by considering a bigger space \par \medskip 
 
 In general, $\Lambda$ has no inverse. So we cannot revert the evolution of the state, unless $\Lambda$ is unitary. Tracing over $E$ leads to irreversibility. Decoherence happens when the environment is entangled to the system. 
+
+\chapter{Quantum Master equation}
+
+In open quantum systems. Given an evolution operator 
+\begin{equation}
+    \rho(t = 0) \rightarrow^{\Lambda}_t \rho(t > 0)
+\end{equation}
+we want to find the equation 
+\begin{equation}
+    \frac{\text{d}\rho}{\text{d}t} = \dots ?
+\end{equation}
+Infinitesimal evolution from $t$ to $t+\delta t$
+\begin{equation}
+    \rho(t + \delta t) = \Lambda[\rho(t)]
+\end{equation}
+From last week 
+\begin{equation}
+    \begin{aligned}
+        &\Lambda[\cdot] = \sum_i K_i \cdot K_i^\dagger \\
+        &K_0 = 1 - L_0 \qquad ||L_0|| = O(\delta t) \\
+        &K_{i>0} = \sqrt{\varepsilon_i} A_i \qquad \varepsilon_i = O(\sqrt{\delta t})
+    \end{aligned}
+\end{equation}
+Normalisation:
+\begin{equation}
+    \begin{aligned}
+        &\sum_i K_i^\dagger K_i = 1 \\
+        &(1 - L_0^\dagger)(1 - L_0) + \sum_{i>0}\varepsilon_i A^\dagger_i A_i = 1 \\
+        &L_0^\dagger  + L_0 = \sum_{i>0} \varepsilon_i A_i^\dagger A_i 
+    \end{aligned}
+\end{equation} 
+We decompose 
+\begin{equation}
+    L_0 = A + iH
+\end{equation}
+with $A$ and $H$ hermitian, such that the normalisation condition gives 
+\begin{equation}
+    2A= \sum_{i>0} \varepsilon_i A_i^\dagger A_i 
+\end{equation}
+We arrive at 
+\begin{equation}
+    \begin{aligned}
+        \rho(t + \delta t) &= (1 - A - iH)\rho (1 - A + iH) + \sum_{i>0} \varepsilon_i A_i \rho A_i^\dagger \\
+        &= \rho(t) - i[H, \rho] - A\rho - \rho A + \sum_{i>0} \varepsilon_i A_i \rho A_i^\dagger \\ 
+        &= \rho(t) - i[H, \rho] + \sum_{i>0} \varepsilon_i \left[A_i \rho A_i^\dagger - \frac{1}{2}A_i^\dagger A_i \rho - \frac{1}{2}\rho A_i^\dagger A_i \right] 
+    \end{aligned}
+\end{equation}
+
+We set 
+\begin{equation}
+    \begin{aligned}
+        &\varepsilon_i = \gamma_i \delta t \\ 
+        &H \rightarrow \tilde{H}\delta t
+    \end{aligned}
+\end{equation}
+which gives 
+\begin{equation}
+    \frac{\text{d}\rho}{\text{d}t} = - i[\tilde{H}, \rho] + \sum_{i>0} \gamma_i \left[A_i \rho A_i^\dagger - \frac{1}{2}\{A_i^\dagger A_i, \rho\}\right]
+\end{equation}
+This form of master equation is called "Lindblad" form. The operator $\mathscr{L}$ is called the Lindbladian
+\begin{equation}
+    \dot{\rho} = \mathscr{L}[\rho]
+\end{equation}
+Important result: Only $\mathscr{L}$ in the Lindbladian form gives a CPTP after integration. Thus, any CPTP evolution which is markovian can be obtained from a master equation in the Lindblad form. 
+\begin{example}
+    Back to the Rabi oscillation. \newline 
+    Jump operator: $|0\rangle\langle1| = \sigma_-$\newline 
+    Rate: $\gamma_1$\newline 
+    Non-unitary evolution 
+    \begin{equation}
+        \begin{aligned}
+            \dot{\rho} &= \text{coherent Rabi} + \gamma_1 [\sigma_- \rho \sigma_+ - \frac{1}{2}\sigma_+\sigma_-\rho - \frac{1}{2}\rho\sigma_+\sigma_-] \\ 
+            &= \dots + \gamma_1 \left[|0\rangle\langle1| \rho | 1 \rangle\langle 0| - \frac{1}{2}|1\rangle \langle 1|\rho -\frac{1}{2}\rho|1\rangle \langle 1| \right]
+        \end{aligned}
+    \end{equation}
+Thus 
+\begin{itemize}
+    \item $\dot{\rho}_{11} = -\gamma_1 \rho_{11}$
+    \item $\dot{\rho}_{00} = \gamma_1 \rho_{11}$
+    \item $\dot{\rho}_{01} = -\frac{\gamma_1}{2} \rho_{01}$
+\end{itemize}
+which are Bloch equations
+\end{example}
+
+\begin{example}
+    Harmonic oscillator, optical cavity, microwave resonator, bosonic mode, \dots
+    \begin{equation}
+        H = \bar{h}w a^\dagger a 
+    \end{equation}
+    Jump: $\sqrt{K}a$\newline
+    Suppose that at any time $t$ the state is in a coherent state 
+    \begin{equation}
+        \rho(t) = |\alpha(t)\rangle\langle\alpha(t)|
+    \end{equation}
+    \begin{equation}
+        |\alpha(t)\rangle = D(\alpha(t))|0\rangle = e^{\alpha( a^\dagger - a)}|0\rangle 
+    \end{equation}
+    This state is solution of the QME 
+    \begin{equation}
+        \frac{\text{d}}{\text{d}t}|\alpha(t)\rangle = \dot{\alpha}(a^\dagger - a) |\alpha\rangle 
+    \end{equation}
+    such that 
+    \begin{equation}
+        \frac{\text{d}\rho}{\text{d}t} = \dot{\alpha}\left[(a^\dagger - a)|\alpha\rangle\langle\alpha| - |\alpha\rangle\langle\alpha|(a^\dagger - a)\right]
+    \end{equation}
+    Jump term: 
+    \begin{equation}
+        \begin{aligned}
+            &a\rho a^\dagger = \alpha^2 |\alpha\rangle\langle\alpha| \\
+            &\frac{1}{2} \rho a^\dagger a = \frac{\alpha}{2}|\alpha\rangle\langle\alpha| a
+        \end{aligned}
+    \end{equation}
+    We arrive at 
+    \begin{equation}
+        \begin{aligned}
+            \frac{\text{d}\rho}{\text{d}t} &= \dot{\alpha}[-2\alpha |\alpha \rangle\langle \alpha| + a^\dagger|\alpha \rangle\langle \alpha| + |\alpha \rangle\langle \alpha|a ] \\
+            &= \frac{K}{2}\alpha \left[-2\alpha |\alpha \rangle\langle \alpha| + a^\dagger|\alpha \rangle\langle \alpha| + |\alpha \rangle\langle \alpha|a \right]
+        \end{aligned}
+    \end{equation}
+    So if $\dot{\alpha} = -\frac{K}{2}\alpha$ then $\rho(t)$ is solution. 
+    \begin{itemize}
+        \item Energy decays as $e^{-Kt}$
+        \item The state remains pure even with dissipation 
+    \end{itemize}
+\end{example}
+
+
 \end{document}

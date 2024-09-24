@@ -382,10 +382,159 @@ If $T\rightarrow 0, J \rightarrow +\infty, \tilde{\mu} \rightarrow 0$, we have
     Z = 2e^{JN_b} (1 + N\tilde{\mu}^4 + O(\tilde{\mu}^6))
 \end{equation}
 
-section{Glimpse of Kramers-Wannier duality}
+\section{Glimpse of Kramers-Wannier duality}
 \begin{enumerate}
     \item High T: $Z = (2\text{cosh}^2(J)^{N_b})^N \sum_{G\text{ closed}} u^{|G|}$
     \item Low T: $Z = 2e^{2JN} \sum_{G\text{ closed (on dual lattice)}} \tilde{u}^{|G|}$
 \end{enumerate}
 So they are essentially the same, except for a factor in front. From this, we can find the critical point (will be done in TD)
+
+
+\section{Transfer Matrix}
+
+\begin{itemize}
+    \item Simple method with profound consequences 
+    \item underlies connection between classical stat mech in $d$ spatial dimensions and quantum stat mech in $(d-1)$ spatial dimensions
+    \item 1D solves any problem with finite number of states per site 
+\end{itemize}
+
+We consider the Ising model on a ring of size $L$
+\begin{equation}
+    \begin{aligned}
+        Z &= \sum_{S_1,\dots, S_L}  e^{JS_1S_2}\dots e^{JS_LS_1} \\
+        &= \sum_{S_1, \dots, S_L} M_{S_1S_2}\dots M_{S_LS_1}
+    \end{aligned}
+\end{equation}
+with 
+\begin{equation}
+    M = \begin{pmatrix}
+        M_{1,1} & M_{1,-1} \\ M_{-1,1} & M_{-1,-1} 
+    \end{pmatrix} = \begin{pmatrix}
+        e^J & e^{-J} \\ e^{-J} & e^J
+    \end{pmatrix}
+\end{equation}
+\begin{equation}
+    Z = \sum_{S_i} (M^L)_{S_iS_i}
+\end{equation}
+\begin{equation}
+    Z_{PBC} = \text{tr}(M^L)
+\end{equation}
+$M$ is real symmetric zith eigenvalues $\lambda_1 \geq \lambda_2$
+\begin{equation}
+    \begin{aligned}
+        &M = |1\rangle \lambda_1 \langle 1 | + |2\rangle \lambda_2 \langle 2| \\ 
+        &M = |1\rangle \lambda_1^L \langle 1 | + |2\rangle \lambda_2^L \langle 2|
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    Z_{PBC} = \lambda_1^L + \lambda_2^L \sim \lambda_1^L
+\end{equation}
+free energy density $f$: 
+\begin{equation}
+    Z \sim e^{-\beta L f}
+\end{equation}
+\begin{equation}
+    f = -\frac{1}{\beta}\ln(\lambda_1) = -\frac{1}{\beta}\ln(2 \text{cosh}(J))
+\end{equation}
+\subsection{Correlation functions (PBC)}
+We want $<S_x S_{x + r}>$
+\begin{equation}
+    <S_x S_{x + r}> = \frac{1}{Z}\sum_{\{S\}}e^{JS_1S_2}\dots e^{JS_LS_1} S_x S_{x+r}
+\end{equation}
+We can make it as a matrix 
+\begin{equation}
+    <S_x S_{x + r}> = \frac{1}{Z}\sum_{\{S\}} \sum_{S_x'} e^{JS_1S_2}\dots e^{S_{x-1}S_x}S_x\delta_{S_x, S_x'}e^{S_xS_{x+1}}\dots e^{JS_LS_1}  S_{x+r}
+\end{equation}
+\begin{equation}
+    \mathcal{S}_{S_x, S_x'} = S_x\delta_{S_x, S_x'} = \begin{pmatrix}
+        1 & 0 \\ 0 & -1
+    \end{pmatrix}  
+\end{equation}
+which gives 
+\begin{equation}
+    <S_x S_{x + r}> = \frac{1}{Z} \text{tr}(\mathcal{S}M^r \mathcal{S}M^{L-r})
+\end{equation}
+\underline{$L \rightarrow \infty$}:
+\begin{equation}
+    \begin{aligned}
+        &M^L \sim |1\rangle \lambda_1^L \langle 1| \\
+        &M^r = |2\rangle \lambda_2^r \langle 2| + |1\rangle \lambda_1^r \langle 1|
+    \end{aligned}
+\end{equation}
+such that 
+\begin{equation}
+    <S_x S_{x + r}> = \left(\frac{\lambda_2}{\lambda_1}\right)^r |\langle 1 | \mathcal{S}|2\rangle|^2
+\end{equation}
+So 
+\begin{equation}
+    \lim_{L\rightarrow \infty} <S_1S_{1+r}> = Ae^{-r/\xi}
+\end{equation}
+with 
+\begin{equation}
+    \xi = \frac{1}{\ln(\lambda_1 / \lambda_2)}
+\end{equation}
+The ratio of the leading and subleading eigenvalues given the correlation length.\par \medskip 
+
+In a more general way, if $M$ is a $d\times d$ real symmetric matrix, assuming 
+\begin{equation}
+    \lambda_1 > \lambda_2 > \lambda_3 > \dots
+\end{equation}
+given an observable $O_x$ which maps to a matrix $\mathcal{C}$, we have 
+\begin{equation}
+    \lim _{L \rightarrow \infty} <O_x> = \langle 1|\mathcal{C}|1\rangle 
+\end{equation}
+\begin{equation}
+    \lim_{L\rightarrow \infty} \left[<O_xO_{x+r}> - <O_x><O_{x+r}>\right] = \sum_{\mu = 2}^{d} \left(\frac{\lambda_\mu}{\lambda_1}\right)^r \dots
+\end{equation}
+\section{Preview of quantum-classical correspondance} 
+Reinterpret space in D ising model as "imaginary time" (PBC). 
+
+\begin{equation}
+    Z_{1D\text{, classical}} = \text{Tr}M^L
+\end{equation}
+\begin{equation}
+    M = \begin{pmatrix}
+        e^J & e^{-J} \\ e^{-J} & e^J
+    \end{pmatrix}
+\end{equation}
+
+Take $J>>1$. 
+\begin{equation}
+    M = e^J\begin{pmatrix}
+        1 & \varepsilon \\ \varepsilon & 1
+    \end{pmatrix}
+\end{equation}
+with $\varepsilon = e^{-2J}$
+\begin{equation}
+    Z_{1D\text{, classical}} = e^{JL}\hat{Z}_{qm}
+\end{equation}
+with 
+\begin{equation}
+    \hat{Z}_{qm} = \text{Tr}(e^{\varepsilon L \sigma^x})
+\end{equation}
+We define 
+\begin{equation}
+    \beta_{qm} = \varepsilon L
+\end{equation}
+and 
+\begin{equation}
+    \hat{H}_{qm}  = e^{\sigma^x}
+\end{equation}
+\begin{equation}
+    Z_{1D, \text{classical}}(J, L) = e^{JL}\hat{Z}_{qm, 0D}(\beta_{qm})
+\end{equation}
+with 
+\begin{equation}
+    \hat{Z}_{qm, 0D} = \text{Tr}(e^{-\beta_{qm}\hat{H}})
+\end{equation}
+
+The Cardy Book discusses this in more details. 
+
+\chapter{RG Formalism via real space RG}
+Yeomans Cardy chapter 3 
+
+\section{Block spins}
+We descale the space, and associate blocks of spins to a single spin on a new grid, which corresponds to the descaled grid. For exemple, on a square lattice, we replace 9 spins with 1. $S_I$ is a function of $S_i$ for $i\in I$. We also rescale the metric such that the lattice spacing is always 1. Here, we divide all metrics by 3. 
+
+
 \end{document}

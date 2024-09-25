@@ -494,19 +494,24 @@ is the Riemann curvature tensor, of second order in term of the metric. A necess
     \end{aligned}
 \end{equation}\bigskip 
 
-\noindent Properties of the Riemman tensor: \newline
-symmetry two by two indices :
-\begin{equation}
-    R_{\lambda \mu\nu\kappa} = R_{\nu\kappa\lambda\mu}
-\end{equation}
-antisymmetry two first and two second
-\begin{equation}
-    R_{\lambda \mu\nu\kappa} = - R_{\lambda \mu\kappa\nu} = R_{\mu\lambda\kappa\nu}
-\end{equation}
-cyclicity of the 3 last indices
-\begin{equation}
-    R_{\lambda [\mu\nu\kappa]} = 0
-\end{equation}
+\noindent The Riemann tensor possesses multiple properties: 
+\begin{itemize}
+    \item The first two indices are symmetric with the two last
+    \begin{equation}
+        R_{\lambda \mu\nu\kappa} = R_{\nu\kappa\lambda\mu}
+    \end{equation}
+    \item It is antisymmetric in the two first indices and the two last indices
+    \begin{equation}
+        R_{\lambda \mu\nu\kappa} = - R_{\lambda \mu\kappa\nu} = R_{\mu\lambda\kappa\nu}
+    \end{equation}
+    \item The last 3 indices obey a cyclicity condition 
+    \begin{equation}
+        R_{\lambda [\mu\nu\kappa]} = 0
+    \end{equation}
+\end{itemize}
+
+To know the number of independant components of the Riemann tensor, we can count the number of constraints. 
+
 
 Bianchi identity:
 \begin{equation}
@@ -578,15 +583,192 @@ We can change the coordinates such that the first coordinate correspond to the p
         \item if in a given coordinate system, the coordinates of a tensor $T$ don't depend on some coordinate $x^0$ say, then $\mathcal{L}_{\partial_0} T= 0$.  
     \end{enumerate}
 \end{theorem}
+For a rank 2 tensor, we have
+\begin{equation}
+    \mathcal{L}_u T_{\alpha\beta} = (\triangledown_\mu T_{\alpha\beta})u^\mu + (\triangledown_\alpha u^\mu)T_{\mu\beta} + (\triangledown_\beta u^\mu)T_{\alpha\mu} 
+\end{equation}
 
 \subsection{Killing vectors} (Lie derivative applied to the metric)
 \begin{enumerate}
     \item $k^\mu$ is a Killing vector if $\mathcal{L}_k g_{\mu\nu} = 0$, if $\triangledown _\beta k_\alpha + \triangledown _\alpha k_\beta = 0$ (killing equation)
     \item if in a given coord system $g_{\mu\nu}$ doesn't depend on $x^0$, $\partial_0 g_{\mu\nu} = 0$, so $\mathcal{L}_{\partial_0}g_{\mu\nu} = 0$
 \end{enumerate}
-As expected, for each Killing vector, there is a coserved quantity along a geodesic 
+As expected, for each Killing vector, there is a conserved quantity along a geodesic 
 \begin{equation}
     \frac{\text{d}}{\text{d}\lambda}\left(k_\mu \frac{\text{d}x^\mu}{\text{d}\lambda}\right) = 0
 \end{equation}
 
+If we have a single killing vector, we can choose the coord system such that the killing vector $k_\mu$ is equal to $\partial_0$. If we have more, it is not always possible to have a coordinate per killing vector. 
+
+If $k$ and $k'$ are killing vectors, then $[k, k']$ is still a killing vector. 
+
+\begin{example}
+    \begin{equation}
+        n=2: \quad \mathbb{R}^2:\qquad \text{d}s^2 = \text{d}x^2 + \text{d}y^2, \quad g_{\mu\nu} = \begin{pmatrix}
+            1 & 0 \\ 0 & 1
+        \end{pmatrix}
+    \end{equation}
+    For this example, $\partial_x$ and $\partial_y$ are killing vectors. 
+    But we can also take the polar coordinate system, for which the metric is 
+    \begin{equation}
+        \text{d}s^2  = \text{d}r^2 + r^2 \text{d}\theta^2, \quad g'_{\mu\nu} = \begin{pmatrix}
+            1 & 0 \\ 0 & r^2
+        \end{pmatrix}
+    \end{equation}
+    In which $\partial_\theta$ is evidently a killing vector.
+\end{example}
+
+In the above example, we see that there is no coordinate system able to express nicely all 3 killing vectors that we just showed. This also shows that there can be more killing vectors than the dimension of the space. In fact, we will show in TD that there can be at most $\frac{n(n+1)}{2}$ linearly independant killing vectors. \par \medskip 
+If there are exactly $\frac{n(n+1)}{2}$ killing vectors, then the space time is maximally symmetric and it has a constant Ricci scalar. Indeed, in the above exemple, we have 3 killing vectors and we have $R = 0$. 
+\begin{example}
+    \begin{equation}
+        n=3: \quad \mathbb{R}^3:\qquad \text{d}s^2 = \text{d}x^2 + \text{d}y^2 + \text{d}z^2
+    \end{equation}
+    This shows $\partial_x, \partial_y$ and $\partial_z$ as killing vectors. But switching the coordinates to 
+    \begin{equation}
+        \text{d}s^2 = \text{d}r^2 +r^2(\text{d}\theta^2 + \text{sin}^2(\theta) \text{d}\phi^2)
+    \end{equation}
+    We find a 4th killing vector $\partial_\phi = -y\partial_x + x\partial_y$. The two lasts are $-x\partial_z + z\partial_x$ and $-z\partial_y + y\partial_z$.
+\end{example}
+
+\begin{definition}
+    A space-time is stationary if there is one time-like killing vector $k^\mu$. ($k^\mu k_\mu < 0$)
+\end{definition}
+In the coord system space time, $k = \partial_t$. In $x^\mu = (t, x^k)$, the metric is then of the form 
+\begin{equation}
+    \text{d}s^2 = g_{00}(x^k)\text{d}t^2 + g_{0i}(x^k)\text{d}t\text{d}x^i + g_{ij}(x^k)\text{d}x^i\text{d}x^j
+\end{equation}
+With $g_{00}(x^k)<0$ in our Lorentzian manifold. This describes rotating neutron stars, rotating black holes...
+
+\begin{definition}
+    A static space time is a space-time with a time-like killing vector $k^\mu$ ($k^\mu k_\mu < 0$) and invariant under $t \rightarrow -t$
+\end{definition}
+In $x^\mu = (t, x^k)$, the metric is then of the form 
+\begin{equation}
+    \text{d}s^2 = g_{00}(x^k)\text{d}t^2 + g_{ij}(x^k)\text{d}x^i\text{d}x^j
+\end{equation}
+This describes Schwarchild black holes, non-rotating neutron stars, \dots 
+
+
+\begin{definition}
+    A static spherical symmetric is a static space time with additional 3 space-like killing vectors $(R, S, T)$
+\end{definition}
+In $x^\mu = (t, x^k)$, the metric is then of the form 
+\begin{equation}
+    \text{d}s^2 = g_{00}(r)\text{d}t^2 + g_{rr}(r)\text{d}r^2 + r^2(\text{d}\theta^2 + \text{sin}^2(\theta)\text{d}\phi^2)
+\end{equation}
+
+On an affinely parametrized time-like geodesic $(\lambda = \tau)$, conserved quantity 
+\begin{equation}
+    k_\mu u^\mu = k^\nu u^\mu g_{\mu\nu}
+\end{equation}
+\begin{example}
+    For $k = \partial_t$, we have $k^\mu = \delta^\mu_0$, and with $u^\mu = (\dot{t}, \dot{r}, \dot{\theta}, \dot{\phi})$, the conserved quantity in a stationary spacetime is $E = -\dot{t}g_{00}$ the energy. 
+\end{example}
+\begin{example}
+    For $R =\partial_\theta$, the corresponding conserved quantity is $L = R^\mu u^\nu g_{\mu\nu} = r^2 \text{sin}^2(\theta)\dot{\phi}$ the momentum along $\theta$. 
+\end{example}
+Alternatively, we can also find conserved quantities through the equations of motion, by slightly offsetting the Lagrangian in the action. 
+
+\begin{definition}
+    Killing tensors are tensors $K_{\nu_1\dots \nu_l}$ which are totally symmetric and satisfy 
+    \begin{equation}
+        \triangledown_{(\mu} K_{\nu_1\dots \nu_l)} = 0
+    \end{equation}
+\end{definition}
+To each killing tensor, there exist an associated quantity conserved along geodesics, 
+\begin{equation}
+    C = K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}
+\end{equation}
+In a Kerr black hole for exemple, the Brandon Carter is constante (?), which will be used along with $L$ and $E$ to uniquely determine the geodesics. \par \medskip 
+
+For a killing vector $k^\rho$, we will show that 
+\begin{equation}
+    \triangledown_\mu \triangledown_\rho k^\rho = R^\rho_{\sigma\mu\nu}k^\nu 
+\end{equation}
+By contracting, we also find 
+\begin{equation}
+    k^\lambda \triangledown_\lambda R = 0
+\end{equation}
+Meaning the directional derivative of the Ricci scalar along a killing vector vanishes. 
+
+\chapter{Physical laws in curved spacetime}
+
+\begin{itemize}
+    \item general covariance: physical laws should be the same for all observers, independant of their coordinates
+    \item equiv principle: physical laws reduce to those of special relativity in a LFFF 
+\end{itemize}
+
+To go from special relativity to general relativity, one procedure is to "covariantize". 
+\begin{enumerate}
+    \item replacing $\eta_{\mu\nu} \rightarrow g_{\mu\nu}$
+    \item replacing $\partial_\mu \rightarrow \triangledown_\mu$
+\end{enumerate}
+
+This prescription leaves some ambiguities. 
+\begin{example}
+    In Minkoswki spacetime 
+    \begin{equation}
+        S'_\phi = \int \text{d}x^4 \left( -\frac{1}{2}(\partial_\mu \phi)(\partial_\nu \phi) \eta^{\mu\nu} - V(\phi)\right)
+    \end{equation}
+    We could "covariantize" this into 
+    \begin{equation}
+        S'_\phi = \int \text{d}x^4 \sqrt{-g}\left( -\frac{1}{2}(\triangledown_\mu \phi)(\triangledown_\nu \phi) \eta^{\mu\nu} - V(\phi)\right)
+    \end{equation}
+    But we could also want to add a term in $R\phi^2$, or a contraction of the Riemann tensor with the field. 
+\end{example}
+The minimal prescription doesn't tell us what to do in this case. There can be formal reasons (symmetries, keeping the 2nd order, \dots) to avoid some terms, but ultimately experiments will have the final word. It is also this blur that allows many modified gravity theories. \par \medskip 
+
+We can vary with respect to $\phi$, $\delta_\phi S = 0$. We get the equation 
+\begin{equation}
+    \frac{1}{\sqrt{-g}}\partial_\nu (\sqrt{-g}(\partial_\mu \phi)g^{\mu\nu}) = V'
+\end{equation}
+\begin{remark}
+    Note that something similar can be done with vector fields instead of scalar fields
+\end{remark}
+But we can also vary the action with respect to $g_{\mu\nu}$ with $\phi$ constant. This defines the stress energy tensor 
+\begin{equation}
+    T_{\mu\nu} = -\frac{2}{\sqrt{-g}}\frac{\delta S_{\text{matter}}}{\delta g^{\mu\nu}} \qquad  T^{\mu\nu} = \frac{2}{\sqrt{-g}}\frac{\delta S_{\text{matter}}}{\delta g^{\mu\nu}} 
+\end{equation}
+\begin{equation}
+    T^\phi_{\mu\nu} = (\partial_\mu\phi)(\partial_\nu \phi) - g_{\mu\nu}\left(\frac{1}{2}(\partial \phi)^2 + V(\phi)\right)
+\end{equation}
+Enforcing once again $\delta_g S = 0$, we get that the energy-momentum tensor satisfies $\triangledown^\mu T^\phi_{\mu\nu} = 0$ \par \medskip 
+
+If we don't know what is the action for our matter field, then we can describe $T_{\mu\nu}$ in term of macroscopic quantities
+
+\begin{example}
+    For exemple, for a perfect fluid whose energy density is $\rho$, whose 4 velocity is $u^\mu$ and whose pressure is $P$, we have 
+    \begin{equation}
+        T_{\mu\nu} = (\rho + P)u_\mu u_\nu + Pg_{\mu\nu}
+    \end{equation}
+    Then enforcing $\triangledown^\mu T_{\mu\nu} = 0$ enforces the Euler equations and the continuity equation. For non relativistic dust, $P = 0$ and for relativistic fluid, $P = \frac{1}{3}\rho$
+\end{example}
+
+Einstein equations are 
+\begin{equation}
+    E_{\mu\nu} = T_{\mu\nu}
+\end{equation}
+where the Einstein's tensor is linked to the curvature of the space. 
+\begin{itemize}
+    \item $\triangledown^\mu T_{\mu\nu} = 0 \Rightarrow \triangledown^\mu E_{\mu\nu} = 0$
+    \item $E_{\mu\nu} = E_{\nu\mu}$
+    \item Einstein equations are second order in the derivatives 
+    \item for weak, slowly varying fields and a source consisting of dust, we get Newtonian gravity
+\end{itemize}
+The action for Einstein equations is 
+\begin{equation}
+    \mathcal{S}_{EH} = \frac{c^4}{16\pi \mathcal{G}}\int \text{d}^4 x \sqrt{-g}R + \mathcal{S}_{\text{matter}}
+\end{equation}
+The equation of motion for this action correspond to Einstein's equations. 
+\begin{equation}
+    R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R = \frac{8\pi G}{c^4}T_{\mu\nu}
+\end{equation}
+\begin{equation}
+    \frac{8\pi G}{c^4}T = -R
+\end{equation}
+which lead to (in 4D)
+\begin{equation}
+    R_{\mu\nu} = \frac{8\pi G}{c^4}(T_{\mu\nu} - \frac{1}{2}Tg_{\mu\nu})
+\end{equation}
 \end{document}

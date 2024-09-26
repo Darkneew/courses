@@ -683,9 +683,253 @@ in which we have chosen
 
 Since there is a variety of discretized proesses that lead to the same (visually speaking) continuous SDE (stochastic differential equation), we'd like to understand better the connections between these various discretizations. We shall now take $0 \leq \alpha \leq 1$, and consider 
 \begin{equation}
-    \Delta x = x(t + \Delta t) - x(t) = f(x(t) + \alpha\Delta t) \Delta t + g(x(t) + \alpha \Delta x)\Delta \eta  
+    \begin{aligned}
+        &\Delta x = x(t + \Delta t) - x(t) = f(x(t) + \alpha\Delta t) \Delta t + g(x(t) + \alpha \Delta x)\Delta \eta \\
+        &\Leftrightarrow_{\Delta t \rightarrow 0} \dot{x} =^\alpha f + g \eta
+    \end{aligned}  
+\end{equation}
+With 
+\begin{equation}
+    \Delta \eta = \int_{t}^{t+\Delta t}\text{d}s~ \eta(s)
 \end{equation}
 Our goal is to find, if it exists, the corresponding Fokker-Planck equation. 
+\begin{equation}
+    \lim_{\Delta t \rightarrow 0} \frac{<\Delta x^k>}{\Delta t} = a_k 
+\end{equation}
+\begin{equation}
+    \Delta x = x(t_0 + \Delta t ) - x(t_0)
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        \Rightarrow ~~&<\Delta x> = <f(x_0 + \alpha \Delta x)\Delta t + g(x_0 + \alpha \Delta x)\Delta \eta>\\ 
+        &= <f(x_0) \Delta t + \alpha \Delta x \Delta t f'(x_0) + \frac{1}{2} \alpha^2 \Delta x^2f''(x_0)\Delta t + \dots > \\ 
+        &+ <[g(x_0) + \alpha \Delta x g'(x_0) + \dots]\Delta \eta> \\
+        & = f(x_0)\Delta t + g(x_0)<\Delta \eta> + \alpha g'(x_0)<\Delta x \Delta \eta> + O(\Delta t ^{3/2}) 
+    \end{aligned}
+\end{equation}
+We also compute
+\begin{equation}
+    <\Delta x \Delta \eta> = g(x_0) <\Delta \eta^2> + O(\Delta t^{3/2})
+\end{equation}
+knowing
+\begin{equation}
+    <\Delta \eta> = 0, \qquad <\Delta \eta^2> = \Delta t
+\end{equation}
+We get 
+\begin{equation}
+    \lim_{\Delta t \rightarrow 0} \frac{<\Delta x>}{\Delta t} = f(x_0) + \alpha g'(x_0)g(x_0)
+\end{equation}
+We carry out the same reasonning for $\Delta x^2$:
+\begin{equation}
+    \lim_{\Delta t \rightarrow 0}\frac{<\Delta x^2>}{\Delta t} = g^2(x_0)
+\end{equation}
+And for all $k \geq 3$, 
+\begin{equation}
+    \lim_{\Delta t \rightarrow 0}\frac{<\Delta x^k>}{\Delta t} = 0
+\end{equation}
+
+
+Hence when we write 
+\begin{equation}
+    \dot{x} =^\alpha f + g\eta
+\end{equation}
+We see that it's fully equivalent to 
+\begin{equation}
+    \dot{x} =^0 f + \alpha g'g + g\eta
+\end{equation}
+Even if both are visually different, they encode the same physics. Both are described by the same Fokker-Planck equation 
+\begin{equation}
+    \partial_t \rho = -\partial_x [(f(x) + \alpha g'(x)g(x))\rho] + \frac{1}{2}\partial_x^2 (g^2(x)\rho)
+\end{equation}
+When $g$ is a constant,
+\begin{equation}
+    \begin{aligned}
+        \dot{x} &=^\alpha  f + g\eta \\
+        &=^0 f + g\eta
+    \end{aligned}
+\end{equation}
+This is an additive (noise) Langevin equation, but contrast to g(x) not a constant, which leads to a multiplicative Langevin equation. \par \bigskip 
+
+Let $u(t)$ be a random process slaved to $x(t)$:
+\begin{equation}
+    u(t) = U (x(t))
+\end{equation}
+Our goal: find a SDE for $u$ knowing $\dot{x} =^\alpha f + g\eta$. We begin with 
+\begin{equation}
+    \begin{aligned}
+        \Delta u &= u(t_0 + \Delta t) - u(t_0) = U(x_0 + \Delta x) - U(x_0) \\
+        &= \Delta x U'(x_0) + \frac{1}{2} U''(x_0)\Delta x^2 + O(\Delta t^{3/2}) \\
+        &= [f(x_0 + \alpha \Delta x)\Delta t + g(x_0 + \alpha \Delta x)\Delta \eta]U'(x_0) \\
+        &~~~+ \frac{1}{2}U''(x_0)[f(x_0 + \alpha \Delta x)\Delta t + g(x_0 + \alpha \Delta x)\Delta \eta]^2 + O(\Delta t^{3/2})
+    \end{aligned}
+\end{equation}
+
+Such that 
+\begin{equation}
+    \begin{aligned}
+        \Delta u = &f(x_0)\Delta t U'(x_0) \\
+        &+g(x_0) U'(x_0)\Delta \eta \\
+        &+\alpha g'(x_0)U'(x_0)\Delta x\Delta \eta \\
+        &+ \frac{1}{2} U''(x_0)g^2(x_0)\Delta \eta ^2 \\
+        &+ O(\Delta t ^{3/2})
+    \end{aligned}
+\end{equation}
+So
+\begin{equation}
+    \lim_{\Delta t \rightarrow 0}\frac{<\Delta u>}{\Delta t} = f(x_0)U'(x_0) + \alpha g'gU' + \frac{1}{2}U'' g^2
+\end{equation}
+\begin{equation}
+    \lim_{\Delta t \rightarrow 0}\frac{<\Delta u^2>}{\Delta t} = U'(x_0)^2\Delta x^2 + O(t^{3/2})
+\end{equation}
+And for all $k \geq 3$, 
+\begin{equation}
+    \lim_{\Delta t \rightarrow 0}\frac{<\Delta u^k>}{\Delta t} = 0
+\end{equation}
+We could now write a Fokker-Planck equation for 
+\begin{equation}
+    q(u, t) = \text{Prob}\{ u \leq u(t) \leq u+\text{d}u\}/\text{d}u
+\end{equation}
+\begin{equation}
+    \partial_t q = -\frac{\partial}{\partial u}\left([(f + \alpha g'g)U + \frac{1}{2}g^2U'']q\right) + \frac{1}{2}\partial_u^2(g^2U^{'2} q)
+\end{equation}
+where $x$ has to be expressed in term of $u$. \par \medskip 
+Hence, if $\dot{x}=^\alpha f + g\eta$ then 
+\begin{equation}
+    \frac{\text{d}u}{\text{d}t} =^0 (f + \alpha g'g)U' + \frac{1}{2}g^2 U'' + gU'\eta
+\end{equation}
+If we had started from $\alpha = 0$
+\begin{equation}
+    \dot{x} =^0 f + g\eta
+\end{equation}
+then 
+\begin{equation}
+    \dot{u} =^0 \dot{x}U' + \frac{g^2U''}{2}
+\end{equation}
+It$\bar{o}$'s lemma. But if $\alpha \neq 0$, $\dot{x}=^\alpha f + g\eta$ leads to 
+\begin{equation}
+    \begin{aligned}
+        \dot{u} &=^0 (f + \alpha g'g)U' + \frac{1}{2}g^2 U'' + gU'\eta \\
+        &=^{\alpha'} (f + \alpha g'g)U' + \frac{1}{2}g^2 U'' + gU'\eta - \alpha' \frac{\text{d}}{\text{d}u}\left(gU'\right)gU'\\
+        &=^{\alpha'} (f + (\alpha-\alpha') g'g)U' + (\frac{1}{2}-\alpha)g^2 U'' + gU'\eta 
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    \dot{u} =^{\alpha} \dot{x}U' + (\frac{1}{2}- \alpha)g^2U''
+\end{equation}
+
+On this version of the It$\bar{o}$'s lemma, we see explicitely that the chain rule fails. But we also see that $\alpha = \frac{1}{2}$ plays a particular role where formally, the chain rule holds 
+\begin{equation}
+    \begin{aligned}
+        &\dot{x} =^{\frac{1}{2}} f + g\eta \\ 
+        &\dot{u} =^{\frac{1}{2}} \dot{x}U'
+    \end{aligned}
+\end{equation}
+
+"Choices" of $\alpha$ : 
+\begin{itemize}
+    \item $\alpha = 0$: (prepoint) Ito discretization, very nice for computers, but we lose differential calculus (no chain rule)
+    \begin{equation}
+        x_{n+1} = x_n + f(x_n)\Delta t + g(x_n)\sqrt{\Delta t}\eta_n, \quad <\eta_n\eta_m> = \delta_{n,m}
+    \end{equation}
+    \item $\alpha = \frac{1}{2}$: (midpoint) Statonovich discretization: not cool, implicit recursion, almost impossible to implement on a computer. But cool, we have chain rule. Even cooler, physics consistent. It is also the only one consistent with time reversal
+    \item $\alpha = 1$: (postpoint) Klimontovich-Hanggi, nice for plasma physics. We want to write everything in path integral formalism, and use Matsubara time, which uses post point discretization
+\end{itemize}
+
+Of course, all of this extends to 
+\begin{equation}
+    \dot{x}^\mu =^\alpha f^\mu + g^{\mu i}\eta_i
+\end{equation}
+with $\mu = 1,\dots, d$ and $i = 1, \dots, d' \leq d$. $u = U^\mu(x)$ evolves according to 
+\begin{equation}
+    \dot{u}^\mu =^0 \partial_\nu U^\mu f^\nu + \partial_\nu U^\mu g^{\nu i}\eta_i + \frac{1}{2}\partial_\beta \partial_\gamma U^\mu \omega^{\beta\gamma}
+\end{equation}
+with $\omega^{\beta\gamma} = g^{\beta i}g^{\gamma i}$. 
+
+\section{Connection to physics}
+What is the connection between $\dot{x} = f + g\eta$ and physics? Let's go back to the colloid in water picture. 
+\begin{equation}
+    M\frac{\text{d}\vec{P}}{\text{d}t} = \vec{F}_b + \vec{F}_{\text{ext}}
+\end{equation}
+
+We separate the bath into regions 
+\begin{equation}
+    \begin{aligned}
+        \vec{F}_b &= \sum \vec{F}_i, \quad \vec{F}_i = \text{ force created by region }i \\
+        &= <\vec{F}_b> + \text{ Gaussian fluctuations}
+    \end{aligned}
+\end{equation}
+where $<\vec{F}_b>$ is an average over the baths at fixed $\vec{R}, \vec{P}$. \par \medskip 
+We try to write something as general as possible, at the linear level
+\begin{equation}
+    <\vec{F}_b> = -\int \text{d}t'~ M_R(t-t')\frac{\text{d}\vec{R}}{\text{d}t'}
+\end{equation}
+Where $M_R(t-t')$ can depend functionally on $\vec{R}$. Condensing all of the above assumptions, we can guess
+\begin{equation}
+    M\frac{\text{d}^2 \vec{R}}{\text{d}t^2} = \vec{F}_{\text{ext}} - \int \text{d}t'~ M_R(t-t')\frac{\text{d}\vec{R}}{\text{d}t'} + \vec{xi}
+\end{equation} 
+where $M_R(t-t')$ is the response kernel, the response of the environment to the movement of the colloid. On the other hand, we have 
+\begin{equation}
+    <\xi^\mu(t)\xi^\nu(t)> = TM^{\mu\nu}_c (t-t')
+\end{equation}
+with $M^{\mu\nu}_c (t-t')$ the correlation kernel. \par \medskip 
+
+There has to be a strong connection between $M_R$ and $M_c$ because they are two faces of the same physical process. If the physics of the system is such that the memory of the bath is quickly forgotten, then it is fine to replace 
+\begin{equation}
+    M_R(t-t') = \gamma \delta(t-t')
+\end{equation}
+and 
+\begin{equation}
+    M_c(t-t') = \gamma' \delta(t-t')
+\end{equation}
+So that 
+\begin{equation}
+    M \frac{\text{d}^2 \vec{R}}{\text{d}t^2} = \vec{F}_{\text{ext}} - \gamma \frac{\text{d}\vec{R}}{\text{d}t} + \sqrt{2\gamma' T}\vec{\eta}
+\end{equation}
+\begin{equation}
+    <\eta^\mu(t)\eta^\nu(t)> = \sigma^{\mu\nu}\delta(t-t')
+\end{equation}
+This is an underdamped Langevin equation. \par \medskip 
+
+For a colloid in water, the overdamped limit is when we can make the approximation that there is an almost instantaneous balance between $\vec{F}_{\text{ext}}$ and $\vec{F}_b$, so that inertia can be neglected
+\begin{equation}
+    \vec{0} \simeq \vec{F}_{\text{ext}} + \vec{F}_b
+\end{equation}
+
+\begin{equation}
+    \begin{aligned}
+        &-\gamma \frac{\text{d}\vec{R}}{\text{d}t} + \sqrt{2\gamma'T} \eta + \vec{F}_{\text{ext}} = 0 \\
+        &\frac{\text{d}\vec{R}}{\text{d}t} = \mu \vec{F}_{\text{ext}} + \sqrt{2\gamma' \mu^2}\vec{\eta}
+    \end{aligned}
+\end{equation}
+with $\mu = \frac{1}{\gamma}$ the mobility.  \par \medskip 
+
+We'll take this sort of equations as a starting point. For instance, for an isolated particle, in the underdamped description
+\begin{equation}
+    d=1: \qquad  M\frac{\text{d}v}{\text{d}t} = -\gamma v + \sqrt{2\gamma' T }\eta
+\end{equation}
+where the Markov approximation $M_R \propto \delta(t)$ was used. But we want to derive an evolution equation for 
+\begin{equation}
+    K = \frac{Mv^2}{2}
+\end{equation}
+From the one above, assuming we are using a $\alpha = 1/2$ discretization, we get 
+\begin{equation}
+    \frac{\text{d}K}{\text{d}t} =^{1/2} M v\dot{v} = -\gamma Mv^2 + Mv \sqrt{2\gamma'T}\eta
+\end{equation}
+or assuming we were using a $\alpha = 0$ discretization, we get 
+\begin{equation}
+    \frac{\text{d}K}{\text{d}t} =^0 \dot{v}\frac{\text{d}K}{\text{d}v} + \frac{1}{2}\frac{\text{d}^2 K}{\text{d}v^2}2\gamma'T 
+\end{equation}
+which leads through computations to 
+\begin{equation}
+    \frac{M<v^2>}{2} = \frac{\gamma'}{\gamma}\frac{T}{2}
+\end{equation}
+from which we understand that we must have $\gamma' = \gamma$ \par \medskip 
+
+Multiplicative noise also occurs directly for a simple overdamped colloid in water 
+\begin{equation}
+    \gamma \frac{\text{d}\vec{R}}{\text{d}t} = \sqrt{2\gamma' T}\vec{\eta}
+\end{equation}
+In a river, $\gamma$ depends on the distance to the wall. 
 \chapter{Time-reversal}
 
 \chapter{Metastability}

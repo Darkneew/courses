@@ -76,7 +76,7 @@ The Newtonian gravity is valid in the limit $\Phi_N << 1$.
 
 Semi classical gravity is doing QFT in curved spacetime. The idea is to start with a classical solution of Einstein's equation. Then we quantise the field in this metric. Then we can loop, compute the change in the metric due to the field, then re quantise the field, etc... The result of this computation gives the famous Hawking temperature of black holes 
 \begin{equation}
-    T_H = \frac{\bar{h}c^3}{8\pi GMk_B}
+    T_H = \frac{hbarc^3}{8\pi GMk_B}
 \end{equation}
 For a BH of mass of the sun $M_\Theta$, $T_H \sim 10^{-8}$K. This causes the decay of black holes such as primordial black holes.\par \medskip 
 
@@ -261,7 +261,7 @@ We get
 \end{equation}
 Which is, for the particular part, exactly the Rindler metric. So the Rindler space modelizes at first order the exterior near horizon of a black hole.
 
-\section{Formalism}
+\chapter{Formalism}
 
 GR is based on 4 postulates 
 \begin{enumerate}
@@ -304,7 +304,7 @@ GR is based on 4 postulates
     In particular, $\Gamma$ is not a tensor. 
 \end{enumerate}
 
-\subsection{(Anti-) symmetrisation of tensors}. \newline 
+\section{(Anti-) symmetrisation of tensors}. \newline 
 Given some tensor $B_{\mu\nu}$, we can symmetrize it by taking 
 \begin{equation}
     S_{\mu\nu} = \frac{1}{2}(B_{\mu\nu} + B_{\nu\mu})
@@ -325,7 +325,7 @@ By convention, we write
 \end{equation}
 a tensor symmetric in $\mu_1 \leftrightarrow \mu_2$ and in $\mu_5 \leftrightarrow \mu_7$, and antisymmetric in $\mu_3 \leftrightarrow \mu_4$ \par \bigskip 
 
-\subsection{Derivatives}
+\section{Derivatives}
 Since we haven't introduced a metric, we only have $\partial_\mu$.
 \begin{enumerate}
     \item $\partial_\mu f$ transforms like a vector 
@@ -338,7 +338,7 @@ The exterior derivative $\text{d}$ takes a $p$-form to a $(p+1)$-form
 \end{equation}
 $\text{d}A$ is a tensor. Also, $\text{d}^2 = 0$. GR cannot be only formulated in term of forms. 
 
-\subsection{Metric and tensor densities}
+\section{Metric and tensor densities}
 \begin{enumerate}
     \item Metric gives a notion of distance on the manifold 
     \item $(0, 2)$ symmetric tensor $g_{\mu\nu} = g_{\nu\mu}$
@@ -376,7 +376,7 @@ with $\mathcal{L}$ a scalar. \par \medskip
     \end{aligned}
 \end{equation}
 
-\subsection{Geodesics and curves of extremal proper time}
+\section{Geodesics and curves of extremal proper time}
 
 Which curve $x^\mu(\lambda)$ extremises the proper time between two fixed points $p$ ($\lambda = 0$) and $q$ ($\lambda = 1$)? 
 \begin{equation}
@@ -433,7 +433,7 @@ but $\lambda$ cannot be proper time since $\text{d}s^2 = 0$. We have $I = 0$ on 
     Is it a light-like curve which is not a geodesic.
 \end{example}
 
-\subsection{Covariant derivatives $\triangledown_\mu$}
+\section{Covariant derivatives $\triangledown_\mu$}
 
 \begin{enumerate}
     \item acts from tensors $(k,l)$ to tensors $(k, l+1)$
@@ -467,14 +467,14 @@ In this language, the geodesic equation rewrites
 \end{equation}
 where $U^\alpha = \frac{\text{d}x^\alpha}{\text{d}\lambda}$
 
-\subsection{Directional covariant derivative}
+\section{Directional covariant derivative}
 
 if a tensor is only defined on some curve $x^\mu(\lambda)$ (eg. momentum $P^\mu$ of a particle), then the directional covariant derivative $\frac{D}{\text{d}\lambda} = \frac{\text{d} x^\mu}{\text{d}\lambda} \triangledown_\mu$\par \medskip 
 
 $\frac{DT^{\mu\dots}_{\nu\dots}}{\text{d}\lambda}$ transforms as a tensor. Parrallel transport: $T$ is parrallel transported along $x^\mu(\lambda)$ if $\frac{DT}{\text{d}\lambda} = 0$
 
 
-\subsection{Geodesics deviation equation and the Riemann tensor}
+\section{Geodesics deviation equation and the Riemann tensor}
 
 In flat spacetime, two intially parrallel straight lines (geodesics) remain parrallel. In curved spacetime, they converge / diverge. The objective is to find by how much they deviate. The idea is to consider two initially parrallel lines, $x^\mu(\lambda)$ and $\bar{x}^\mu(\lambda)$, where $\bar{x}^\mu(\lambda) = x^\mu(\lambda) + \xi^\mu(\lambda)$, $\xi^\mu << 1$. We then expand the geodesics equations at first order. \par \medskip 
 
@@ -544,7 +544,7 @@ There are multiple scalars or tensors that we can define
     \end{enumerate}
 \end{example}
 
-\subsection{Lie Derivative}
+\section{Lie Derivative}
 We don't need any supplementary structure (contrary to $\triangledown^\mu$ which required the connexion). Take a curve $\gamma$, tangent vector $U^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$, acceleration vector $A^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$. At a point $P$ on the curve, we have the coordinates $x^\mu$. A little bit later, we arrive at point $Q$, with coordinates $x^{'\mu} = x^\mu + U^\mu \text{d}\lambda$. We interpret this as an infinitesimal coordinate transformation. Under this transformation, 
 \begin{equation}
     A^{'\alpha}(x') = \frac{\partial x^{'\alpha}}{\partial x^\beta} A^\beta (x) = (\delta^\alpha_\beta + (\partial_\beta U^\alpha)\text{d}\lambda) A^\beta(x)
@@ -588,7 +588,7 @@ For a rank 2 tensor, we have
     \mathcal{L}_u T_{\alpha\beta} = (\triangledown_\mu T_{\alpha\beta})u^\mu + (\triangledown_\alpha u^\mu)T_{\mu\beta} + (\triangledown_\beta u^\mu)T_{\alpha\mu} 
 \end{equation}
 
-\subsection{Killing vectors} (Lie derivative applied to the metric)
+\section{Killing vectors} (Lie derivative applied to the metric)
 \begin{enumerate}
     \item $k^\mu$ is a Killing vector if $\mathcal{L}_k g_{\mu\nu} = 0$, if $\triangledown _\beta k_\alpha + \triangledown _\alpha k_\beta = 0$ (killing equation)
     \item if in a given coord system $g_{\mu\nu}$ doesn't depend on $x^0$, $\partial_0 g_{\mu\nu} = 0$, so $\mathcal{L}_{\partial_0}g_{\mu\nu} = 0$
@@ -680,7 +680,17 @@ To each killing tensor, there exist an associated quantity conserved along geode
 \begin{equation}
     C = K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}
 \end{equation}
-In a Kerr black hole for exemple, the Brandon Carter is constante (?), which will be used along with $L$ and $E$ to uniquely determine the geodesics. \par \medskip 
+\begin{proof}
+    We want to prove that for a geodesic $x(\lambda)$, we have $\frac{\text{d}C}{\text{d}\lambda} = 0$
+    \begin{equation}
+        \begin{aligned}
+            \frac{\text{d}C}{\text{d}\lambda} &= \frac{\text{d}}{\text{d}\lambda}\left(K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}\right) \\
+            &= \frac{\text{d}K_{\nu_1\dots \nu_l}}{\text{d}\lambda} \dot{x}^{\nu_1}\dots \dot{x}^{\nu_l} + K_{\nu_1\dots \nu_l}\frac{\text{d}}{\text{d}\lambda}\left(\dot{x}^{\nu_1}\dots \dot{x}^{\nu_l}\right) \\
+            &= \dot{x}^\mu\triangledown_\mu K_{\nu_1\dots \nu_l} \dot{x}^{\nu_1}\dots \dot{x}^{\nu_l} + K_{\nu_1\dots \nu_l}\frac{\text{d}}{\text{d}\lambda}\left(\dot{x}^{\nu_1}\dots \dot{x}^{\nu_l}\right) 
+        \end{aligned}
+    \end{equation}
+\end{proof}
+In a Kerr black hole for exemple, the Brandon Carter is constant (?), which will be used along with $L$ and $E$ to uniquely determine the geodesics. \par \medskip 
 
 For a killing vector $k^\rho$, we will show that 
 \begin{equation}

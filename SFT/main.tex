@@ -537,4 +537,38 @@ Yeomans Cardy chapter 3
 We descale the space, and associate blocks of spins to a single spin on a new grid, which corresponds to the descaled grid. For exemple, on a square lattice, we replace 9 spins with 1. $S_I$ is a function of $S_i$ for $i\in I$. We also rescale the metric such that the lattice spacing is always 1. Here, we divide all metrics by 3. 
 
 
+\section{Linear RG near fixed points}
+Take $1 >> \delta K = K - K_*$. We suppose there is a single parameter in the space of theories. 
+\begin{equation}
+    \begin{aligned}
+        K' &= R(K) = R(K_* + \delta K) \\
+        &= K_* + R'(K_*)\delta K + O(K^2) \\
+        &= K_* + \delta K'
+    \end{aligned}
+\end{equation}
+with $\delta K' = R'(K_*)\delta K$. 
+
+\begin{definition}
+    "RG eigenvalue": $y$ where
+    \begin{equation}
+        R'(K_*) = b^y
+    \end{equation}
+    \begin{equation}
+        y = \frac{\ln(R'(K_*))}{\ln(b)}
+    \end{equation}
+\end{definition}
+
+Then 
+\begin{equation}
+    \delta K' = b^y \delta K + O(\delta K^2)
+\end{equation}
+
+if $\text{Re}(y)>0$ then $\delta K$ goes up under RG. $y$ is a universal quantity which only depends on fixed point theory. It does not depend on $b$, not on RG scheme, not on model we start with. 
+
+\section{Correlation length}
+Define $\nu = 1/y$ the correlation length exponent. We can find 
+\begin{equation}
+    \xi \sim |\delta K |^{-\nu} = \frac{c_\pm}{|\delta K |^{\nu}}
+\end{equation}
+
 \end{document}

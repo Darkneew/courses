@@ -43,7 +43,7 @@
 \tableofcontents
 
 \chapter{Introduction}
-Danièle Steer: daniel.steer@phys.ens.fr \newline
+Danièle Steer: daniele.steer@phys.ens.fr \newline
 work on theories of gravity, gravitational waves, primordial cosmology \par \medskip 
 
 We should do the TD before the TD. \par \medskip 
@@ -114,7 +114,7 @@ $\bar{g}_{\mu\nu}$ is a known solution, but can be a lot of things. Either Minko
 
 Another possibility to solve the equations is when $\Phi_N << 1$, where we have 
 \begin{equation}
-    \triangledown ^2 \Phi = 4\pi G\rho  
+    \nabla ^2 \Phi = 4\pi G\rho  
 \end{equation}
 with $\rho$ the mass density. \par \medskip 
 
@@ -129,7 +129,7 @@ The Christoffel symbol is given by
     \Gamma^\mu_{\alpha\beta} = \frac{1}{2}g^{\mu\nu} (\partial_\alpha g_{\nu\beta} + \partial_\beta g_{\nu\alpha} - \partial_\nu g_{\alpha\beta})
 \end{equation}\par \medskip 
 
-In the limit $\Phi_N << 1$, it reduces to $\vec{a} = - \vec{\triangledown} \Phi_N$. This is independant of the composition of the particle (universal equation). It is a consequence of $m_i = m_g$. THe current experiments say that 
+In the limit $\Phi_N << 1$, it reduces to $\vec{a} = - \vec{\nabla} \Phi_N$. This is independant of the composition of the particle (universal equation). It is a consequence of $m_i = m_g$. THe current experiments say that 
 \begin{equation*}
     \left|\frac{m_i - m_g}{m_g}\right| \sim 10^{-15}
 \end{equation*}
@@ -267,7 +267,7 @@ GR is based on 4 postulates
 \begin{enumerate}
     \item Spacetime is 4D Lorentzian manifold, equipped with a Levi-Civita connexion $(\Gamma^\mu_{\alpha\beta})$
     \item Free particles follow time-like or null geodesics $(m > 0, \quad m = 0)$
-    \item The energy, momentum and stresses of matter are described by a symmetric tensor $T_{\mu\nu}$, which is covariantly conserved $\triangledown^\mu T_{\mu\nu} = 0$
+    \item The energy, momentum and stresses of matter are described by a symmetric tensor $T_{\mu\nu}$, which is covariantly conserved $\nabla^\mu T_{\mu\nu} = 0$
     \item The curvature of space time is related to $T_{\mu\nu}$ via the Einstein's equation $G_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$
 \end{enumerate}
 
@@ -364,7 +364,7 @@ So
 \end{equation}
 Since physics is coordinate invariant, any action $S$ must be a scalar, and thus must be of the form 
 \begin{equation}
-    S = \int \text{d}^4 x \sqrt{-g}\mathcal{L}(\phi, \triangledown \phi)
+    S = \int \text{d}^4 x \sqrt{-g}\mathcal{L}(\phi, \nabla \phi)
 \end{equation}
 with $\mathcal{L}$ a scalar. \par \medskip 
 
@@ -433,43 +433,43 @@ but $\lambda$ cannot be proper time since $\text{d}s^2 = 0$. We have $I = 0$ on 
     Is it a light-like curve which is not a geodesic.
 \end{example}
 
-\section{Covariant derivatives $\triangledown_\mu$}
+\section{Covariant derivatives $\nabla_\mu$}
 
 \begin{enumerate}
     \item acts from tensors $(k,l)$ to tensors $(k, l+1)$
     \item reduces to $\partial_\mu$ on flat space
     \item linear 
     \item Leibnitz derivation 
-    \item On scalars $f$, $\triangledown_\mu f = \partial_\mu f$
+    \item On scalars $f$, $\nabla_\mu f = \partial_\mu f$
     \item When acting on a vector $v^\alpha$, these properties imply that 
         \begin{equation}
-        \triangledown_\mu v^\alpha = \partial_\mu v^\alpha + (\gamma_\mu)^\alpha_{~\beta} v^\beta
+        \nabla_\mu v^\alpha = \partial_\mu v^\alpha + (\gamma_\mu)^\alpha_{~\beta} v^\beta
         \end{equation}
     \item moreover, $(\gamma_\mu)^\alpha_{~\beta}$ must transform like the Christoffel symbol 
-    \item Since $v^\beta v_\beta$ is a scalr, we have $\triangledown_\mu (v^\alpha v_\alpha) = \partial_\mu (v^\alpha v_\alpha)$, we have 
+    \item Since $v^\beta v_\beta$ is a scalr, we have $\nabla_\mu (v^\alpha v_\alpha) = \partial_\mu (v^\alpha v_\alpha)$, we have 
     \begin{equation}
-        \triangledown_\mu v_\alpha = \partial_\mu v_\alpha - (\gamma_\mu)^\alpha_{~\beta} v_\beta
+        \nabla_\mu v_\alpha = \partial_\mu v_\alpha - (\gamma_\mu)^\alpha_{~\beta} v_\beta
     \end{equation}
     \item we can also find the transformation rule of $T^{\mu\nu}$ by contracting $T^{\mu\nu}v_{\mu}v_\nu$. 
     \item The torsion tensor is $T^\lambda_{~\alpha\beta} = (\gamma_\alpha)^\lambda_{~\beta} - (\gamma_\beta)^\lambda_{~\alpha}$.
 \end{enumerate}
 
-In special relativitym we choose to have no torsion (it is assumed, some theories with torsion exist but they are not GR), aka $T^\lambda_{~\alpha\beta} = 0$. We also choose $\triangledown_\alpha g_{\mu\nu} = 0$, which is obvious in the rest frame (where we locally have a Minkoski spacetime), and which is true in any frame due to the equivalence principle. These two conditions result in 
+In special relativitym we choose to have no torsion (it is assumed, some theories with torsion exist but they are not GR), aka $T^\lambda_{~\alpha\beta} = 0$. We also choose $\nabla_\alpha g_{\mu\nu} = 0$, which is obvious in the rest frame (where we locally have a Minkoski spacetime), and which is true in any frame due to the equivalence principle. These two conditions result in 
 \begin{equation}
     \gamma^\lambda_{~\alpha\beta} = \Gamma^\lambda_{~\alpha\beta}
 \end{equation}
 the Christoffel symbol. \par \bigskip 
-Check that $[\triangledown_\mu, \triangledown_\nu]f = 0$ for $f$ a scalar, amd that $\triangledown_\mu v^\mu = \frac{1}{\sqrt{-g}}\partial_\mu (\sqrt{-g}v^\mu)$. \par \bigskip 
+Check that $[\nabla_\mu, \nabla_\nu]f = 0$ for $f$ a scalar, amd that $\nabla_\mu v^\mu = \frac{1}{\sqrt{-g}}\partial_\mu (\sqrt{-g}v^\mu)$. \par \bigskip 
 
 In this language, the geodesic equation rewrites 
 \begin{equation}
-    U^\mu \triangledown_\alpha U^\alpha = 0
+    U^\mu \nabla_\alpha U^\alpha = 0
 \end{equation}
 where $U^\alpha = \frac{\text{d}x^\alpha}{\text{d}\lambda}$
 
 \section{Directional covariant derivative}
 
-if a tensor is only defined on some curve $x^\mu(\lambda)$ (eg. momentum $P^\mu$ of a particle), then the directional covariant derivative $\frac{D}{\text{d}\lambda} = \frac{\text{d} x^\mu}{\text{d}\lambda} \triangledown_\mu$\par \medskip 
+if a tensor is only defined on some curve $x^\mu(\lambda)$ (eg. momentum $P^\mu$ of a particle), then the directional covariant derivative $\frac{D}{\text{d}\lambda} = \frac{\text{d} x^\mu}{\text{d}\lambda} \nabla_\mu$\par \medskip 
 
 $\frac{DT^{\mu\dots}_{\nu\dots}}{\text{d}\lambda}$ transforms as a tensor. Parrallel transport: $T$ is parrallel transported along $x^\mu(\lambda)$ if $\frac{DT}{\text{d}\lambda} = 0$
 
@@ -489,8 +489,8 @@ where
 is the Riemann curvature tensor, of second order in term of the metric. A necessary and sufficient condition for $g_{\mu\nu}$ to describe globally flat space time is that $R^\mu_{~\alpha \beta\gamma} = 0$. One can show that 
 \begin{equation}
     \begin{aligned}
-        &[\triangledown_\mu, \triangledown_\nu] v^\rho = R^\rho_{\sigma \mu\nu} v^\sigma \\
-        &[\triangledown_\mu, \triangledown_\nu] \omega_\sigma = - R^\rho_{\sigma \mu\nu} \omega_\rho 
+        &[\nabla_\mu, \nabla_\nu] v^\rho = R^\rho_{\sigma \mu\nu} v^\sigma \\
+        &[\nabla_\mu, \nabla_\nu] \omega_\sigma = - R^\rho_{\sigma \mu\nu} \omega_\rho 
     \end{aligned}
 \end{equation}\bigskip 
 
@@ -515,14 +515,14 @@ To know the number of independant components of the Riemann tensor, we can count
 
 Bianchi identity:
 \begin{equation}
-    \triangledown_{[\gamma}R_{\mu\nu]\lambda\kappa} = 0
+    \nabla_{[\gamma}R_{\mu\nu]\lambda\kappa} = 0
 \end{equation}
 
 There are multiple scalars or tensors that we can define 
 \begin{enumerate}
     \item Ricci tensor: $R_{\alpha\beta} = R^\mu_{~\alpha\mu\beta}$, it is symmetric
     \item Ricci scalar: $R = R^alpha_{~\alpha}$
-    \item Einstein tensor: $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$. We have $\triangledown^\mu G_{\mu\nu} = 0$
+    \item Einstein tensor: $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$. We have $\nabla^\mu G_{\mu\nu} = 0$
     \item Kretschmann scalar: $K = R_{\alpha\beta\gamma\delta}R^{\alpha\beta\gamma\delta}$
 \end{enumerate}
 
@@ -545,7 +545,7 @@ There are multiple scalars or tensors that we can define
 \end{example}
 
 \section{Lie Derivative}
-We don't need any supplementary structure (contrary to $\triangledown^\mu$ which required the connexion). Take a curve $\gamma$, tangent vector $U^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$, acceleration vector $A^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$. At a point $P$ on the curve, we have the coordinates $x^\mu$. A little bit later, we arrive at point $Q$, with coordinates $x^{'\mu} = x^\mu + U^\mu \text{d}\lambda$. We interpret this as an infinitesimal coordinate transformation. Under this transformation, 
+We don't need any supplementary structure (contrary to $\nabla^\mu$ which required the connexion). Take a curve $\gamma$, tangent vector $U^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$, acceleration vector $A^\mu = \frac{\text{d}x^\mu}{\text{d}\lambda}$. At a point $P$ on the curve, we have the coordinates $x^\mu$. A little bit later, we arrive at point $Q$, with coordinates $x^{'\mu} = x^\mu + U^\mu \text{d}\lambda$. We interpret this as an infinitesimal coordinate transformation. Under this transformation, 
 \begin{equation}
     A^{'\alpha}(x') = \frac{\partial x^{'\alpha}}{\partial x^\beta} A^\beta (x) = (\delta^\alpha_\beta + (\partial_\beta U^\alpha)\text{d}\lambda) A^\beta(x)
 \end{equation}
@@ -563,9 +563,9 @@ In general, $A^{'\alpha}$ and $A^{\alpha}$ differ. Their difference defines the 
     \mathcal{L}_U A^\alpha (P) = \lim_{\text{d}\lambda \rightarrow 0} \frac{A^\alpha(Q) - A^{'\alpha}(Q)}{\text{d}\lambda} = (\partial_\beta A^\alpha)U^\beta - (\partial_\beta U^\alpha) A^\beta
 \end{equation}
 \begin{enumerate}
-    \item for a vector, $\mathcal{L}_U A^\alpha = (\triangledown _\beta A^\alpha)U^\beta - (\triangledown_\beta U^{\alpha})A^{\beta}$
+    \item for a vector, $\mathcal{L}_U A^\alpha = (\nabla _\beta A^\alpha)U^\beta - (\nabla_\beta U^{\alpha})A^{\beta}$
     \item for a scalar, $\mathcal{L}_U\Phi = (\partial_\beta \Phi)U^\beta$
-    \item for a covector, $\mathcal{L}_U \omega_\alpha = (\triangledown _\beta \omega_\alpha)U^\beta + (\triangledown_\beta U^{\alpha})\omega_{\beta}$
+    \item for a covector, $\mathcal{L}_U \omega_\alpha = (\nabla _\beta \omega_\alpha)U^\beta + (\nabla_\beta U^{\alpha})\omega_{\beta}$
 \end{enumerate}
 
 Holds true the Leibnitz rule for the Lie derivative
@@ -585,12 +585,12 @@ We can change the coordinates such that the first coordinate correspond to the p
 \end{theorem}
 For a rank 2 tensor, we have
 \begin{equation}
-    \mathcal{L}_u T_{\alpha\beta} = (\triangledown_\mu T_{\alpha\beta})u^\mu + (\triangledown_\alpha u^\mu)T_{\mu\beta} + (\triangledown_\beta u^\mu)T_{\alpha\mu} 
+    \mathcal{L}_u T_{\alpha\beta} = (\nabla_\mu T_{\alpha\beta})u^\mu + (\nabla_\alpha u^\mu)T_{\mu\beta} + (\nabla_\beta u^\mu)T_{\alpha\mu} 
 \end{equation}
 
 \section{Killing vectors} (Lie derivative applied to the metric)
 \begin{enumerate}
-    \item $k^\mu$ is a Killing vector if $\mathcal{L}_k g_{\mu\nu} = 0$, if $\triangledown _\beta k_\alpha + \triangledown _\alpha k_\beta = 0$ (killing equation)
+    \item $k^\mu$ is a Killing vector if $\mathcal{L}_k g_{\mu\nu} = 0$, if $\nabla _\beta k_\alpha + \nabla _\alpha k_\beta = 0$ (killing equation)
     \item if in a given coord system $g_{\mu\nu}$ doesn't depend on $x^0$, $\partial_0 g_{\mu\nu} = 0$, so $\mathcal{L}_{\partial_0}g_{\mu\nu} = 0$
 \end{enumerate}
 As expected, for each Killing vector, there is a conserved quantity along a geodesic 
@@ -673,7 +673,7 @@ Alternatively, we can also find conserved quantities through the equations of mo
 \begin{definition}
     Killing tensors are tensors $K_{\nu_1\dots \nu_l}$ which are totally symmetric and satisfy 
     \begin{equation}
-        \triangledown_{(\mu} K_{\nu_1\dots \nu_l)} = 0
+        \nabla_{(\mu} K_{\nu_1\dots \nu_l)} = 0
     \end{equation}
 \end{definition}
 To each killing tensor, there exist an associated quantity conserved along geodesics, 
@@ -685,20 +685,31 @@ To each killing tensor, there exist an associated quantity conserved along geode
     \begin{equation}
         \begin{aligned}
             \frac{\text{d}C}{\text{d}\lambda} &= \frac{\text{d}}{\text{d}\lambda}\left(K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}\right) \\
-            &= \frac{\text{d}K_{\nu_1\dots \nu_l}}{\text{d}\lambda} \dot{x}^{\nu_1}\dots \dot{x}^{\nu_l} + K_{\nu_1\dots \nu_l}\frac{\text{d}}{\text{d}\lambda}\left(\dot{x}^{\nu_1}\dots \dot{x}^{\nu_l}\right) \\
-            &= \dot{x}^\mu\triangledown_\mu K_{\nu_1\dots \nu_l} \dot{x}^{\nu_1}\dots \dot{x}^{\nu_l} + K_{\nu_1\dots \nu_l}\frac{\text{d}}{\text{d}\lambda}\left(\dot{x}^{\nu_1}\dots \dot{x}^{\nu_l}\right) 
+            &= \frac{\text{d}x^\mu}{\text{d}\lambda}\nabla\mu\left(K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}\right) \\
         \end{aligned}
+    \label{eq:killingtensor}\end{equation}
+    But by one of the definitions of a geodesic, 
+    \begin{equation}
+        \frac{\text{d}x^\mu}{\text{d}\lambda}\nabla\mu \frac{\text{d}x^{\nu}}{\text{d}\lambda} = U^\mu \nabla_\mu U^\nu = 0
+    \end{equation}
+    So by developping \eqref{eq:killingtensor} using the Leibnitz rule, replacing the $\frac{\text{d}x^{\nu}}{\text{d}\lambda}$ by $U^\nu$ for readability, we see 
+    \begin{equation}
+        \frac{\text{d}C}{\text{d}\lambda} = U^{\nu_1}\dots U^{\nu_l} U^\mu \nabla\mu K_{\nu_1\dots \nu_l} 
+    \end{equation}
+    But $U^{\nu_1}\dots U^{\nu_l} U^\mu$ is completely symmetric, whilst $\nabla\mu K_{\nu_1\dots \nu_l} $ is completely antisymmetric by assumption. Therefore, contracting the indices, we end up with 0. 
+    \begin{equation}
+        \frac{\text{d}C}{\text{d}\lambda} = 0
     \end{equation}
 \end{proof}
 In a Kerr black hole for exemple, the Brandon Carter is constant (?), which will be used along with $L$ and $E$ to uniquely determine the geodesics. \par \medskip 
 
 For a killing vector $k^\rho$, we will show that 
 \begin{equation}
-    \triangledown_\mu \triangledown_\rho k^\rho = R^\rho_{\sigma\mu\nu}k^\nu 
+    \nabla_\mu \nabla_\rho k^\rho = R^\rho_{\sigma\mu\nu}k^\nu 
 \end{equation}
 By contracting, we also find 
 \begin{equation}
-    k^\lambda \triangledown_\lambda R = 0
+    k^\lambda \nabla_\lambda R = 0
 \end{equation}
 Meaning the directional derivative of the Ricci scalar along a killing vector vanishes. 
 
@@ -712,7 +723,7 @@ Meaning the directional derivative of the Ricci scalar along a killing vector va
 To go from special relativity to general relativity, one procedure is to "covariantize". 
 \begin{enumerate}
     \item replacing $\eta_{\mu\nu} \rightarrow g_{\mu\nu}$
-    \item replacing $\partial_\mu \rightarrow \triangledown_\mu$
+    \item replacing $\partial_\mu \rightarrow \nabla_\mu$
 \end{enumerate}
 
 This prescription leaves some ambiguities. 
@@ -723,7 +734,7 @@ This prescription leaves some ambiguities.
     \end{equation}
     We could "covariantize" this into 
     \begin{equation}
-        S'_\phi = \int \text{d}x^4 \sqrt{-g}\left( -\frac{1}{2}(\triangledown_\mu \phi)(\triangledown_\nu \phi) \eta^{\mu\nu} - V(\phi)\right)
+        S'_\phi = \int \text{d}x^4 \sqrt{-g}\left( -\frac{1}{2}(\nabla_\mu \phi)(\nabla_\nu \phi) \eta^{\mu\nu} - V(\phi)\right)
     \end{equation}
     But we could also want to add a term in $R\phi^2$, or a contraction of the Riemann tensor with the field. 
 \end{example}
@@ -743,7 +754,7 @@ But we can also vary the action with respect to $g_{\mu\nu}$ with $\phi$ constan
 \begin{equation}
     T^\phi_{\mu\nu} = (\partial_\mu\phi)(\partial_\nu \phi) - g_{\mu\nu}\left(\frac{1}{2}(\partial \phi)^2 + V(\phi)\right)
 \end{equation}
-Enforcing once again $\delta_g S = 0$, we get that the energy-momentum tensor satisfies $\triangledown^\mu T^\phi_{\mu\nu} = 0$ \par \medskip 
+Enforcing once again $\delta_g S = 0$, we get that the energy-momentum tensor satisfies $\nabla^\mu T^\phi_{\mu\nu} = 0$ \par \medskip 
 
 If we don't know what is the action for our matter field, then we can describe $T_{\mu\nu}$ in term of macroscopic quantities
 
@@ -752,7 +763,7 @@ If we don't know what is the action for our matter field, then we can describe $
     \begin{equation}
         T_{\mu\nu} = (\rho + P)u_\mu u_\nu + Pg_{\mu\nu}
     \end{equation}
-    Then enforcing $\triangledown^\mu T_{\mu\nu} = 0$ enforces the Euler equations and the continuity equation. For non relativistic dust, $P = 0$ and for relativistic fluid, $P = \frac{1}{3}\rho$
+    Then enforcing $\nabla^\mu T_{\mu\nu} = 0$ enforces the Euler equations and the continuity equation. For non relativistic dust, $P = 0$ and for relativistic fluid, $P = \frac{1}{3}\rho$
 \end{example}
 
 Einstein equations are 
@@ -761,7 +772,7 @@ Einstein equations are
 \end{equation}
 where the Einstein's tensor is linked to the curvature of the space. 
 \begin{itemize}
-    \item $\triangledown^\mu T_{\mu\nu} = 0 \Rightarrow \triangledown^\mu E_{\mu\nu} = 0$
+    \item $\nabla^\mu T_{\mu\nu} = 0 \Rightarrow \nabla^\mu E_{\mu\nu} = 0$
     \item $E_{\mu\nu} = E_{\nu\mu}$
     \item Einstein equations are second order in the derivatives 
     \item for weak, slowly varying fields and a source consisting of dust, we get Newtonian gravity

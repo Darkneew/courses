@@ -1,0 +1,31 @@
+\begin{definition}
+    Killing tensors are tensors $K_{\nu_1\dots \nu_l}$ which are totally symmetric and satisfy 
+    \begin{equation}
+        \nabla_{(\mu} K_{\nu_1\dots \nu_l)} = 0
+    \end{equation}
+\end{definition}
+To each killing tensor, there exist an associated quantity conserved along geodesics, 
+\begin{equation}
+    C = K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}
+\end{equation}
+\begin{proof}
+    We want to prove that for a geodesic $x(\lambda)$, we have $\frac{\text{d}C}{\text{d}\lambda} = 0$
+    \begin{equation}
+        \begin{aligned}
+            \frac{\text{d}C}{\text{d}\lambda} &= \frac{\text{d}}{\text{d}\lambda}\left(K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}\right) \\
+            &= \frac{\text{d}x^\mu}{\text{d}\lambda}\nabla\mu\left(K_{\nu_1\dots \nu_l} \frac{\text{d}x^{\nu_1}}{\text{d}\lambda} \dots \frac{\text{d}x^{\nu_l}}{\text{d}\lambda}\right) \\
+        \end{aligned}
+    \label{eq:killingtensor}\end{equation}
+    But by one of the definitions of a geodesic, 
+    \begin{equation}
+        \frac{\text{d}x^\mu}{\text{d}\lambda}\nabla\mu \frac{\text{d}x^{\nu}}{\text{d}\lambda} = U^\mu \nabla_\mu U^\nu = 0
+    \end{equation}
+    So by developping \eqref{eq:killingtensor} using the Leibnitz rule, replacing the $\frac{\text{d}x^{\nu}}{\text{d}\lambda}$ by $U^\nu$ for readability, we see 
+    \begin{equation}
+        \frac{\text{d}C}{\text{d}\lambda} = U^{\nu_1}\dots U^{\nu_l} U^\mu \nabla\mu K_{\nu_1\dots \nu_l} 
+    \end{equation}
+    But $U^{\nu_1}\dots U^{\nu_l} U^\mu$ is completely symmetric, whilst $\nabla\mu K_{\nu_1\dots \nu_l} $ is completely antisymmetric by assumption. Therefore, contracting the indices, we end up with 0. 
+    \begin{equation}
+        \frac{\text{d}C}{\text{d}\lambda} = 0
+    \end{equation}
+\end{proof}

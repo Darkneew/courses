@@ -792,4 +792,200 @@ which lead to (in 4D)
 \begin{equation}
     R_{\mu\nu} = \frac{8\pi G}{c^4}(T_{\mu\nu} - \frac{1}{2}Tg_{\mu\nu})
 \end{equation}
+We can rewrite this 
+\begin{equation}
+    G_{\mu\nu} = \frac{8\pi G}{c^4} T_{\mu\nu} - \Lambda g_{\mu\nu}
+\end{equation}
+We must have $\Lambda$ constant. We call it the cosmological constant. \par \medskip 
+
+For a perfect fluid, $\Lambda = \rho = -P$ is strangely negative, also it is positively proportional to the energy density. \par \medskip 
+
+In 4D, these lead in principle to 10 2nd order equations (since all tensors are symmetric). In practice, it's a bit more subtle that that 
+\begin{equation}
+    \begin{aligned}
+        &\nabla^\mu G_{\mu\nu} = 0 \\
+        &\partial^t G_{\mu\nu} = -\partial^iG_{i\nu} - \Gamma G \dots - \Gamma G
+    \end{aligned}
+\end{equation}
+Since the right hand side has no partial derivatives, it is at most of 2nd order in time derivatives. Hence the left hand side too, and $G_{\mu\nu}$ is constrained to 1st order in time derivatives. The conservation of $G_{\mu\nu}$ leads to 4 constraints.  \par \medskip 
+
+The equations should also be coordinate invariant, constraining 4 more degrees of freedom. In the end, only 2 degrees of freedom are left dynamical. For gravitational waves, in practice, these correspond to the 2 polarizations, $+$ and $\times$. 
+
+A more elegant way of seeing this is through a Hamiltonian approach to GR, see book by Henneaux and Teitelboim.\par\medskip 
+
+From this, there are two ways to find solutions to Einstein's equation  
+
+\begin{itemize}
+    \item Impose symmetries: Schwarchild, Kerr, FRWL, domain walls, strings, ...
+    \item Take a solution and look at perturbative solutions $g_{\mu\nu} = \bar{g}_{\mu\nu} + h_{\mu\nu}$
+\end{itemize}
+
+\section{Static spherically symmetric solutions}
+Schwarchild, Stars, geodesics \dots We need to understand time and light like geodesics in order to detect the presence of a BH. 
+
+\begin{itemize}
+    \item VLT: time like geodesics of stars around the center of a galaxy => deduce the properties of the corresponding BH $M \sim 10^6 M_{\circledcirc}$
+    \item EM images of the accretion diste around a BH $M \sim 10^9 M_{\circledcirc}$
+    \item Lensing light like geodesics
+    \item Gravitational waves (GW): also propagate on null geodesics. With LVK, detection of $\sim 100$ BH of masses $3M_{\circledcirc} \leq M \leq 100M_{\circledcirc}$
+    \item Quasi normal modes of a BH and superadiance effect. 
+\end{itemize}
+
+very useful code in python: "Sage Math/Sage Manifold". Can be used to solve geodesics in the spacetime. Very useful book: C Bender and S Orzag "Advanced mathematical methods for scientists and engineers." \par \medskip 
+
+Consider a spherical body, (possibly non-constant) radius $R$, stress energy tensor $T_{\mu\nu}$. Outside the body, $T_{\mu\nu} = 0$. \par \bigskip 
+
+\noindent Metric:
+\begin{equation}
+    \text{d}s^2 = -e^{2\Phi(t, r)} \text{d}t^2 + e^{2\Psi(t, r)}\text{d}r^2 = r^2 \text{d}\Omega^2
+\end{equation}
+
+When $\Phi, \Psi \rightarrow 0$, $\text{d}s^2 \rightarrow \text{Minkowski}$, so we impose the boundary condition $\Phi, \Psi \rightarrow_{r\rightarrow \infty} 0$ such that $t$ is the proper time of an observer at rest at $r\rightarrow \infty$.\par \medskip 
+
+We want to solve the metric. We have 
+\begin{equation}
+    g^{rr} = e^{-2\Psi} = 1-\frac{2G m(t, r)}{r} = q(t, r)
+\end{equation}
+Which corresponds to (verify this)
+\begin{equation}
+    G^t_t = -\frac{2G}{r^2} \partial_r m(t, r)
+\end{equation}
+\begin{equation}
+    G^t_r = - \frac{2G}{r^2} e^{2\Phi}\partial_t m(t, r)
+\end{equation}
+\begin{equation}
+    G^r_r = -\frac{2q(t,r)}{r}\partial_r \Phi + \frac{2Gm(t, r)}{r^3}
+\end{equation}
+
+Using Einsteins Equation, we get the following equations
+\begin{equation}
+    \partial_r m(t, r) = -4\pi r^2 T^t_t
+\label{eq:rsym1}\end{equation}
+\begin{equation}
+    \partial_t m(t, r) = -4\pi r^2 e^{-2\Phi} = q(t, r)T^t_r
+\label{eq:rsym2}\end{equation}
+\begin{equation}
+    \partial_r \Phi = \frac{G}{q(t, r)r^2}\left(m(t, r) + 4\pi r^3 T^r_r\right)
+\label{eq:rsym3}\end{equation}
+Plus 
+\begin{equation}
+    \nabla_\mu T_{\mu\nu} = 0
+\end{equation}
+
+\subsection{The outside solution}
+
+First looking outside the stars where $T_{\mu\nu} = 0$, equations \eqref{eq:rsym1}, \eqref{eq:rsym2} and \eqref{eq:rsym3} translate into 
+\begin{equation}
+    \begin{aligned}
+        \partial_r m = 0,&\quad \partial_t m = 0
+        &\rightarrow m(t, r) = M
+    \end{aligned}
+\end{equation}
+and
+\begin{equation}
+    \partial_r \Phi = \frac{GM}{r^2(1 - \frac{2GM}{r})}
+\end{equation}
+Such that 
+\begin{equation}
+    \Phi(t, r) = \frac{1}{2}\ln (1-\frac{2GM}{r}) + c(t)
+\end{equation}
+But since $\Phi \rightarrow_{r \rightarrow \infty} 0$, we necessarily have $c(t) = 0$. So 
+\begin{equation}
+    e^{2\Phi} = 1-\frac{2GM}{r}
+\end{equation}
+This gives the Schwarchild metric, valid for $r > 2GM$:
+\begin{equation}
+    \text{d}s^2 = -\left(1-\frac{2GM}{r}\right) \text{d}t^2 + \frac{1}{1-\frac{2GM}{r}}\text{d}r^2 + r^2 \text{d}\Omega^2 
+\end{equation}
+We interestingly see that the metric is time-independant. This is the result of Birkhoff's theorem: a spherically symmetric vacuum solution is necessarily static. \par \medskip 
+
+This means the space outside of a star is independant of whatever the star is doing, as long as it is spherically symmetric. I would feel no difference if a star was pulsating next to me. This also mean no GW can arise from a single BH. \par \medskip 
+
+Since for $r\rightarrow \infty$ (weak field limit) we have $g_{00} = -\left(1-\frac{2GM}{r}\right) \simeq_{\text{up to a factor}} -1 + \Phi_v$, we can make a link to Newtonian gravity and we identify $M$ as the mass generating the potential. Therefore, we often consider $M > 0$ and interpret it as a mass. \par \medskip 
+
+The coordinate system breaks down at $r = r_s = 2GM$. But actually, there is no physical singularity there, as we can see by looking at the Riemann tensor 
+\begin{equation}
+    R^{\alpha\beta\gamma\delta}R_{\alpha\beta\gamma\delta} \propto r^{-6}
+\end{equation}
+though it does not entirely prove that there is no singularity. We will see later that in fact, the Schwarchild metric and coordinates are valid in the whole vacuum sector. This anomaly in the coord system is just like the 0 in the polar 2D coordinate system, where the metric diverges in $r=0$ but the space is very well defined. \par \medskip 
+
+Let's look at killing vectors. 
+\begin{equation}
+    k = \partial_t
+\end{equation}
+is obviously a killing vector. 
+\begin{equation}
+    k^\mu k_\mu = -(1-\frac{2GM}{r})
+\end{equation}
+So for $r>r_s$, $k^2 < 0$ is a time-light vector but for $r=r_s$, $k^2 = 0$ is a light-like vector. So $r_s$ is a killing horizon. \par \medskip 
+
+For the sun, $M_\circledcirc \simeq 10^30 kg$ so $r_s\sim 3km$, whilst $R_\circledcirc \sim10^5km$. So we don't care about the horizon. However, the metric still apply outside of the sun. \par \medskip 
+
+\subsection{The inside solution}
+
+What happens when stars end their life and go cold? There is no radiation pressure to counterbalance the gravitational force, so if nothing kicks in the star would collapse. However, the star can be stabilized if there is a new form of non-thermal pressure to counteract gravity.  \par \medskip 
+
+Quantum degeneracy pressure (cold fermions cannot be compressed indefinitely) can kick in. It is dictated by Heisenberg's uncertainty principle, and occurs when the number $n$ of density of particles is sufficiently high. Heisenberg's uncertainty principle states that 
+\begin{equation}
+    \Delta x \Delta p \sim \geq \hbar
+\end{equation}
+But 
+\begin{equation}
+    \Delta x \sim n^{-1/3}
+\end{equation}
+\begin{equation}
+    \Delta p \sim \sqrt{mk_BT}
+\end{equation}
+Which defines the fermi Temperature, low limit temperature given the mass of the particles at fixed density:
+\begin{equation}
+    T_f \simeq \frac{\hbar^2 n^{2/3}}{mk_B}
+\end{equation}
+which is inversely proportional to $m$. Therefore, if it can, a star will first stabilize itself as an electron (creating a white dwarf), and then if it can as a neutron (creating a neutron star) which is heavier. \par \medskip 
+
+\begin{enumerate}
+    \item A white dwarf (WD) of mass $M_\circledcirc$ would have a radius of around $R \sim \frac{R_\circledcirc}{100}$ so $\Phi_N <<1$ and there is no general relativity effect that can be observed. The maximum mass of a white dwarf is $1.4 M_{\circledcirc}$, so our sun will become a white dwarf but a star twice heavier would not become a WD.
+    \item A neutron star of mass $M_\circledcirc$ would have a radius of around $R \sim 10km$ so $\Phi_N \sim 0.1$ and we can observe some small general relativity effects. The maximum mass of a white dwarf is $3.5 M_{\circledcirc}$, so a star twice heavier than the sun would become a neutron star, but not a star 4 times heavier. 
+    \item A black hole has no mass upper limit. 
+\end{enumerate} \medskip 
+
+
+We should now assume that the interior of the studied star is a static perfect fluid. 
+\begin{equation}
+    T_{\mu\nu} = (\rho + P)u_\mu u_\nu + Pg_{\mu\nu}
+\end{equation}
+We need to determine $P(r), \rho(r)$ and $u^\mu = (\alpha, 0, 0, 0)$. But 
+\begin{equation}
+    u^\mu u^\nu g_{\mu\nu} = -1
+\end{equation}
+such that 
+\begin{equation}
+    \alpha = e^{-\Phi}
+\end{equation}
+We get the following equations
+\begin{equation}
+    T^t_t = -\rho \Rightarrow \partial_r m(t, r) = 4\pi r^2 \rho
+\end{equation}
+\begin{equation}
+    T^t_t = 0 \Rightarrow \text{the solution is static}
+\end{equation}
+\begin{equation}
+    T^r_r = P \Rightarrow \partial_r \Phi = \frac{G(m(r) + 4\pi r^3 P)}{r(r-2m(r))}
+\label{eq:consrad1}\end{equation}
+But this time, we should also use $\nabla^\mu T_{\mu\nu} = 0$ which will impose strong constraints. Only one equation can be used in this conservation law, which is $\nabla^\mu T_{\mu r} = 0$ and which gives 
+\begin{equation}
+   \begin{aligned}
+    &\frac{\text{d}P}{\text{d}r} + (\Gamma T + \dots + \Gamma T) = 0 \\
+    &\Rightarrow \frac{\text{d}P}{\text{d}r} = -(\rho + P)\frac{\text{d}\Phi}{\text{d}r}
+   \end{aligned}
+\label{eq:consconsrad}\end{equation}
+These equations are solvable assuming that the fluid is incompressible, that is assuming that $\rho = \rho_c = \text{cst}$. We have 
+\begin{equation}
+    \frac{\text{d}m}{\text{d}r} = 4\pi r^2 \rho_c \quad m(r) = m(0) + \frac{4}{3}\pi \rho_c r^3
+\end{equation}
+Recognizing the volume of a ball, we can assume by taking it to the Newtonian limit that $m(0) = 0$ and $m(r) = V(B(r)) \rho_c $. \par \medskip 
+
+Then, we can inject \eqref{eq:consrad1} into \eqref{eq:consconsrad} to get 
+\begin{equation}
+    \frac{\text{d}P}{\text{d}r} = -\frac{\frac{4}{3}\rho G\pi \rho_c r^3}{r(r-\frac{8}{3}\pi \rho_c r^3)} - \frac{\frac{4}{3}G\pi \rho_c r^3 + 4\rho\pi r^3 G}{r(r-\frac{8}{3}\pi \rho_c r^3)}P - \frac{4\pi r^3 G}{r(r-\frac{8}{3}\pi \rho_c r^3)}P^2
+\end{equation}
 \end{document}

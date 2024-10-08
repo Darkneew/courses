@@ -14,7 +14,7 @@
 
 % graphics %
 \usepackage{graphicx}
-\graphicspath{ {../img/} }
+\graphicspath{ {./images/} }
 
 % environments %
 \newtheorem{theorem}{Theorem}[section]
@@ -570,5 +570,84 @@ Define $\nu = 1/y$ the correlation length exponent. We can find
 \begin{equation}
     \xi \sim |\delta K |^{-\nu} = \frac{c_\pm}{|\delta K |^{\nu}}
 \end{equation}
+
+\section{Adding a magnetic field}
+
+(no new calculation required in our approximation). Consider $h << 1$. 
+\begin{equation}
+    \mathcal{H} = \mathcal{H}_0 + \mathcal{H}_1
+\end{equation}
+\begin{equation}
+    e^{-\mathcal{H}'[S']} = \sum_{S \rightarrow S'} e^{-\mathcal{H}_0[S]}e^{-\mathcal{H}_i[S] + h \sum_i S_i}
+\end{equation}
+So 
+\begin{equation}
+    \mathcal{H}'[S'] = \frac{N}{3}\ln Z_{\Delta} + K \sum_{<ij>}<S_i>_{S_I'}<S_j>_{S_J'} + h\sum _i <S_i>_{S_I'}
+\end{equation}
+We easily read 
+\begin{equation}
+    h' = 3\gamma_K h + O(h^3)
+\end{equation}
+where we remanining is $O(h^3)$ and not  $O(h^2)$ due to the $\mathbb{Z}_2$ symmetry in $h$. We find 
+\begin{equation}
+    y_h > y_t > 0
+\end{equation}
+which means that the system is more sensible to the magnetic field than to the temperature. \par \medskip 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{criticalsf}
+    \caption{Critical surface}
+\end{figure}
+
+If the critical surface has "codimension" $k$: 
+\begin{enumerate}
+    \item There are $k$ relevant perturbations 
+    \item Experimentalists must tune $k$ parameters to acoss critical surface
+\end{enumerate}
+
+\section{Extensions}
+
+We can experiment with modifications 
+\begin{itemize}
+    \item Square lattice
+    \item have the possibility of "vacancies", $S = \pm 1, 0$ (we had a term in $S_i^2$ to the Hamiltonian)
+    \item models with more states (ex Potts model, percolation)
+    \item have boundaries, boundary conditions
+\end{itemize}
+
+\section{Symmetries and RG flows}
+Recall Ising $\mathbb{Z}_2$ symmetry. 
+\begin{enumerate}
+    \item $\mathbb{Z}_2$-even couplings: $K\sum_{<ij>}S_iS_j$, etc 
+    \item $\mathbb{Z}_2$-odd couplings: $K\sum_{i}S_i$, etc 
+\end{enumerate}
+Linearized RG equation 
+\begin{equation}
+    \delta K' = T \delta K  + O(\delta K^2)
+\end{equation}
+Previously $\underline{\delta K} = (\delta K, h)$
+\begin{equation}
+    T = \begin{pmatrix}
+        b^{y_t} & 0 \\ 0 & b^{y_h}
+    \end{pmatrix}
+\end{equation}
+More generally (more couplings), we have two blocks 
+\begin{equation}
+    T = \begin{pmatrix}
+        \square & 0 \\ 0 & \square
+    \end{pmatrix}
+\end{equation}
+associated to the even and odd sectors. There is a hierarchy of eigenvalues in each sector. There is a theorem which states there is only one relevant parameter per sector?
+
+\subsection{Emergent symmetries}
+RG preserves symmetries of $\mathcal{H}$ (should not lose a symmetry by zooming out). However, RG might generate new symmetries asymptotically (at fixed points). For exemple, conformal symmetry is emergent in critical ising model. \par \medskip 
+
+\subsection{$\mathbb{Z}_2$ as an emergent symmetry}
+
+Recall: $\mathbb{Z}_2$ symmetry means $\mathcal{H}[S] = \mathcal{H}[-S]$. \par \medskip 
+
+In 3D, the Ising model has only 2 relevant perturbations, $\delta T$ and $h$. \par \medskip 
+
+Interesting consequence for models that do not have microscopic $\mathbb{Z}_2$ but which have 2 experimental tuning parameters. Even though we cannot reach the critical point directly (we cannot have the $\mathbb{Z}_2$ symmetry microscopically), we can fix ourselves on the critical surface, which will flow to the critical point (we will have the $\mathbb{Z}_2$ symmetry macroscopically). 
 
 \end{document}

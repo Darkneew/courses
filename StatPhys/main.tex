@@ -930,8 +930,212 @@ Multiplicative noise also occurs directly for a simple overdamped colloid in wat
     \gamma \frac{\text{d}\vec{R}}{\text{d}t} = \sqrt{2\gamma' T}\vec{\eta}
 \end{equation}
 In a river, $\gamma$ depends on the distance to the wall. 
+
+\section{Path integrals for stochastic processes}
+\subsection{Starting from a Langevin equation}
+We begin with $\dot{x} =^\alpha f+g\xi$. 
+
+\begin{equation}
+    \Delta x_m = x_{m+1} - x_m = f(x_m + \alpha \Delta x_m) \Delta t + g(x_m + \alpha \Delta x_m)\sqrt{\Delta t}~\xi_m
+\label{eq:pilangevin}\end{equation}
+with $x_0$ given, $m = 0, \dots, M-1$, and $\xi_0, \dots, \xi_{M-1}$ independant Gaussian variables 
+\begin{equation}
+    <\xi_i, \xi_j> = \delta_{ij}
+\end{equation}
+Goal: write 
+\begin{equation}
+    <A(x(t_{\text{obs}}))> = \int \mathcal{D}_{\text{path}} e^{-\mathcal{S}[\text{path}]}A(\text{path})    
+\end{equation} 
+We have 
+\begin{equation}
+    <A(x_m)> = \int \frac{\text{d}\xi_0}{\sqrt{2\pi}}\dots\frac{\text{d}\xi_{M-1}}{\sqrt{2\pi}} e^{-\frac{\xi_0^2}{2}-\dots-\frac{\xi_{M-1}^2}{2} } A(x_M(\xi_0, \dots, \xi_{M-1}))
+\end{equation}
+where $x_m$ is the solution of \eqref{eq:pilangevin} at a given set $\xi_0, \dots, \xi_{M-1}$.
+We perform a change of integration variable 
+\begin{equation}
+    (\xi_0, \dots, \xi_{M-1}) \rightarrow (x_1,\dots , x_M)
+\end{equation}
+We have 
+\begin{equation}
+    \text{d}\xi_0 \dots \text{d}\xi_{M-1} = \text{d}x_1 \dots \text{d}x_m \left|  \text{det}\left(\frac{\partial\xi_i}{\partial x_j}\right)\right|
+\end{equation}
+where 
+\begin{equation}
+    \xi_i = \frac{\Delta x_i - f_i \Delta t}{g_i \sqrt{\Delta t}}
+\end{equation}
+We can compute the determinant by using only the diagonal, since we may notice that the matrix is triangular. 
+\begin{equation}
+    \begin{aligned}
+        \frac{\partial \xi_i}{\partial x_i+1} &= \frac{1 - \alpha f'_i\Delta t}{g_i \sqrt{\Delta t}} - \frac{\alpha g'_i}{g_i}\frac{\Delta x_i - f_i \Delta t}{g_i \sqrt{\Delta t}} \\
+        &= \frac{1}{g_i \sqrt{\Delta t}}[1 - \alpha f'_i \Delta t - \frac{\alpha g'_i}{g_i}(\Delta x_i - f_i \Delta t)]
+    \end{aligned}
+\end{equation}
+Then 
+\begin{equation}
+    <A(x_M)> = (2\pi)^{-M/2} \int \text{d}x_1 \dots \text{d}x_M \prod_{i=0}^{M-1}\frac{1}{g_i \sqrt{\Delta t}}[1 - \alpha f'_i \Delta t - \frac{\alpha g'_i}{g_i}(\Delta x_i - f_i \Delta t)] A(x_M )e^{\dots}
+\end{equation}
+Then using some kind of Fourier transform (denoting by a $\bar{x}$ a variable being integrated over the imaginary line), we get 
+\begin{equation}
+    <A(x_M)> = (2\pi)^{-M}\int \text{d}x_1 \dots \text{d}x_M \text{d}\bar{x}_0 \dots \text{d}\bar{x}_{M-1} A(x_M)\prod_{i=0}^{M-1}\frac{1}{g_i \sqrt{\Delta t}}[1 - \alpha f'_i \Delta t - \frac{\alpha g'_i}{g_i}(\Delta x_i - f_i \Delta t)] e^{-\sum_{i=0}^{M-1}\bar{x}_i[\Delta x_i - f_i \Delta t] - \frac{g_i^2}{2}\bar{x_i}^2\Delta t}
+\end{equation}
+But now, we can replace $\Delta x_i - f_i \Delta t$ to get 
+\begin{equation}
+    <A(x_M)> = (2\pi)^{-M}\int \text{d}x_1 \dots \text{d}x_M \text{d}\bar{x}_0 \dots \text{d}\bar{x}_{M-1} A(x_M)\prod_{i=0}^{M-1}[1 - \alpha f'_i \Delta t - \alpha g'_ig_i\bar{x}_i\Delta t] e^{-\sum_{i=0}^{M-1}\bar{x}_i[\Delta x_i - f_i \Delta t] - \frac{g_i^2}{2}\bar{x_i}^2\Delta t}
+\end{equation}
+
+Such that we can write for small $\Delta t$
+\begin{equation}
+    <A(x_M)> = (2\pi)^{-M}\int \text{d}x_1 \dots \text{d}x_M \text{d}\bar{x}_0 \dots \text{d}\bar{x}_{M-1} A(x_M) e^{-\mathcal{S}[\{\bar{x}_i, x_j\}]}
+\end{equation}
+with 
+\begin{equation}
+    \mathcal{S} = \sum_i \left[\bar{x}_i (\Delta x_i - f_i \Delta t) - \frac{g_i^2}{2}\bar{x}_i^2 \Delta t + \alpha f'_i \Delta t + \alpha g'_i g_i \bar{x}_i \Delta t\right]
+\end{equation}
+Or in continuous variables, 
+\begin{equation}
+    <A(x(t_{\text{obs}}))> = \int  \mathcal{D}\bar{x} \mathcal{D}x A(x(t_{\text{obs}}))e^{-\mathcal{S}[\bar{x}, x]}
+\end{equation}
+with
+\begin{equation}
+    \mathcal{S} =^\alpha \int_{0}^{t_\text{obs}} \text{d}t [\bar{x}(\dot{x} - f) - \frac{g^2}{2}\bar{x}^2 + \alpha f' + \alpha g'g\bar{x}]
+\end{equation}
+
+\subsection{The Janssen - De Dominicis action}
+
+In the continuum, $\dot{x} =^\alpha f+g\xi$ is equivalent to 
+\begin{equation}
+    <A> = \int \mathcal{D}\bar{x}\mathcal{D}x A e^{-\mathcal{S}}
+\end{equation}
+with $\mathcal{S}[\bar{x}, x] =^\alpha \int_{0}^{t_\text{obs}} \text{d}t [\bar{x}(\dot{x} - f) - \frac{g^2}{2}\bar{x}^2 + \alpha f' + \alpha g'g\bar{x}]$. "Martini Sigga Rose". We see that if we had used $\alpha = 0$, things would have been simpler. It turns out that the Ito form is the simplest to use for perturbation theory 
+\begin{equation}
+    \begin{aligned}
+        &\dot{x} =^\alpha f + g\xi \\ 
+        &\dot{x} =^0 f + \alpha gg' + g\xi \\
+        &\mathcal{S} =^0 \int [\bar{x}(\dot{x} - f - \alpha g'g) - \frac{g^2}{2}\bar{x}^2]
+    \end{aligned}
+\end{equation}
+One can show that 
+\begin{equation}
+    <\bar{x}(t)x(t)> = \Theta(0) = \alpha
+\end{equation}
+and thus $\alpha = 0$ is more convenient for explicit perturbation expansions. 
+
+\subsection{The dirty way for Ito}
+
+Let's be bold and write 
+\begin{equation}
+    \dot{x} =^0 f + g\eta 
+\end{equation}
+solution of $x[\eta]$ and compute 
+\begin{equation}
+    <A(x(t_{\text{obs}}))> = \int \mathcal{D}\eta ~e^{-\int \frac{\eta^2}{2}} A(x[\eta](t_{\text{obs}})) \times \int \mathcal{D}x \int \mathcal{D}\bar{x} e^{-\bar{x}(\dot{x} - f- g\eta)}
+\end{equation}
+integrating $\eta$ out, 
+\begin{equation}
+    <A> = \int \mathcal{D}\bar{x}\mathcal{D}x A(x) e^{-\mathcal{S}}
+\end{equation}
+with 
+\begin{equation}
+    \mathcal{S} = \int \bar{x}(\dot{x} - f) - \frac{g^2}{2}\bar{x}^2
+\end{equation}
+
+\subsection{Onsager-Machlup functorial}
+When $g$ is a constant, the $\bar{x}$ field is not necessarily needed, and we can expess averages in terms of the physical field only 
+\begin{equation}
+    \mathcal{S} =^\alpha \int \frac{(\dot{x} - f)^2}{2g^2} + \alpha f'
+\end{equation}
+This is known as the Onsager-Machlup functional. 
+
+\section{Quantum Langevin equation}
+
+\subsection{Some questions}A
+At the classical level, we derived that 
+\begin{equation}
+    m\dot{\dot{x}} = -V'(x) - \gamma \dot{x} + \sqrt{2\gamma T}\eta
+\end{equation}
+How to quantize this? We start with a quantum system with Hamiltonian 
+\begin{equation}
+    \mathcal{H} = \mathcal{H}_0(\vec{R}, \vec{P}) + \mathcal{H}_b 
+\end{equation}
+and interactions between the bath and the particles. We introduce some simplifying assumptions. In quantum mechanics, 
+\begin{equation}
+    \frac{\text{d}\vec{R}}{\text{d}t} = \frac{i}{\hbar}[\mathcal{H}, vec{R}] = \vec{P}/M
+\end{equation}
+assuming $\mathcal{H}_0 = \frac{vec{P}}{2M} + V(\vec{R})$. We also have 
+\begin{equation}
+    \frac{\text{d}\vec{P}}{\text{d}t} = \frac{i}{\hbar}[\mathcal{H}, \vec{P}] = -\frac{\partial V}{\partial \vec{R}} - \sum_i k_i(\vec{R} - \vec{r}_i)
+\end{equation}
+with 
+\begin{equation}
+    \frac{\text{d}\vec{r}_i}{\text{d}t} = \vec{p}_i/m_i
+\end{equation}
+etc etc etc we continue with computations see the notes, at the end we find 
+\begin{equation}
+    <\xi(t)\xi(t') + xi(t')xi(t)> = \sum_j \frac{\hbar}{2m_j \omega_j} \text{coth}(\frac{\beta \hbar \omega_j}{2})\cos (\omega_j(t-t'))
+\end{equation}
+If we want to say more, we have to explain what the $k_i, m_i, \omega_i$'s are
 \chapter{Time-reversal}
 
+\section{Defining equilibrium}
+\subsection{Statistical mechanics with trajectories}
+We return to a description in terms of a master equation 
+\begin{equation}
+    \partial_t P(C, t) = \sum_{C'} W(C' \rightarrow C)P(C', t) - r(C)P(C, t)
+\end{equation}
+and we have seen that 
+\begin{equation}
+    P[\text{traj}] = P_0(C_0) \delta(t_{\text{obs}} - \sum_{j=0}^k \tau_j) e^{-\sum_j r(C_j)\tau_j}\prod_j W(C_j \rightarrow C_{j+1})
+\end{equation}
+
+is the probability density to observe a time realization
+\begin{equation}
+    C_0 \rightarrow^{\tau_0} C_1 \rightarrow \dots \rightarrow C_K \rightarrow^{\tau_K} C_K
+\end{equation}
+and 
+\begin{equation}
+    \bar{Q}[\text{traj}] = \ln(\frac{P[\text{traj}]}{P[\text{traj}^R]})
+\end{equation}
+\begin{equation}
+    Q_S[\text{traj}] = \sum_j \ln{\frac{W(C_j \rightarrow C_{j+1})}{W(C_{j+1} \rightarrow C_j)}}
+\end{equation}
+If we introduce 
+\begin{equation}
+    S(t) = -\sum_C P(C, t) \ln P(C, t)
+\end{equation}
+then 
+\begin{equation}
+    \frac{\text{d}S}{\text{d}t} = \sigma_{\text{irr}} - J_S, \quad \sigma_{\text{irr}} \geq 0, \quad J_s = \frac{\text{d}}{\text{d}t}<Q_s>
+\end{equation}
+
+In a stationnary (steady) state, $\frac{\text{d}S}{\text{d}t} = 0$ hence 
+\begin{equation}
+    \sigma_{\text{irr}} = J_S \geq 0
+\end{equation}
+The steady-state is an equilibrium if and only if 
+\begin{equation}
+    \sigma_{\text{irr}} = J_S = 0
+\end{equation}
+ie 
+\begin{equation}
+    W(C \rightarrow C') P(C) = W(C' \rightarrow C) P(C') = 
+\end{equation}
+
+\subsection{The words and world of stochastic energetics}
+Let's introduce fluctuating observables
+\begin{equation}
+    \hat{S}(t) = -\ln(P(C(t), t))
+\end{equation}
+By construction, 
+\begin{equation}
+    <\hat{S}> = S
+\end{equation}
+Over a small time interval $[t, t+\Delta t]$
+\begin{equation}
+    \hat{S}(t + \Delta t) - \hat{S}(t) = -\ln \frac{P(C(t + \Delta t), t)}{P(C(t), t)} - \Delta t \frac{\partial_t P}{P}
+\end{equation}
+and averaging leads us back to $\frac{\text{d}S}{\text{d}t} = \sigma_{\text{irr}} - J_s$. 
+
+Equivalently, we can get a whole microscopic actually varying picture, for thermodynamics. We prove this way the second's principle, see the notes. 
 \chapter{Metastability}
 
 \chapter{Mean-field}

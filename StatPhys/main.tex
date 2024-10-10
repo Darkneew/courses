@@ -1135,7 +1135,282 @@ Over a small time interval $[t, t+\Delta t]$
 \end{equation}
 and averaging leads us back to $\frac{\text{d}S}{\text{d}t} = \sigma_{\text{irr}} - J_s$. 
 
-Equivalently, we can get a whole microscopic actually varying picture, for thermodynamics. We prove this way the second's principle, see the notes. 
+Equivalently, we can get a whole microscopic fluctuating picture for thermodynamics, see the notes for more details. For the second principle, we get 
+\begin{equation}
+    \bar{Q} = \Delta \hat{S} + Q_s
+\end{equation}
+Where 
+\begin{equation}
+    <\bar{Q}> = D_{KL}(P[\text{traj}]|P[\text{traj}^R]) \geq 0
+\end{equation}
+Equilibrium is defined as a steady state in which $<\bar{Q}> = 0$. This is equivalent to stating 
+\begin{equation}
+    <\bar{Q}> = <Q_s> = 0
+\end{equation}
+
+\subsection{Application to Langevin dynamics}
+
+In principle all proofs apply to 
+\begin{equation}
+    m\frac{\text{d}^2\vec{x}}{\text{d}t^2} = -\int M_R(t-t') \frac{\text{d}\vec{x}}{\text{d}t'} + \vec{F}_{\text{ext}} + \vec{\eta}
+\end{equation}
+with
+\begin{equation}
+    <\eta^\alpha (t) \eta^\beta(t')> = TM_C(t - t') \delta^{\alpha\beta}
+\end{equation}
+But for simplicity we restrict ourselves to 
+\begin{itemize}
+    \item The overdamped limit 
+    \item The Markov limit $M_R, M_C \propto \delta$
+\end{itemize}
+Such that this simplifies to 
+\begin{equation}
+    \gamma \dot{\vec{x}} = \vec{F}_{\text{ext}} + \sqrt{2T\gamma'}\vec{\xi}
+\end{equation}
+with 
+\begin{equation}
+    <\xi^\alpha (t) \xi^\beta(t')> = \delta(t - t') \delta^{\alpha\beta}
+\end{equation}
+Let's write $P[\text{traj}]$ over $[0, t_{\text{obs}}]$. 
+\begin{equation}
+    P[\vec{x}] = P_{\text{init}}(\vec{x}(0)) e^{-\frac{1}{4T\gamma'}\int_0^{t_{\text{obs}}}\text{d}t (\gamma \dot{\vec{x}} - \vec{F}_{\text{ext}})^2 - \frac{1}{2\gamma}\int_{0}^{t_{\text{obs}}}\text{d}t \vec{\nabla}\cdot \vec{F}_{\text{ext}}}
+\end{equation}
+The time reversed trajectory is 
+\begin{equation}
+    \vec{x}^R (t) = \vec{x}(t_{\text{obs}} - t)
+\end{equation}
+such that 
+\begin{equation}
+    P[\vec{x}^R] = P_{f}(\vec{x}(t_\text{obs})) e^{-\frac{1}{4T\gamma'}\int_0^{t_{\text{obs}}}\text{d}t (-\gamma \dot{\vec{x}} - \vec{F}_{\text{ext}})^2 - \frac{1}{2\gamma}\int_{0}^{t_{\text{obs}}}\text{d}t \vec{\nabla}\cdot \vec{F}_{\text{ext}}}
+\end{equation}
+We get 
+\begin{equation}
+    \begin{aligned}
+        \bar{Q}[\vec{x}] &= \ln\frac{P_{\text{init}}(\vec{x}(0))}{P_{f}(\vec{x}(t_\text{obs}))} -\frac{1}{4T\gamma'}\int_0^{t_{\text{obs}}}\text{d}t (\gamma \dot{\vec{x}} - \vec{F}_{\text{ext}})^2  - (-\gamma \dot{\vec{x}} - \vec{F}_{\text{ext}})^2 \\
+        &= \ln\frac{P_{\text{init}}(\vec{x}(0))}{P_{f}(\vec{x}(t_\text{obs}))} + \frac{\gamma}{\gamma '}\frac{1}{T}\int_0^{t_{\text{obs}}} \text{d}t \dot{\vec{x}} \cdot \vec{F}_{\text{ext}}
+    \end{aligned}
+\end{equation}
+If $\vec{F}_{\text{ext}} = -\vec{\nabla}V$ is conservative, then 
+\begin{equation}
+    \bar{Q} = \ln\frac{P_{\text{init}}(\vec{x}(0))}{P_{f}(\vec{x}(t_\text{obs}))} + \frac{\gamma}{\gamma '}\frac{1}{T}\left[V(\vec{x}(t_\text{obs})) - V(\vec{x}(0))\right]
+\end{equation}
+In a steady state, $P_i = P_f = P_ss$ and thus 
+\begin{equation}
+    \bar{Q} = \ln P_{ss}(\vec{x}(0))  + \frac{\gamma}{\gamma '}\frac{1}{T}V(\vec{x}(t_\text{obs})) - \ln P_{ss}(\vec{x}(t_\text{obs})) - \frac{\gamma}{\gamma '}\frac{1}{T}V(\vec{x}(0))
+\end{equation}
+And thus if there is equilibrium then 
+\begin{equation}
+    P_{ss}(\vec{x}) = \frac{e^{-\frac{V(\vec{x})}{T}}}{Z}
+\end{equation}
+and $\gamma = \gamma '$ is a property of the thermostat. \par \medskip 
+
+Let's now use again $\gamma' = \gamma$, but $\vec{F}_{\text{ext}}$ not necessarily conservative 
+\begin{equation}
+    \bar{Q} = \left[\ln P_{ss}(\vec{x}(0)) - \ln P_{ss}(\vec{x}(t_{\text{obs}}))  \right] + \frac{1}{T} \int_{0}^{t_{\text{obs}}} \text{d}t ~\dot{\vec{x}}\cdot \vec{F}_{\text{ext}}
+\end{equation}
+where we recognize the first term to be $\Delta \hat{S}$ and the second one to be $Q_s$. Hence, $TQ_s$ is the work done by $\vec{F}_{\text{ext}}$ on the system over $[0, t_{\text{obs}}]$.\par 
+But $-\gamma \dot{\vec{x}} + \sqrt{2\gamma T}\vec{\xi} + \vec{F}_{\text{ext}} = \vec{0}$, so writing $\vec{F}_b = -\gamma \dot{\vec{x}} + \sqrt{2\gamma T}\vec{\xi}$ the force of the bath on the system, we have 
+\begin{equation}
+    \vec{F}_{\text{ext}} = -\vec{F}_{\text{b}}
+\end{equation}
+The force of the system on the thermostat. We see
+\begin{equation}
+    Q_s = \frac{1}{T}\int_{0}^{t_{\text{obs}}} \text{d}t ~\dot{\vec{x}} \cdot (-\vec{F}_b)
+\end{equation}
+is equal to the heat given out by the thermostat divided by $T$. In a steady state, 
+\begin{equation}
+    J_s = <\dot{Q}_s> = \frac{1}{T}<\dot{\vec{x}}\cdot \vec{F}_{\text{ext}}> \geq 0
+\end{equation}
+\subsection{Consequences of equilibrium for the evolution operator}
+At the master equation level, assuming equilibrium dynamics means that the rates $W$ statisfy 
+\begin{equation}
+    W(C\rightarrow C')P_{\text{eq}}(C) = W(C'\rightarrow C)P_{\text{eq}}(C')
+\end{equation}
+This has a direct consequence for $W$: 
+\begin{equation}
+    W_s = PWP^{-1}
+\end{equation}
+where $P_{CC'} = P_{\text{eq}}(C)\delta_{CC'}$
+\begin{equation}
+    \begin{aligned}
+        W_{s~CC'} &= W(C' \Rightarrow C)\sqrt{\frac{P_{\text{eq}}(C')}{P_{\text{eq}}(C)}} \quad \text{if }C\neq C'\\
+        &= -r(C) \quad \text{if }C=C'
+    \end{aligned}
+\end{equation}
+
+\begin{equation}
+    W_{s~CC'} = \sqrt{W(C\rightarrow C')W(C'\rightarrow C)} - r(C)\delta_{CC'}
+\end{equation}
+We see here that $W_s = W_s^\dagger$ is symmetric, so its spectrum, or the one of $W$, is real. There is a definite smell of quantum mechs. But 
+\begin{itemize}
+    \item There is no $i$
+    \item state vector $\propto$ prob
+\end{itemize} 
+See Cardy, 96. \par \bigskip 
+
+To be more concrete, let's have a look at at an overdamped Langevin equation. 
+\begin{equation}
+    \frac{\text{d}\vec{x}}{\text{d}t} = -\vec{\nabla} V + \sqrt{2T}\vec{\eta}, \quad \gamma = 1
+\end{equation}
+\begin{equation}
+    Wp = \partial_t p = \vec{\nabla}\cdot (\vec{\nabla} Vp) + T\vec{\nabla}^2 p
+\end{equation}
+We have $W^\dagger \neq W$, but 
+\begin{equation}
+    W_s = T\vec{\nabla}^2 - \frac{1}{4T}(\vec{\nabla}V)^2 + \frac{1}{2}\Delta V 
+\end{equation}
+The evolution equation for 
+\begin{equation}
+    \tilde{p}(\vec{x}, t) = P_{eq}^{-1/2} p(x, t)
+\end{equation}
+reads 
+\begin{equation}
+    \begin{aligned}
+        \partial_t \tilde{p} &= W_s \tilde{p} \\ 
+        &= \text{nooo he erased}
+    \end{aligned}
+\end{equation}
+Funnily, there is some physical meaning to the combination 
+\begin{equation}
+    r(\vec{x}) = \text{cst} + \frac{(\vec{\nabla}V)^2}{4T} - \frac{\Delta V}{2}
+\end{equation}
+is the rate at which the particle escapes from location $\vec{x}$, where the constant term diverges but represents the brownian motion, which has no knowledge of the energetic background and which eventually doesn't really matter. 
+
+\section{Consequences of time reversibility}
+
+\subsection{The fluctuation-dissipation theorem at the level of a master equation}
+
+The starting point is a master equation with rates $W_0(C \rightarrow C')$ respecting detailed balance property with respect to $P_{eq}(C)$. 
+\begin{equation}
+    r_0(C) = \sum_{C'} W_0(C \rightarrow C') 
+\end{equation}
+is the escape rate in equilibrium. This defines the unperturbed dynamics. We now add a perturbation 
+\begin{equation}
+    W(C \rightarrow C') = W_0 (C \rightarrow C') e^{\frac{\beta}{2}h(t)[A(C) - A[C']]}
+\end{equation}
+where $h$ depends on time ($h$ small, $h(t<0) = 0$) and $A$ is some observable. If $h$ were a constant, we would have detailed balance with respect to $P_{eq}e^{\beta h A}$, $H = H_0 - hA$. So changing the rates this way just correspond to adding a small varying field, $hA$. \par \medskip 
+
+The goal is to study 
+\begin{equation}
+    \frac{\delta<B(t)>_h}{\delta h(t')}\Bigg|_h = R(t, t')
+\end{equation}
+the response of $B$ at time $t$ for a perturbation of $A$ at time $t'< t$. \par \medskip 
+
+We need to compute 
+\begin{equation}
+    <B>_h - <B>_{h=0}
+\end{equation}
+and identify $R$ such that 
+\begin{equation}
+    <B>_h^{(t)} - <B>_0^{(t)} = \int^t \text{d}t'~ R(t, t')h(t')
+\end{equation}
+The master equation reads for small $h$
+\begin{equation}
+    \partial_t P = (W_0 + \delta W)P
+\end{equation}
+with 
+\begin{equation}
+    \delta W_{CC'} = W_0(C'\rightarrow C)\frac{\beta h}{2} [A(C) - A[C']] -\delta r(c)\delta_{CC'}
+\end{equation}
+\begin{equation}
+    \delta r(C) =\frac{\beta h}{2} \sum_{C'} W_0(C\rightarrow C')(A(C') - A[C])
+\end{equation}
+So
+\begin{equation}
+    P = P_{eq} + \delta P, \quad \partial_t \delta P = W_0 \delta P + \delta W P_{eq} 
+\end{equation}
+We want $\delta P$ because 
+\begin{equation}
+    \begin{aligned}
+        \delta <B> &= <B>_h (t) - <B>_0 (t)\\
+        &= \sum_C \delta P(C, t) B(C)
+    \end{aligned}
+\end{equation}
+and we see that 
+\begin{equation}
+    \delta P_C = \int_{0}^{t}\text{d}t'~ (e^{W_0(t-t')})_{CC'} \delta W_{C'C''}P_{eq}(C'') 
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        \delta W_{C'C''} = -&\frac{\beta h}{2}W_{0~C'C''}A(C'') + \frac{\beta h}{2}W_0 (C'' \rightarrow C')A(C') \\
+    &- \frac{\beta h}{2}\delta_{C'C''}\sum_{C'''} W_0 (C'\rightarrow C''')A(C''')
+    \end{aligned}
+\end{equation}
+Such that 
+\begin{equation}
+    \begin{aligned}
+        \delta <B> = -&\frac{\beta}{2} \sum_{CC'C''} \int_{0}^{t}\text{d}\tau ~ h(\tau) B(C)[e^{W_0(t - \tau)}]_{CC'}W_{0~C'C''} A(C'')P_{eq}(C'')   \\ 
+    &- \frac{\beta}{2}\sum_{CC'C''} \int_{0}^{t}\text{d}\tau ~ B(\tau)[e^{W_0(t - \tau)}]_{CC'}W_{0~C'C''}\delta r(C', \tau) P_{eq}(C')
+    \end{aligned}
+\end{equation}
+We have 
+\begin{equation}
+    R(t, t') = -\frac{\beta}{2} \frac{\text{d}}{\text{d}t}<B(t)A(t')> - \frac{\beta}{2}<B(t)\delta r(t')>
+\end{equation}
+"extended fluctuation -dissipation theorem". If we use detailed balance, the second piece simplifies into $-\frac{\beta}{2} \frac{\text{d}}{\text{d}t}<B(t)A(t')>$ so that 
+\begin{equation}
+    R(t, t') =-\beta \frac{\text{d}}{\text{d}t}<B(t)A(t')>
+\end{equation}
+this is the real fluctuation dissipation theorem, with 
+\begin{equation}
+    <B(t)A(0)> = \sum_{CC'}B(C)[e^{W_0(t - \tau)}]_{CC'}A(C') P_{eq}(C')
+\end{equation}
+There are several remarkable features. 
+\begin{itemize}
+    \item in equilibrium there is time translation invariance, ie $$C_{BA}(t, t') = <B(t)A(t')> = C_{BA}(t-t') = C_{BA}(t'-t)$$
+    \item $R$ is also time translation invariant: $R(t, t') = R(t-t')$
+\end{itemize}
+\begin{equation}
+    R(\tau) - R(-\tau) = -\beta \frac{\text{d}C}{\text{d}\tau}
+\end{equation}
+The FDT (fluctuation dissipation theorem) expresses that the relaxation rate of an equilibrium fluctuation is identical to the response of the system to a small external perturbation. \par \medskip 
+The FDT $R = -\beta C$ depends neither on $A$ nor on $B$, and there exists a universal number 
+\begin{equation}
+    T = \frac{1}{\beta} = -\frac{\dot{C}}{R} = \text{temperature}
+\end{equation}
+There are generalizations to non-linear response. 
+
+\subsection{The FDT at the level of a Langevin equation}
+Let's start from 
+\begin{equation}
+    \dot{x} = -V' + f + \sqrt{2T}\eta 
+\end{equation}
+with $f$ a small external force at $t \geq 0$. We ask again about 
+\begin{equation}
+    R(t, t') = \frac{\delta <B(t)>}{\delta f(t')}\Bigg| _{f=0}
+\end{equation}
+We know that 
+\begin{equation}
+    <B> = \int \mathcal{D}x B(x(t)) e^{-\frac{1}{4T}\int (\dot{x} + V' - f)^2}
+\end{equation}
+we compute 
+\begin{equation}
+    R(t, t') = \frac{\delta<B(t)>}{\delta f(t')} = \frac{1}{2T}<B(x(t))(\dot{x}+V')(t')>
+\end{equation}
+and
+\begin{equation}
+    R(-t, -t') = \frac{1}{2T}<B(-t)(\dot{x} + V')(-t')>
+\end{equation}
+such that we can write
+\begin{equation}
+    R(t, t') - R(-t, -t') = -\frac{1}{T}\frac{\text{d}}{\text{d}t} C(t-t')
+\end{equation}
+with $C(t-t') = <B(t)x(t')>$
+It turns out that if 
+\begin{equation}
+    \dot{x} = F + \sqrt{2T}\eta
+\end{equation}
+with $F$ not necessarily conservative, then one can apply a perturbation $f\rightarrow 0$, and then define $R$ and $C$ in the same way 
+\begin{equation}
+    \begin{aligned}
+        J_s &= \frac{1}{T}<\dot{x} F> = \text{entropy production rate} \\ 
+        &= \lim_{t \rightarrow 0} \frac{\text{d}}{\text{d}t} (TR(t) + \dot{C}(t))
+    \end{aligned}
+\end{equation}
+Harada-Sasa, PRL 2005
+
+\section{Fluctuation theorems}
+
 \chapter{Metastability}
 
 \chapter{Mean-field}

@@ -650,4 +650,92 @@ In 3D, the Ising model has only 2 relevant perturbations, $\delta T$ and $h$. \p
 
 Interesting consequence for models that do not have microscopic $\mathbb{Z}_2$ but which have 2 experimental tuning parameters. Even though we cannot reach the critical point directly (we cannot have the $\mathbb{Z}_2$ symmetry microscopically), we can fix ourselves on the critical surface, which will flow to the critical point (we will have the $\mathbb{Z}_2$ symmetry macroscopically). 
 
+\subsection{Scaling operators}
+
+Remember the idea of scaling variables. We start with 
+\begin{equation}
+    \begin{aligned}
+        \mathcal{H} &= K_1 \sum SS + K_2 \sum SSS + \dots \\
+        &= H_*[S] + \sum_i K_i \sum \dots
+    \end{aligned}
+\end{equation}
+And linearizing the action of the RG on $\delta K_i$, we have 
+\begin{equation}
+    \delta K' = T\delta K
+\end{equation}
+We can change the coordinates $\delta K_i \rightarrow u_\alpha = M^{-1}_{\alpha i}\delta K_i$ to diagonalize the transformation, ie 
+\begin{equation}
+    u'_\alpha = b^{y_\alpha}u_\alpha
+\end{equation}
+We then have 
+\begin{equation}
+    \begin{aligned}
+        \mathcal{H} &= H_*[S] + \sum_\alpha u_\alpha \sum_r O_\alpha (r)
+    \end{aligned}
+\end{equation}
+where $r$ is the sum over positions, and $O_\alpha$ is a somewhat local operator in the spins near $r$. \par \medskip 
+
+The $O_\alpha$ are called the scaling operators. They have simple behaviour under the RG, and simple correlation functions. Good basis of operators at fixed points. \par \medskip 
+
+Consider a coarse graining by a factor $b$. $R = r/b$. $O_\alpha'(R)$ is some function but of $S'$ instead of $S$. 
+\begin{theorem}
+    \begin{equation}
+        O_\alpha(r) \sim b^{-x_\alpha} O_\alpha'(R)
+    \end{equation}
+    \begin{itemize}
+        \item $x_\alpha$ is the scaling dimension of $O_\alpha$
+        \item $\sim$: equivalent for correlation fnctions at distances >> lattice spacing 
+        \item $x_\alpha = d - y_\alpha$ 
+    \end{itemize}
+\end{theorem}
+\begin{example}
+    Previous Ising calculation . Within our approx, $h$ was a scaling variable and the corresponding scaling operator was just $S_r$. We found that 
+    \begin{equation}
+        <S_r>_{S'_R} = \gamma S'_R
+    \end{equation}
+    In correlation function, $S_r \sim \gamma S_R'$. Thus at large distance, 
+    \begin{equation}
+        <S_r S_{r'}> \sim \gamma^2 <S_R S_{R'}>
+    \end{equation}
+\end{example}
+
+\subsection{Relation between RG eigenvalues $y_\alpha$ and scaling dimensions $x_\alpha$}
+\begin{equation}
+    O_\alpha(r) = b^{-x_\alpha}O'_\alpha(R)
+\end{equation}
+is consistent if and only if $x_\alpha = d-y_\alpha$. 
+\begin{example}
+    \begin{equation}
+        O(r) = S_r\qquad u=h
+    \end{equation}
+    Previously we found $b^y = 3\gamma$, but $3 = b^d$ and $\gamma = b^{-x}$
+\end{example}
+
+\subsection{off-cricitcal correlators, "scaling forms"}
+
+\begin{equation}
+    G^{\text{lattice}}(r, T) \simeq G(r, u_t)
+\end{equation}
+we ignore irrelevant couplings, $u_t \propto T- T_c$
+\begin{equation}
+    G(r, u_t) = b^{-2x_\alpha}G(r/b, b^{y_\alpha}u_t)
+\end{equation}
+
+We can see better the solution by setting $b=r$. Claim: it is a function of $r/\xi(u_t)$, with 
+\begin{equation}
+    \xi(u_t) = u_t^{-\frac{1}{y_\alpha}}
+\end{equation}
+\begin{equation}
+    u_t = \xi ^{-y_\alpha}
+\end{equation}
+So 
+\begin{equation}
+    G_\alpha (r, T) = r^{-2x}H(T/\xi(T))
+\end{equation}
+with 
+\begin{equation}
+    \frac{c}{|T-T_c|^\nu}
+\end{equation}
+
+
 \end{document}

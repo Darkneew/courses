@@ -1411,8 +1411,164 @@ Harada-Sasa, PRL 2005
 
 \section{Fluctuation theorems}
 
-\chapter{Metastability}
+\subsection{Gallaroti-Cohen theorem}
 
+Master eq, rates $W(C \rightarrow C')$
+\begin{equation}
+    Q_s [\text{traj}] = \sum_{j=0}^{K-1} \ln \frac{W(C_j \rightarrow C_{j+1})}{C_{j+1} \rightarrow C_j}
+\end{equation}
+where the trajectory extends over $[0, t_{obs}]$ with $K$ changes of config. We see that, with steady state, 
+\begin{equation}
+    <K> = <r(C)t_{obs}>
+\end{equation}
+where $<r(C)> = \sum_C r(C) P_{ss}(C)$. We also expect $Q_s$ to be extensive in $t_{obs}$ (unless we are in equilibrium because then $<Q_s> = 0$). We shall be interested in 
+\begin{equation}
+    Prob \{Q_s(t_{obs}) = Q_s\}
+\end{equation}
+and we expect 
+\begin{equation}
+    \lim_{t \rightarrow \infty} \frac{\ln P(Q_s, t)}{t} = \pi(q), \qquad q = \frac{Q_s}{t}
+\end{equation}
+meaning $P(Q_s, t) \sim e^{\pi(q)t}$
+The function $\pi(q)$ which is defined in this way, if it exists, is called a large derivatiom function. We are after a property of $\pi(q)$. \par \medskip 
+
+Simai, Pruelle, Bowen, "Le formalisme thermodynamique" \par \medskip 
+
+We have 
+\begin{equation}
+    \partial _t P(C, Q_s, t) = \sum_{C'} W(C' \rightarrow C) P(C', Q_s - \ln\frac{W(C' \rightarrow C)}{W(C \rightarrow C')}, t) - r(C)P(C, Q_s, t)
+\end{equation}
+We can Laplace transform this equation to get 
+\begin{equation}
+    \partial_t \hat{P}(C, s, t)= \sum_{C'} \dots 
+\end{equation}
+where $\hat{P}(C, s, t) = \sum_{Q_s} e^{-sQ_s}P(C, Q_s, t)$. We can rewrite things as
+\begin{equation}
+    \partial_t \hat{P} = \hat{W}(s)\hat{P}
+\end{equation}
+With 
+\begin{equation}
+    \hat{W}(s)_{CC'} = W(C' \rightarrow C)^{1-s}W(C \rightarrow C')^{s} - r(C)\delta_{CC'} - \dots 
+\end{equation}
+This $\hat{W}(s)$ is not a master equation operator. At large times, we thus expect that $\hat{P}(C, s, t)$ is going to be dominated by the largest eigenvalue $\psi(s)$ of $W(s)$. 
+\begin{equation}
+    \hat{P}(C, s, t) \simeq e^{\psi(s)t}\tilde{P}(C, s)
+\end{equation}
+We see that 
+\begin{equation}
+    \begin{aligned}
+        &W(s)^\dagger = W(1-s) \\
+        &W(0) = W
+    \end{aligned}
+\end{equation}
+such that $\psi(s) = \psi(1-s)$. But 
+\begin{equation}
+    \begin{aligned}
+        P(Q_s, t) &= \int \frac{\text{d}s}{2\pi i} e^{sQ_s}\hat{P}(s, t) \\ 
+        &= e^{t \max_s \{sq + \psi(s)\}}
+    \end{aligned}
+\end{equation}
+We thus find $\pi(q) = \max_s \{sq + \psi(s)\}$. But then
+\begin{equation}
+    \begin{aligned}
+        \pi(q) - \pi(-q) &= \max_s \{sq + \psi(s)\} - \max_s \{-sq + \psi(s)\} \\ 
+        &= \max_s \{sq + \psi(s)\} - \max_s \{-q + (1-s)q + \psi(1-s)\} \\ 
+        &= q
+    \end{aligned}
+\end{equation}
+This is the Gallavotti-Coehn theorem. It means that 
+\begin{equation}
+    \frac{P(Q_s, t)}{P(-Q_s, t)} \sim e^{Q_s}
+\end{equation}
+meaning that the probability of the system injecting energy back is exponentially rare, showing the truth and the quantity of truth of thermodynamics's second principle. 
+\subsection{Green Kubo and Onsager}
+$Q_A =$ integrated current of conserved quantity $A$. 
+
+\begin{equation}
+    \frac{<Q_A>}{t} = <\frac{\text{d}Q_A}{\text{d}t}> = J_A = \text{ current of } A
+\end{equation}
+$J_A =$ flux, $E_A =$ affinity. 
+The flux $J_A$ can be obtained by using $\phi$ if $\phi$ is known. In practice, 
+\begin{equation}
+    J_A = -\frac{\partial \phi}{\partial \lambda_A}\Bigg|_{\lambda_B = 0} = \frac{<Q_A>}{t}
+\end{equation}
+The fluctuations of $Q_A$ are also captured by $\phi$
+\begin{equation}
+    \begin{aligned}
+        \frac{<Q_A^2>_c}{t} &= \frac{\partial^2 \phi }{\partial \lambda_A^2}\Bigg|_{\lambda = 0} \\
+        \frac{<Q_AQ_B>_c}{t} &= \frac{\partial^2 \phi}{\partial \lambda_A \partial \lambda_B} \Bigg|_{\lambda = 0}
+    \end{aligned}
+\end{equation}
+
+If the $E_A$'s are very small, them the system is weakly out of equilibrium, and the fluxes are small. We can expand 
+\begin{equation}
+    J_A = \sum_B L_{AB}E_B + \sum_{B, C} M_{ABC} E_B E_C + \dots 
+\end{equation}
+where $L_{AB}$ are the Onsager coefficients, $L_{AB} = \frac{\partial J_A}{\partial E_B}\Bigg|_{E = 0}$
+\begin{equation}
+    \phi (\{\lambda_A, E_A\}) = \lim_{t \rightarrow +\infty } \frac{1}{t}\ln <e^{-\sum_A \lambda_A Q_A}>
+\end{equation}
+So 
+\begin{equation}
+    L_{AB} =  \frac{\partial^2 \phi}{\partial E_B \partial \lambda_A } \Bigg|_{\lambda = 0, E = 0}
+\end{equation}
+Using the GC symmetry of $\phi$, we see that 
+\begin{equation}
+    \frac{\partial^2 \phi }{\partial E_B \partial \lambda_A} \Bigg|_{\lambda = 0, E = 0} = \dots \text{(see notes)}
+\end{equation}
+Such that 
+\begin{equation}
+    L_{AB} = \frac{1}{2}\frac{\partial^2 \phi}{\partial \lambda_A \partial \lambda_B} \Bigg|_{\lambda = 0, E =0}
+\end{equation}
+or 
+\begin{equation}
+    L_{AB} = \frac{<Q_AQ_B>_c}{t}
+\end{equation}
+Of course $L_{AB} = L_{BA}$. We find 
+\begin{equation}
+    L_{AB} = \frac{1}{2}\int \text{d}\tau <j_A(\tau)j_B(0)>
+\end{equation}
+\chapter{Metastability and rare events}
+\section{Thermally activated events}
+\subsection{Motivations}
+
+There might be systems with a few different configurations, but with only one truly stable state. Finding the right "reduction coordinate" means finding how to project all the degrees of freedom onto one that will describe the physics of interest. \par\medskip 
+
+The typical transition time is $10^{-1}s$, while the decorrelation time of momenta is $10^{-12}s$. And the time it takes the molecule to diffuse over a distance of the order of its size $10^{-11}s$. This shows that a blind integration of the equations of motion will never allow one to observe the fluctuation between the different states.\par \medskip 
+
+We witness a similar phenomenon at a phase transition point. 
+
+\subsection{In practice: first passage}
+We adopt a super simplified picture, in one space dimension, where the relevant degree of freedom $x$ evolves according to 
+\begin{equation}
+    \frac{\text{d}x}{\text{d}t} = -\frac{\text{d}V}{\text{d}x} + \sqrt{2T}\eta
+\end{equation}
+with $V$ a potential given by [insert function with 2 wells at different heights] \par \medskip 
+
+We ask about how much time it takes to hop from $x_1$ to $x_2$ or to $x^*$. We expect this typical time $\tau_K$ to be given by 
+\begin{equation}
+    \tau_K \sim e^{\beta(V(x^*) - V(x_1))}
+\end{equation}
+This Arrehius form was established by Kramers. We know that the mean first passage time from $x_1$ to $x^*$, $\tau(x^*, x_1)$ is a solution of 
+\begin{equation}
+    -V'(x_1)\partial_{x_1} \tau + T \partial_{x_1}^2\tau = -1
+\end{equation}
+because 
+\begin{equation}
+    W_0 = \partial_x (V'\cdot) + T\partial^2_{x}\cdot
+\end{equation}
+and  
+\begin{equation}
+    W_0 = -V'\partial_x \cdot + T\partial^2_{x}\cdot
+\end{equation}
+The solution is given by 
+\begin{equation}
+    \tau(x^*, x_1) = \frac{1}{T}\int_{x^*}^{x_1}\text{d}x' e^{\beta V(x')}\int_{x'}^{x_1}\text{d}x ~ e^{-\beta V(x)}
+\end{equation}
+In the low temperature limit, 
+\begin{equation}
+    \tau(x^*, x_1) = \frac{2\pi e^{\beta (V(x^*) - V(x_1))}}{\sqrt{-V''(x^*)V''(x_1)}}
+\end{equation}
 \chapter{Mean-field}
 
 \chapter{Field theories}

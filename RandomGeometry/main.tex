@@ -1,0 +1,119 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{Random Geometry and Non-unitary QFT}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+Probleme de percolation. On se place sur une grille hexagonale, a $p=\frac{1}{2}$ probabilite critique, et on prend un amas infini qui rejoint les deux bords de l'univers. Plusieurs questions 
+\begin{enumerate}
+    \item Quelle est la longueur du bord de l'amas? $\sim L^{7/4}$ (trouve en 1986)
+    \item Quelle est la longueur du perimetre externe (si on saute par dessus les fjords)? $\sim L^{4/3}$ (trouve en 2000)
+    \item Quelle est la masse de l'amas? $\sim L^{91/48}$ (trouve en 1982)
+    \item Quelle est la masse de l'amas utile (le courant electrique peut passer dedans)? $\sim L ^{1,65...}$ (le nombre a une expression exacte depuis 2023, c'est un nombre transcendental)
+\end{enumerate}
+
+On cherche a generaliser le modele. On definit un etat par ses boucles (frontieres entre les cases colorees et non colorees). On peut ecrire le poid de chaque boucle $n$, et le poid de chaque trait de frontiere $K$. On a 
+\begin{equation}
+    Z = \sum_{\text{boucles}} n^{\# \text{boucles}} K^{\#\text{pas}}
+\end{equation}
+Puis on ajuste $K$ en fonction de $n$ pour etre a l'etat critique, $K(n)$. Mais on a un probleme: est ce que le modele est local? Comment l'ecrire proprement? La solution va passer par des algebres de boucles \par \medskip 
+
+\chapter{Approche de matheux}
+L'approche des mathematiciens est de se placer directement dans la limite du continu, et de considerer une courbe. Mais pour bien comprendre, regardons le modele d'Ising sur un reseau. Comment le definir? Il y a plusieurs manieres. 
+\begin{enumerate}
+    \item La premiere maniere est de regarder un reseau, placer un $+$ ou un $-$ sur chaque cellule, et de regarder les paroies entre les $+$ et les $-$. On a 
+    \begin{equation}
+        Z_{\text{Ising}} = \text{Tr}(e^{\beta J \sum_{<ij>}S_i S_j})
+    \end{equation}
+    avec $S_i = \pm 1$, et la trace prend la somme normalisee sur les differentes configurations. Dans ce modele, le cout d'un pas (d'une paroie) est $e^{-2\beta J}$
+    \item Il existe une autre maniere de faire, dual. Cette fois, imaginons que les spins sont places sur les sommets du reseau, au lieu de les placer sur les graphes. On remarque que $e^{\beta J S_iS_j} = \text{cosh}(\beta J) + S_i S_j \text{sinh}(\beta J) = \text{cosh}(\beta J) ( 1 + xS_iS_j)$. avec $x = \text{tan}(\beta J)$. Donc 
+    \begin{equation}
+        Z = \text{cosh}(\beta J)^N \text{Tr} \prod_{<ij>} (1 + x S_iS_j)
+    \end{equation}
+    Mais si il y a $i$ tel que $S_i$ apparait un nombre impair de fois, alors prendre la trace amene la contribution du graphe a 0. Si on regarde les graphes ou on colorie les $xS_iS_j$, alors la trace nous contraint a des soments avec un nombre pair d'arretes colores. Pour un reseau avec strictement moins de 4 voisins, ca laisse seulement la possibilite de 0 ou 2 voisins. On regarde donc les boucles. Remarquons qu'on regarde les memes boucles que dans la caracterisation d'au dessus. 
+    \begin{equation}
+        Z_{\text{Ising}} \propto \sum_{\text{boucles}} x^{\#\text{pas}}
+    \end{equation}
+    De ce point de vue, a $x<x_c$: peu de boucles, les boucles sont courtes. A $x = x_c$, la longueur de la plus grande boucle diverge. A $x > x_c$, autre cas d'un system critique: on tombe dans un modele de percolation a $x=1$. 
+\end{enumerate}
+Ou se trouve le point critique? Evidemment quand le parametre de developpement des deux approches est le meme, quand les deux developpements produisent la meme physique de boucles. On trouve $(\beta J)_c = \frac{1}{2}\log (1+\sqrt 2)$. \par \medskip 
+
+Fonction de correlation
+\begin{equation}
+    <S_{r_1} S_{r_2}> = \frac{\text{Tr}(S_{r_1} S_{r_2})\prod _{<ij>}e^{\beta J S_i S_j}}{Z}
+\end{equation}
+On regarde cette les fois configurations de boucles ou en plus, il y a un chemin de $r_1$ a $r_2$. \par \medskip 
+
+Processus d'exploration\newline 
+Regardons maintenant un reseau qui vit dans le demi plan $\mathbb{H}$. On fixe aussi tous les spins vivants sur le bord. On fixe l'origine, et on fixe d'un cote de l'origine les spins a $+1$ et de l'autre cote a $-1$. Enfait, en regardant la paroie partant de l'origine, on cree forcement un chemin infini auto-evitant qui ne peut jamais traverser le bord du plan. 
+
+\begin{theorem}[Conditionnement] Soit $\gamma_1$ la partie du chemin construite apres un certain nombre de pas. Alors, la distribution de probabilite sur le restant de la courbe, conditionnee par $\gamma_1$, est egale a la distribution de probabilite pour une courbe dans $\mathcal D \ \gamma_1$, avec $\mathcal{D}$ le domaine initial de propagation du chemin.
+\end{theorem}
+
+Regardons maintenant le modele $O(n)$, definit par 
+\begin{equation}
+    Z_{O(n)} = \sum_{\text{boucles}} x^{\#\text{pas}} n^{\#\text{boucles}}
+\end{equation}
+On peut montrer que $x_c = (2 \pm \sqrt{2-n})^{-2}$. Il y a deux points critique, pour $x_c = (2 + \sqrt{2-n})^{-2}$ on obtient un point critique repulsif (sous le groupe de renormalization, a $n$ fixe), correspondant au model d'Ising pour $n=1$. De l'autre cote, pour $x_c = (2 - \sqrt{2-n})^{-2}$ on obtient un point critique attractif (sous le groupe de renormalization a $n$ fixe), correspondant a la percolation pour $n=1$. \par \medskip 
+Pour $n=0$, on a pas de boucle, juste une courbe de dimension fractale. Ca correspond a un polymere. Pour $n=2$, on peut imaginer que les boucles sont orientees et on retrouve des boucles de poid 1 (vu que deux orientations possibles donnent un poid de 2). Dans ce cas, on peut imaginer que les boucles correspondent a une carte topographique, ou l'orientation signifie que le niveau descend a droite quand on va dans le sens de la fleche. On obtient donc un relief. En prenant la limite du continu et en supposant que le niveau varie de moins en moins plus la taille du systeme grandit, on obtient un relief montagneux aleatoire = un champ gaussien libre du point de vue de matheux (pour nous physiciens c'est un champs bosonique libre). Un autre cas interessant (mais ca tue les matheux) c'est le cas $n=-2$. Si on prend cette theorie dans le continue et qu'on regarde les fonctions de green, on se rend compte que notre theorie correspond a une loop-erased random walk. (une marche aleatoire mais ou on efface qd on fait une boucle). C'est aussi equivalent a un tas de sable abelien. (on a une assiette et on peut empiler des grains sur chaque site, mais qd on a une pile qui depasse de 4 (nb de voisins du site) sur un site ca se repartit sur les sites autours). \par \medskip 
+
+Autre generalisation du modele d'Ising. \newline 
+Cette fois, on prend un reseau carre, et on prend 
+\begin{equation}
+    Z_{\text{Potts}} = \text{Tr}(e^{\beta J \sum_{<ij>}\delta_{\sigma_i \sigma_j}})
+\end{equation}
+avec $\sigma_i = 1,\dots , Q$. Pour Q = 2, on a Ising. En remarquant que 
+\begin{equation}
+    e^{\beta J \delta _{\sigma_i \sigma_j}} = 1 + (e^{\beta J} - 1)\delta _{\sigma_i \sigma_j}
+\end{equation}
+On peut regarder les graphes ou on trace une arrete si on place $\delta _{\sigma_i \sigma_j}$ sur ce site. On obtient 
+\begin{equation}
+    Z = \sum_{A \text{ graph}} (e^{\beta J} - 1)^{|A|} Q^{K(A)}
+\end{equation}
+ou $K(A)$ est le nombre de de composantes connexes de $A$. 
+On remarque ici qu'on peut oublier que $Q$ doit etre entier, et prendre n'importe quel $Q$ (please take $Q$ positif reel diront les matheux). $Q \rightarrow 1$ donne un modele de percolation d'arretes avec $e^{\beta J} - 1 = \frac{p}{1-p}$, $p\in [0,1]$. $Q = 2$ donne le modele d'Ising, n'importe quel $Q > 2$ donne un modele interessant, mais seulement $0\leq Q \leq 4$ donnera un point critique (de deuxieme ordre).\par \medskip
+De meme que la dualite entre haute et basse temperature du modele d'Ising, on a une dualite sur le modele de Potts en regardant des graphes sur le dual du reseau. Encore une fois, on se rend compte que le point critique est quand les duaux on le meme parametre, ce qui donne 
+\begin{equation}
+    e^{(\beta J)_c} - 1 = \sqrt{Q}
+\end{equation}
+On retrouve (mais par pure coincidence, c'est pas le meme reseau) que pour Ising on a $(\beta J)_c = \ln (1 + \sqrt{2})$. Pour $Q \rightarrow 0$, on trouve des UST (uniform spanning tree). 
+\end{document}

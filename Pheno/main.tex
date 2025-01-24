@@ -1,0 +1,177 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{Phenomenology of the Standard Model and Beyond}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+Mark goodshell : https://www.lpthe.jussieu.fr/~goodsell/ \par 
+Detailed notes can be found on the webpage 
+\par \medskip 
+
+We can bring whatever we want to the exam (computer, calculator, notes)\par \medskip 
+
+References 
+\begin{enumerate}
+    \item Quantum Field Theory and the Standard Model / Shwartz 
+    \item The Quantum Theory of Fields / Weinberg
+\end{enumerate}
+
+Interests of the prof: 
+\begin{enumerate}
+    \item Looking for new particles
+    \item Understanding the Higgs
+    \item Dark sectors (axions, hidden photons)
+    \item Building new models
+    \item Connecting theories to observations
+\end{enumerate}
+
+Aim of the course
+\begin{enumerate}
+    \item Connect theory and experiments
+    \item WHat experiments are done 
+    \item How can we test models 
+    \item What are the deficiencies of the standard model 
+\end{enumerate}
+
+What we may know 
+\begin{enumerate}
+    \item Fundamental matter particles are made of spin 1/2 fermions 
+    \item Electromagnetic force is carried by a spin 1 boson, the photon. QED describes well the interactions between a photon and an electron 
+    \item Protons and neutrons are composite states made of quarks, which are massive spin 1/2 fermions 
+    \item mesons are also quark composites
+\end{enumerate}
+
+Very few particles are stable. Maybe the proton is stable. Maybe a dark matter particle is too. Pgotons/gravitons/gluons are stable but have no conserved number, we can destroy or create them at no cost. \par \medskip 
+
+Very few particles are stable because to be stable, you need to have a conserved quantum number (protected by symmetry?). The quantum number protects the particle from decaying. The electron is stable for exemple because it is the lightest charged particle (?) \par \medskip 
+
+How to handle non-renormalisable QFTs? Baryons and mesons cannot be written with renormalisable field theories, so we need effective field theories. \par \medskip 
+
+
+\chapter{Particle physics}
+
+"The effect of a concept-driven revolution is to explain old things in a new way. The effect of a tool-driven revolution is to discover new things that have to be explained" Dyson \par \medskip 
+
+What are the limits of our colliders? The energy given to a beam during a revolution around a synchroton is 
+\begin{equation}
+    E \sim eBr
+\end{equation}
+with $r$ the effective radius, if the synchroton is not a real circle. In the end, the energy in the center of mass of the collision will be twice this energy, since we are colliding two beams together. On the other hand, we are loosing energy after each revolution. The power loss per revolution is derived from Lamor's formula
+\begin{equation}
+    E_{loss} = \frac{4\pi}{3}\alpha \frac{\bar{h}c}{r}\left(\frac{E}{m}\right)^4
+\end{equation}
+with 
+\begin{equation}
+    \alpha = \frac{e^2}{4\pi \varepsilon_0\bar{h}c} = \frac{1}{137}
+\end{equation}
+
+What kind of experiments do we do with accelerators? 
+\begin{enumerate}
+    \item Fixed target experiments: we smash particles in the wall. Large luminosity because we guarantee a hard interaction for each particle in the beam. However, low center of mass energy 
+    \item Colliding particles among each other. Mostly soft QED interactions, no hard interaction
+\end{enumerate}
+
+Let's talk about resonnance, unstable states and cross-sections. Consider a state 
+\begin{equation}
+    \psi (t) = \sum_n a_n(t) e^{-iE_n t} \psi_n
+\end{equation}
+We have thanks to Shrodinger's equation 
+\begin{equation}
+    \sum_n i (i\dot{a}_n - iE_n a_n )e^{-iE_n t}\psi_n = H \psi 
+\end{equation}
+Let's write 
+\begin{equation}
+    H_{mn} = \langle\psi_m|H|\psi_n\rangle \qquad H_{nn} \simeq E_n
+\end{equation}
+We have 
+\begin{equation}
+   i (i\dot{a}_n - iE_n a_n )e^{-iE_n t}\psi_n = \sum_m H_{mn} a_m e^{-iE_m t}
+\end{equation}
+Such that 
+\begin{equation}
+    i \dot{a}_n = \sum_{m\neq n} H_{mn} a_m e^{-i(E_m - E_n)t}
+\end{equation}
+Assuming $a_0$ is unstable, $a_0 \sim e^{-\frac{t}{2\tau}}$ where we put a factor 2 in the exponential to cancel the square that will come when taking the probability of the state. Let's consider the final state $f$
+\begin{equation}
+    i \dot{a}_f = H_{f0} e^{-\frac{t\Gamma}{2}} e^{-i(E_f - E_0)t}
+\end{equation}
+with $\Gamma = \frac{1}{\tau}$ the decay rate. Then solving and taking the limit at large time,
+\begin{equation}
+    a_f(t) \rightarrow \frac{H_{f0}}{E_f - E_0 + i\Gamma/2}
+\end{equation}
+How assume that there is a continuum of states. 
+\begin{equation}
+    1 = \int \text{d}E ~ \frac{n_f(E)|H_{f0}|^2}{(E_f - E_0)^2 + \Gamma^2 / 4} 
+\end{equation}
+with $n_f(E)$ the density of states. Recalling that 
+\begin{equation}
+    \frac{1}{(E_f - E_0)^2 + \Gamma^2 / 4} = N\delta(E_f - E_0)
+\end{equation}
+we find 
+\begin{equation}
+    \frac{2\pi n(E_0)}{\Gamma}|H_{fo}|^2 = 1
+\end{equation}
+We look at an incoming stable state $a+b$ turning into the stable state $f$, but turning into the unstable state $x^*$ in the middle of the process 
+\begin{equation}
+    a+b \rightarrow x^* \rightarrow f
+\end{equation}
+The stable state $x^*$ is $\psi_0$ corresponding to $a_0$. Supposing the incoming particle correponds to $a_1$ and comes in an infinite supply ($a_1 = 1$), solving the equations, we find 
+
+\begin{equation}
+    |a_0|^2 \rightarrow \frac{|H_{01}|^2}{(E_1-E_0)^2 + \Gamma^2/4}
+\end{equation}
+with $\frac{\text{d}N}{\text{d}t } = -\Gamma N$. Hence the production rate of $x^*$ is \begin{equation}
+    \frac{\Gamma|H_{01}|^2}{(E_1-E_0)^2 + \Gamma^2/4}
+\end{equation}
+But it is equal to the luminosity times the cross-section, $\sigma \times \frac{v}{V}$. We have the Breit-Wigner formula
+
+\begin{equation}
+\sigma(i\rightarrow x^* \rightarrow f) = \frac{\pi}{k^2}\frac{\Gamma_i \Gamma_f}{(E_1 - E_0)^2 + \Gamma^2/4}    
+\end{equation}
+
+
+
+\chapter{Effective field theories}
+\chapter{Beyond the standard model}
+
+
+\end{document}

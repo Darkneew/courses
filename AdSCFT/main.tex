@@ -1,0 +1,131 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{Intro to AdS/CFT correspondance}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+A duality is a relation between two theories with physically different degrees of freedom. AdS/CFT correspondance is a strong-weak coupling correspondance. \par \medskip 
+There are multiple kinds of dualities
+\begin{itemize}
+    \item A weak duality is a correspondance between physically and mathematically two different theories, where the correspondance exist only in a certain limit. 
+    \item A strong duality is a true equivalence between two theories, it is an isomorphism of theories. 
+\end{itemize}
+The AdS/CFT is a strong duality, between a theory in 10D with gravity and a theory in 4D without gravity. What would be a hint for a duality? If one theory has a global (not a gauge symmetry, since a gauge symmetry is unphysical) symmetry, then the other theory should also have it. \par \medskip
+
+We call it the AdS/CFT correspondance because even though we have many exemples now, the first exemple was the correspondance between a CFT in 4D and a theory on the spacetime $\text{AdS}_5 \times \mathbb{S}^5$, the product of a 5 dimensional Anti de Sitter space and a 5 dimensional sphere. \par \medskip 
+
+We don't need to take notes since the notes are on the moodle. 
+
+\chapter{Conformal invariance}
+The conformal Killing equation is 
+\begin{equation}
+    \partial_\rho \epsilon_\sigma + \partial_\sigma \epsilon_\rho = \frac{2}{d}(\partial^\mu \epsilon_\mu) \eta_{\rho\sigma}
+\end{equation}
+It defines a general Killing vector. 
+
+We can locally modify the stress-energy momentum tensor to make it symmetric, thanks to Loentz invariance. Moreover, 
+\begin{equation}
+    T_\mu^{~~\mu} = 0 \Leftrightarrow \text{ conformal invariance}
+\end{equation}
+Classically, this means also that all couplings are dimensionless, and reciprocally the dimensionless of all couplings imply conformal invariance. \par \medskip 
+
+How can we compute $T_\mu^{~~\mu}$ easily? Suppose we have a generic Lagrangian 
+\begin{equation}
+    \mathcal S = \int \text{d}^4 x \sum_i g_i \mathcal O_i (x)
+\end{equation}
+where the $O_i (x)$ are any monomial in the fields, which we will call operators. Let's assume that the operators have a given conformal weight $\Delta_i$. 
+\begin{equation}
+    x\rightarrow \lambda x \qquad \mathcal O_i \rightarrow \lambda^{-\Delta_i} \mathcal{O}_i
+\end{equation}
+The dimension of $g_i$ is $d-\Delta_i = \Delta_{g_i}$. Scale invariance is preserved iff $\Delta_{g_i} = 0$. \par \medskip 
+
+The spurion trick: we can take the $g_i$ to be dynamical fields (which are physically constants), which we pretend to have conformal weight $\Delta_{g_i}$. In this fake world, there is conformal invariance. It is equivalent to scale the coupling when we rescale the theory, which is trivially invariant under scale transformation. In this fake world, 
+\begin{equation}
+    0 = \delta S = \int \sum_{\text{fields}} \frac{\delta S}{\delta \phi_i(x)} \delta\phi_i(x) + \int \frac{\partial \mathcal L}{\partial g_i}\delta g_i ~\text{d}^dx
+\end{equation}
+which gives 
+\begin{equation}
+    T_\mu^{~~\mu} (x) = -\sum_i \Delta_{g_i} g_i \mathcal O_i(x)
+\end{equation}
+showing by how much scale invariance is broken locally. To get to this fake world, we can introduce a field $\mu$ transforming as 
+\begin{equation}
+    \begin{aligned}
+        x^\mu &\rightarrow \lambda x^\mu \\ 
+        \mu &\rightarrow \lambda^{-1}\mu 
+    \end{aligned}
+\end{equation}
+And then give a dependance of the coupling in $\mu$. 
+\begin{equation}
+    g_i(\mu) = g_i \left(\frac{\mu}{\mu_0}\right)^{-\Delta_{g_i}}
+\end{equation}
+But since $g_i(\mu)$ is fixed in the fake world (that is why we introduced the fake world in the first place), 
+\begin{equation}
+    \frac{\partial g_i}{\partial \text{log}(\mu)} = \Delta_{g_i} g_i \equiv \beta_i(g_i)
+\end{equation}
+We can obtain a dependance in $\mu$ of the coupling parameters in the real world too, with the right renormalization scheme (introduce a cutoff and cancel it by adding an interaction term, which normalizes the cutoff using $\mu$). Similarly, looking at $\delta Z$, we find 
+\begin{equation}
+    <T_\mu^\mu> = - \sum \beta_i(g_i)<\mathcal O_i>
+\end{equation}
+We name $\gamma = \frac{1}{g}\beta(g)$ the anomalous dimension. Theories with scalars or fermions can only have positive beta functions. What about theories with vectors, such as non abelian gauge theories? 
+
+\section{Non abelian gauge theories}
+
+Just like QED but we replace the $U(1)$ symmetry by a non abelian group. 
+\begin{equation}
+        \Phi^i (x) \rightarrow U^i_j (x) \Phi^j(x)
+\end{equation}
+THe Yang Mills action 
+\begin{equation}
+    \mathcal L = -\frac{1}{2}\text{Tr}(F_{\mu\nu}F^{\mu\nu})
+\end{equation}
+with
+\begin{equation}
+    F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu - ig [A_\mu, A_\nu ]
+\end{equation}
+THis describes a theory already interacting by itself. The theory is classically conformal invariant, and renormalizable (although it is hard to show that it is renormalizable). However, it is not conformal at the quantum level. In pure Yang-Mills, without any matter, 
+\begin{equation}
+    \beta (g) = -\frac{11}{3}g^3 \frac{N}{16\pi^2}
+\end{equation}
+where $N$ is the Casimir invariant. 
+
+\end{document}

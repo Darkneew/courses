@@ -1,0 +1,142 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{From the Hot Universe to the Dark Matter}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+Tout est sur le moodle \newline 
+Examen: presenter un article comme si on l'avait fait, slides etc \newline 
+Chaque cours est independant des autres. \par \medskip 
+
+Dark universe = tout ce qu'on voit pas (neutrino, matiere noire, primordial black holes (PBH), etc...)
+
+\chapter{Historical aspects of the dark matter}
+
+Don't hesitate to read historical articles. \newline
+It is important to smell the numbers \par \medskip 
+
+\section{Some numbers}
+
+The age of the (visible) universe: 13.8 billion years old (it is big and not big at the same time)  \newline
+Cosmological principle: everyone in the universe sees the same universe. \newline 
+The hubble law is the only law which preserves the cosmological principle\newline 
+When was produced the CMB (cosmological microwave background)? 380 000 years (after the big bang) \newline 
+What is the size of the Universe (radius of the universe): 93 billion light-years \newline 
+Can galaxies recede faster than light? Yes. The galaxy doesn't feel like receding faster than light, but it can through the added effects of a warping/everchanging spacetime. There is no limit on the warping of spacetime \newline 
+Cosmological horizon: horizon beyond which we cannot see light, because the metric extends so fast that the light doesn't move forward to us (the spacetime extends and pushes the light farther) \newline
+Value of the Hubble constant ~ 70km/s/Mpc \newline
+Anything at more than 10 Mpc recedes faster than they come to us to the gravity: they are not gravity bound. Andromeda is at 700kpc. In 40 million years, Everything which is not Andromeda nor us will cross the cosmological horizon. In 4 million years, the sun will explode but at approximately the same time, the Milky way will merge with Andromeda: it will become the Milkomeda \newline
+A parsec is ~3 lightyears \newline 
+Andromeda is the nearest galaxy, at around ~780kpc \newline
+THe Milky way has a size of around 60 000 lyrs, for a mass of $10^12$ the mass of the sun \newline
+Distance of the sun to the galaxy center: 8.5 kpc \newline 
+Velocity of the earth around the sun: 30km/s \newline 
+Velocity of the sun in the galaxy: 220km/s \newline 
+Velocity of the Galaxy in the Local cluster: 650 km/s \newline 
+Typical kinetic energy of a proton: $mv^2 ~ 1keV$ typical energy of a gas in a galaxy\newline 
+Mean density of photon in the Universe: 411 cm$^{-3}$ (so $~10^90$ photons in the universe)\newline 
+Density of protons around the sun 1 cm$^{-3}$ \newline 
+Density of protons in the Milky way $10^{-3}$ cm$^{-3}$ \newline 
+Density of protons between galaxies 1 m$^{-3}$ \newline 
+Mean density of baryons in the Universe 2,4 $\times$ $10^{-17}$ cm$^{-3}$ \newline 
+Density of DM around the sun $0.3$ GeV cm$^{-3}$ \newline 
+Mean density of DM in the Universe $10^{-6}$ GeV cm$^{-3}$ \newline 
+Mean density of neutrino in the Universe 112 cm$^{-3}$ \newline 
+Mass of the Higgs boson 125 GeV \newline 
+EW cross section $10^{-9}$ GeV$^{-2}$ \newline 
+Actual limit on DM direct detection \newline 
+$\sigma_{xp} \leq 10^{-46}$ cm$^{2}$ \newline 
+Number of protons in 1 gram of matter $\mathcal N_A \simeq 10^24$ \newline 
+Critical density $10^-5$ GeV cm$^{-3}$ \newline 
+Scale + time of $\Lambda$ dominance $10Mpc$ \newline 
+Density of proton in earth 1 g cm$^{-1}$ \newline 
+1 GeV in Kelvin : $10^13$ K\newline 
+Universe is 1000 times larger now than when the CMB was made. The size of the universe is inversely proportional to the temperature, the age of the universe is given by its temperature \newline 
+Is energy conserved in the universe? No \par \medskip 
+
+\section{History of observations}
+Different bits in the history of the universe 
+\begin{enumerate}
+    \item The inflation era, dominated by the inflaton. Inflaton scale is a little bit more than the planck scale. The Hubble rate is constant, the universe is exponentially expanding. The universe is dominated by the dark energy.  
+    \item The reheating era, where the inflaton is oscillating. Energy scale $10^19 \rightarrow 10^10$ GeV 
+    \item The thermal era, dominated by radiation, with energy scales $10^10\rightarrow 1$ GeV 
+    \item The neutrino and CMB era, from scale of the GeV to the eV, dominated by dark matter 
+    \item Then the quintissence, our current era, dominated by dark energy once again, with constant hubble rate and with exponentially expanding universe. 
+\end{enumerate}
+
+We usually have $P$ the pressure, $\rho$ the density of energy, and the equation of state is usually written in term of $W = P/\rho$. For matter, $P=0$, and we get a dilution of the field $\rho \propto \frac{1}{a^3}$. For radiation, $W = 1/3$ and we get an even bigger dilution $\rho \propto \frac{1}{a^4}$ which also gives a redshift. For inflaton/quintissence, $W=-1$, and $\rho \propto 1$. The Hubble rate $H=\frac{\dot{a}}{a}$, we have $H^2 = \frac{\rho}{3 M_p^2}$
+Inflaton scale is a little bit more than the planck scale. This is why the universe doesn't evolve the same way depending on the field considered. 
+
+\subsection{Poincare point of view}
+
+Proxima is the nearest sun, he knew the distance between the sun and proxima $R_s = 10^6 r_E$ where $r_E$ is the distance of earth to the sun. $\rho_s$ is the density of matter around the sun, $\rho_p$ the same around proxima. 
+\begin{equation}
+    \rho_s = \frac{M_s}{\frac{4}{3}\pi r_E^3}
+\end{equation}
+Writing the conservation of energy for the gravitational potential,
+\begin{equation}
+    v_E = \sqrt{\frac{8\pi G}{3}}\sqrt{\rho_S}r_E
+\end{equation}
+And we have the same for proxima around the galactic center. But noticing that in orders of magnitude, $v_s \sim v_E$, (where $v_S$ is the velocity of the sun and is approximately the same as the velocity of Proxima) we have 
+\begin{equation}
+    r_P = 10^9 r_E
+\end{equation}
+He thus computed the size of the galaxy. But knowing the density of stars (assuming the distance between the sun and proxima is an average distance between stars), he thus was able to compute the number of stars in the galaxy, $\sim 10^9$
+
+\chapter{An expanding Universe}
+
+\chapter{The inflaton field}
+
+\chapter{Reheating}
+
+\chapter{A thermal universe: FIMP and WIMP}
+
+\chapter{BBN, CMB and warm dark matter}
+
+\chapter{Direct detection}
+
+\chapter{Indirect detection}
+
+\chapter{Candidates}
+
+\end{document}

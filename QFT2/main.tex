@@ -1,0 +1,402 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{Quantum Field Theory 2}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Non-abelian gauge symmetry}
+
+\section{Introducing the gauge field}
+
+Let's consider a quantum field $\phi$ with the standard symmetry, transforming in a finite dimensional unitary representation $\mathcal U$ of a compact Lie group $G$. 
+\begin{equation}
+    \phi \rightarrow \mathcal U (g)\phi \qquad \text{for } g\in G
+\end{equation}
+Since it is finite dimensional, we can give the representation a finite index $i \in \mathbb{N}_d$
+\begin{equation}
+    \phi_i \rightarrow \mathcal U (g)_{ij}\phi_j \qquad \text{for } g\in G
+\end{equation}
+A potential term as $f(\phi^\dagger \phi)$ is invariant, as is a kinetic term $\partial_\mu \phi^\dagger \partial^\mu \phi$. \par \medskip 
+
+What if $g$ varies over space-time (what if the symmetry acts locally instead of globally)?  
+\begin{equation}
+    \phi(x) \rightarrow \mathcal U (g(x))\phi(x) \qquad \text{for } g\in G
+\end{equation}
+The potential term is still invariant, but something happens to the kinetic term due to the derivative. 
+\begin{equation}
+    \partial_\mu \phi(x) \rightarrow \mathcal{U}(g(x)) \partial_\mu \phi(x) + \left[\partial_\mu \mathcal{U}(g(x))\right] \phi(x)
+\end{equation}
+We would like to promote the symmetry to a global one, but the default derivative doesn't seem to make it work in general. We would like to modify the derivative $\partial_\mu$ to $\mathcal D_\mu$ such that 
+\begin{equation}
+    \mathcal D_\mu \phi (x) \rightarrow \mathcal{U}(g(x)) \mathcal D _\mu \phi(x)
+\end{equation}
+That is we want to take into account the symmetry in the geometry, or modify the symplectic structure to take into account the gauge degrees of freedom, or take secretly into account the coupling to the degrees of freedom in the kinetic term. To do so, we introduce a new field (the gauge field) $A_\mu$ and write\footnote{the conventions will change}
+\begin{equation}
+    \mathcal D _\mu = \partial_\mu - A_\mu
+\end{equation}
+We have 
+\begin{equation}
+    \mathcal D' _\mu \phi'(x) = (\partial_\mu - A'_\mu) \mathcal U (g)\phi = \mathcal U (g) \partial_\mu \phi + \left[\partial_\mu \mathcal{U}(g)\right] \phi - A'_\mu\mathcal U (g)\phi 
+\end{equation}
+But we want it to be equal to 
+\begin{equation}
+    \mathcal U(g) \mathcal D_\mu \phi = \mathcal U(g)(\partial_\mu - A_\mu )\phi
+\end{equation}
+Such that 
+\begin{equation}
+    \mathcal U (g)A_\mu = A'_\mu \mathcal U(g) - \partial_\mu \mathcal U (g)
+\end{equation}
+In other terms
+\begin{equation}
+    A'_\mu = \mathcal U (g)A_\mu\mathcal U ^{-1}(g) + \left[\partial_\mu \mathcal U (g)\right] \mathcal U ^{-1}(g)
+\end{equation}
+What kind of object is $A_\mu$? Using a matrix realization of the Lie algebra, considering 
+\begin{equation}
+    \text{exp} : \mathfrak g \rightarrow G
+\end{equation}
+We write (at least close to the identity) 
+\begin{equation}
+    \mathcal U(g) = e^{i\alpha^i(g)\tau_i}
+\end{equation}
+with $\tau^i$ a basis of $\mathfrak{g}$ in appropriate representation. 
+\begin{equation}
+    \left[\partial_\mu \mathcal U (g)\right] \mathcal U ^{-1}(g) = \left[\partial_\mu \alpha^i (g)\right]\tau_i
+\end{equation}
+So $A_\mu$ is Lie algebra valued, $A_\mu = A_\mu^i \tau_i$. Following physics conventions, we write the generators of the Lie algebra as $i \tau_i$ (since $\mathcal U$ is unitary, the $\tau_i$ are then hermitians, which is likeable). So the convention changes for $\mathcal D_\mu$
+\begin{equation}
+    \mathcal D_\mu = \partial_\mu - iA_\mu \quad \text{with  } A_\mu = A_\mu^i \tau_i
+\end{equation}
+Substituting using the new convention, we have 
+\begin{equation}
+    A'_\mu = \mathcal U (g)A_\mu\mathcal U ^{-1}(g) - i\left[\partial_\mu \mathcal U (g)\right] \mathcal U ^{-1}(g)
+\end{equation}
+Note that 
+\begin{equation}
+    \tau \rightarrow \mathcal U \tau \mathcal U ^{-1}
+\end{equation}
+is the adjoint action of the Lie group on the Lie algebra. \par \medskip 
+
+Now, let's rewrite things infinitesimally, for $\alpha = \alpha^i\tau_i$. 
+\begin{equation}
+    \mathcal U (g) A_\mu \mathcal U^{-1}(g) = A_\mu + i[\alpha, A_\mu] + O(\alpha^2)
+\end{equation}
+and 
+\begin{equation}
+    - i\left[\partial_\mu \mathcal U (g)\right] \mathcal U ^{-1}(g) = \partial_\mu \alpha^i(g)\tau_i
+\end{equation}
+Such that 
+\begin{equation}
+    A'_\mu = A_\mu + \partial_\mu \alpha + i[\alpha, A_\mu ]
+\end{equation}
+In compontents\footnote{There is no meaning to the height of the indices. They can be raised or lowered at will},
+\begin{equation}
+    \begin{aligned}
+        A^k_\mu \tau_k &\rightarrow A^k_\mu \tau_k + \partial_\mu \alpha^k \tau_k + i\alpha^i A^j_\mu [\tau_i, \tau_j] \\
+        &\rightarrow A^k_\mu + \partial_\mu \alpha^k - \alpha^i A^j_\mu C^k_{ij}
+    \end{aligned}
+\end{equation} 
+Notice how the last term vanishes when the Lie algebra is abelian. \par \medskip 
+
+$A^K_\mu$ is called the gauge field, $\mathcal D_\mu$ the gauge covariant derivative. An action (without $A_\mu$) with global symmetry group $G$ (ie the fields transform in a unitary representation of $G$) becomes invariant under a local symmetry with gauge group $G$ upon replacing $\partial_\mu \rightarrow \mathcal D_\mu$. This introduces the gauge field into the action. 
+
+\section{The kinetic term of the gauge field}
+
+Looking for gauge invariant $2^{nd}$ order in derivatives quadratic term in $A_\mu$. Consider $\mathcal D_\mu \mathcal D_\nu \phi$ for any field $\phi$ transforming in some representation of $G$. 
+\begin{itemize}
+    \item Includes a derivative of $A^\mu$
+    \item transforms nicely 
+\end{itemize}
+How do we get rid of $\phi$ in this term?
+\begin{equation}
+    \mathcal D_\mu \mathcal D_\nu \phi = \partial_\mu \partial_\nu \phi  - i(\partial_\mu A^k_\nu)\tau_k \phi - i  A^k_\nu \tau_k \partial_\mu \phi - i A^i_\mu\tau_i \partial_\nu \phi - A^i_\mu A^k_\nu \tau_i \tau_k \phi
+\end{equation}
+We can try to consider the commutator of the covariant derivatives 
+\begin{equation}
+    [\mathcal D_\mu, \mathcal D_\nu]\phi = \left(-i (\partial_\mu A^j_\nu - \partial_\nu A^j_\mu) - iA^i_\mu A^k_\nu C^j_{ik}\right)\tau_j \phi
+\end{equation}
+Hence $[\mathcal D_\mu, \mathcal D_\nu]$ is a matrix operator, in contrast to a derivative operator. We define 
+\begin{equation}
+    F_{\mu\nu} = i[\mathcal D_\mu, \mathcal D_\nu] 
+\end{equation}
+the field strength, for $\mathcal D_\mu$ in some representation. 
+\begin{equation}
+    F_{\mu\nu} = F_{\mu\nu}^k \tau_k = \left(-i (\partial_\mu A^k_\nu - \partial_\nu A^k_\mu) - iA^i_\mu A^j_\nu C^k_{ij}\right)\tau_k
+\end{equation}
+How does $F_{\mu\nu}$ transforms? 
+\begin{equation}
+    \mathcal D'_\mu \mathcal D'_\nu \phi' = \mathcal U (g) \mathcal D_\mu \mathcal D_\nu \phi 
+\end{equation}
+So 
+\begin{equation}
+    F'_{\mu\nu} = \mathcal U (g) F_{\mu\nu} \mathcal U^{-1}(g)
+\end{equation}
+Hence $\text{Tr}(F_{\mu\nu}F_{\rho\sigma})$ is gauge invariant.
+\begin{remark}
+    To define this product, we can either work in the universal envelopping algebra or in any representation.
+\end{remark}
+
+Now, there are two Lorentz-invariant contractions. 
+\begin{enumerate}
+    \item $\text{Tr}(F_{\mu\nu}F^{\mu\nu})$ : it is the kinetic term
+    \item $\text{Tr}(F_{\mu\nu}F_{\rho\sigma})\varepsilon^{\mu\nu\rho\sigma}$ : it will play a role later. Notice that it is a total derivative
+\end{enumerate}
+
+\section{Assorted facts about Lie algebras}
+\subsection{The trace bilinear}
+
+\begin{equation}
+    \text{Tr}(F_{\mu\nu}F^{\mu\nu}) = F_{\mu\nu}^{~~~k}F^{\mu\nu,l}\text{Tr}(\tau_k\tau_l)
+\end{equation}
+To have a well defined kinetic term, we need $\text{Tr}(\tau_k\tau_l)$ to be non-degenerate and positive or negative definite. In the case of the Standard model, we can fix a specific representation of $su(2), su(3), \dots$ and check the relations. Towards negative definites statement of $\text{Tr}(\tau_i\tau_j)$ 
+\begin{definition}
+Given a represent. $(\pi, V)$ of $\mathfrak{g}$, the bilinear form $B_V(.,.) = \text{Tr}(\pi(.)\pi(.))$ is the trace bilinear form with respect to $V$. 
+\end{definition}
+With respect to the adjoint representation, it is the Killing form. 
+\begin{theorem}
+    The killing form is non-degenerate iff $\mathfrak g$ is non-degenerate. 
+\end{theorem}
+\begin{theorem}
+    Given a semisimple $\mathfrak g$, its Killing form is negative definite iff its Lie group is compact
+\end{theorem}
+
+\subsection{Normalisation of the trace bilinear}
+\begin{definition}
+    Let $(\pi, V)$ be a rep of $\mathfrak g$ . A bilinear form $B$ on $V$ is invariant wrt $\pi$ if for $x\in \mathfrak g$, for $v,w\in V$, 
+    \begin{equation}
+        B(\pi(x)v, w) + B(v, \pi(x)w) = 0
+    \end{equation}
+\end{definition}
+Proposition: the trace bilinear is invariant with respect to the adjoint rep. \newline 
+Proposition: Let $\mathfrak g$ be a finite dimensional simple Lie algebra. Then there exist, up to a scalar, at most one invariant bilinear form. \par \medskip 
+
+Since the adjoint action always give a invariant bilinear form in any representation, we end up with the fact that our trace bilinear must be the Killing form up to a scalar. The \underline{Dynkin index} $T(\pi)$ is the scalar in front of the bilinear (or a rescaled version of it). 
+
+\subsection{Relating the Dynkin index to the Casimir of the representation}
+Let $\mathfrak g$ be a semisimple Lie algebra, $\{x_i\}$ be a basis of $\mathfrak{g}$, $\{y_i\}$ be a dual basis of $\mathfrak{g}$ with respect to the Killing form. The Dynkin index $T(\pi)$ is defined as the scalar relating the trace bilinear in the representation $\pi$ to the Killing form. \par \medskip 
+
+Prop: $J = \sum x_i y_i$ commutes with all elements of $\mathfrak{g}$. It is independant of the choice of basis. $J$ is called the quadratic Casimir element of $\mathfrak{g}$. Let $(\pi, V)$ be an irreducible representation of $\mathfrak{g}$. $\pi(J)$ commutes with all elements of $\pi(\mathfrak{g})$. By Schur's lemma, $\pi(J) = C(\pi)\text{Id}$, with $C(\pi)\in \mathbb{C}$. $C(\pi)$ is called the Casimir of the representation. By a quick computation, we see that 
+\begin{equation}
+    C(\pi)\times \frac{d}{n} = T(\pi)
+\end{equation}
+with $d$ the dimension of the representation and $n$ the dimension of the Lie algebra. 
+
+\subsection{Exemple $SU(N)$}
+
+Lie algebras defined as matrix subalgebras of $\mathfrak{gl}(n)$ come with a canonical representation on $\mathbb{C}^n$, which is the defining representation. \newline 
+NB: Physics convention: replace Killing form in definition of the Dynkin index by 
+\begin{equation}
+    2\text{Tr}_{\pi_0}
+\end{equation}
+where $(\pi_0, V_0)$ is the defining representation. Hence the Dynkin index of the defining representation is $\frac{1}{2}$ in these conventions. In these conventions we also define the Casimir element using dual basis with respects to the inner product $2\text{Tr}_{\pi_0}$. \par \medskip 
+
+For explicit computation, we can introduce an orthonormal basis $\{T_i\}$ of the defining representation of $\mathfrak{su(N)}$ with regards to $2\text{Tr}$. 
+\begin{equation}
+    \begin{aligned}
+        &\text{Tr}(T_iT_j) = \frac{1}{2}\delta_{ij} \\
+        &\text{Tr}((\pi(T_i)\pi(T_j)) = T(\pi)\delta_ij
+    \end{aligned}
+\end{equation}
+With respect to $2\text{Tr}_{\pi_0}$, $\{T_i\}$ is a self-dual basis. 
+\begin{equation}
+    \dim \pi_0 = N 
+\end{equation}
+On the other hand, 
+\begin{equation}
+    \dim (\mathfrak{su}(N)) = \#\{\text{basis of traceless hermitian matrices}\} = N^2 - 1
+\end{equation}
+Such that 
+\begin{equation}
+    C(\pi_0) = \frac{N^2-1}{2N}
+\end{equation}
+Note: the structure constants in such a basis are completely antisymmetric. 
+\begin{equation}
+    [T_i,T_j] = iC_{ij}^kT_k
+\end{equation}
+with $f_{ijk} = C_{ij}^k$, $f$ is completely antisymmetric
+
+\section{Quantizing gauge theories}
+
+By construction of the gauge symmetry, the second order differential operator defininf the kinetic term of the gauge field is not invertible. We need to gauge fix to define the propagator. But what is left of the gauge fixing, that can help us fix the renormalization counterterms? 
+
+\subsection{The Fadeev-Popov procedure}
+
+Recall 
+\begin{equation}
+    F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu - i[A_\mu, A_\nu]
+\end{equation}
+Then $\text{Tr}(F_{\mu\nu}F^{\mu\nu})$ gives kinetic terms plus interaction terms. In an orthogonal basis, $\text{Tr}(T_iT_j)\propto \delta_{ij}$ so the gauge kinetic term is $\dim \mathfrak{g}$ copies of the photon kinetic term 
+\begin{equation}
+    A_i^\mu (g_{\mu\nu}\square - \partial_\mu\partial_\nu)A^\nu_i
+\end{equation}
+Indeed, for $A^\mu_i$ an eigenvector of the momentum operator, we get $(g_{\mu\nu}k^2 - k_\mu k_\nu)$ which has a non trivial kernel. However, we could eliminate this kernel by shifting the coefficient of $\partial_\mu\partial_\nu$ away from $-1$: 
+\begin{equation}
+    \begin{aligned}
+        &\mathcal{L}[A, \phi_i] + \frac{1}{2\xi} A_i^\mu \partial_\mu\partial_\nu A^\nu_i \\
+        &= \mathcal{L}[A, \phi_i] - \frac{1}{2\xi} (\partial_\mu A^\mu_i)(\partial_\nu A^\nu_i) + \text{ total derivatives}
+    \end{aligned}
+\end{equation}
+How can we introduce a term $e^{-\frac{i}{2\xi}\int \text{d}^4x(\partial_\mu A^\mu_i)(\partial_\nu A^\nu_i)}$ into the action? The strategy is to multiply the partition function $Z$ action by field independant terms which do not change the amplitude. \par \medskip 
+
+\begin{equation}
+    e^{-\frac{i}{2\xi}\int \text{d}^4x(\partial_\mu A^\mu_i)(\partial_\nu A^\nu_i)} = \int \mathcal Df e^{-\frac{i}{2\xi}\int \text{d}^4x ff} \delta(\partial_\nu A^\nu_i - f)
+\end{equation}
+We write $B_\xi[f] = e^{-\frac{i}{2\xi}\int \text{d}^4x ff}$, and $G[A] = \delta(\partial_\nu A^\nu_i - f)$. We also write $A^g$ the field $A$ transformed by the action of $g$. Integrating over the gauge group, we trivially have 
+\begin{equation}
+    1 = \int \mathcal D g \delta(G[A^g]) \det \frac{\delta G[A^g]}{\delta g}
+\end{equation}
+Now 
+\begin{equation}
+    \int \mathcal D g \int \mathcal D f B_\xi[f] \delta(G[A^g]) \det \frac{\delta G[A^g]}{\delta g} = C(\xi) 
+\end{equation}
+does not depend on $A$. Let's rescale 
+\begin{equation}
+    Z = \int \mathcal D A \mathcal D \phi e^{iS[A, \phi]}
+\end{equation}
+into $Z' = C(\xi) Z$
+\begin{equation}
+    Z' = \int \mathcal D g \int \mathcal D f\int \mathcal D A \mathcal D \phi ~e^{iS[A, \phi]} B_\xi[f] \delta(G[A^g]) \det \frac{\delta G[A^g]}{\delta g} 
+\end{equation}
+We want to use gauge invariance to replace dependance on $A^g$ by dependance on $A$. First note 
+\begin{equation}
+    \frac{\delta G[A^{g\tilde g}]}{\delta \tilde g} \Bigg|_{\tilde g = e} = \frac{\delta G[A^{g}]}{\delta g} \frac{\delta \tilde g g}{\delta \tilde g}\Bigg|_{\tilde g = e}
+\end{equation}
+Such that 
+\begin{equation}
+    \det \frac{\delta G[A^g]}{\delta g} = \det \frac{\delta G[A^{g\tilde g}]}{\delta \tilde g} \Bigg|_{\tilde g = e} \left[\det \frac{\delta \tilde g g}{\delta \tilde g}\Big|_{\tilde g = e}\right]^{-1}
+\end{equation}
+We can write $\mu(g) = \left[\det \frac{\delta \tilde g g}{\delta \tilde g}\Big|_{\tilde g = e}\right]^{-1}$. 
+\begin{equation}
+    Z' = \int \mathcal D g \mu(g) \mathcal D f \mathcal D A \mathcal D \phi ~e^{iS[A, \phi]} B_\xi[f] \delta(G[A^g]) \det \frac{\delta G[A^{g\tilde g}]}{\delta \tilde g} \Bigg|_{\tilde g = e} 
+\end{equation}
+But if the gauge symmetry is preserved by the quantum theory, the measure should be invariant under a gauge transform. So we can integrate over $A^{g^{-1}}$ instead of over $A$, and (necessarily) similarly for $\phi$. So 
+\begin{equation}
+    Z' = \int \mathcal D g \mu(g) \mathcal D f \mathcal D A^{g^{-1}} \mathcal D \phi^{g^{-1}} e^{iS[A^{g^{-1}}, \phi^{g^{-1}}]} B_\xi[f] \delta(G[A]) \det \frac{\delta G[A^{\tilde g}]}{\delta \tilde g} \Bigg|_{\tilde g = e} 
+\end{equation}
+The $g$ dependance has factored out into a coefficient 
+\begin{equation}
+    \int \mathcal D g \mu(g) = \int \mathcal D g \det^{-1} \frac{\delta \tilde g g}{\delta \tilde g}\Big|_{\tilde g = e} = V_G
+\end{equation}
+which can be easily interpreted as the volume of the Gauge group. Indeed, integrating over all of the possible fields before gauge fixing should yield a factor $V_G$. Since the gauge group is unphysical, we should have divided at some point the whole partition function by $V_G$ to take into account the gauge redundancy. We are happy to see that $V_G$ naturally decouples from $Z'$. We also notice that $V_G$ naturally generalizes the Haar measure of the Lie group to a gauge group. We can define 
+\begin{equation}
+    Z = \frac{\int \mathcal D A \mathcal D \phi~ e^{iS}}{V_G}
+\end{equation}
+We would now like to reformulate the other not nice term, to get it in a nice shape and understand its reason for appearing. 
+
+\begin{equation}
+    \det \frac{\delta G[A^{ g}]}{\delta  g} \Bigg|_{ g = e} = \det \frac{\delta [\partial_\mu A^{g,\mu} - f]}{\delta  g} \Bigg|_{ g = e}
+\end{equation}
+To evaluate this derivative around $g=e$, we can consider infinitesimal gauge transformations 
+\begin{equation}
+    A_\mu^{e+\pi} = A_\mu + \mathcal D _\mu \pi = A_\mu + \partial_\mu \pi - i[A_\mu, \pi]
+\end{equation}
+Such that 
+\begin{equation}
+    \frac{\delta G[A^{e+\pi}]}{\delta \pi} \Bigg|_{ \pi = 0} = \partial_\mu \mathcal D _\mu
+\end{equation}
+
+Identity from fermionic path integral: 
+\begin{equation}
+    \det \mathcal O = \int \text{d}\bar \psi \text{d} \bar \psi ~e^{-i \int \text{d}^4x \bar\psi \mathcal O \psi} 
+\end{equation}
+Such that 
+\begin{equation}
+    \det \partial_\mu \mathcal D _\mu = \int \mathcal D\bar{c}\mathcal D c~ e^{i\int \text{d}^4 x \bar c (-partial_\mu \mathcal D _\mu)c}
+\end{equation}
+Such that we end up with new fermionic fields 
+\begin{equation}
+    Z' = \int \mathcal D A \mathcal D \phi \mathcal D \bar c \mathcal D c e^{i\int \text{d}^4 x \left[\mathcal L [A, \phi] - \frac{1}{2\xi}(\partial_\mu A^\mu _i )^2 - \bar c_i \partial_\mu D^\mu c_i\right]}
+\end{equation}
+Note the fields $c_i, \bar c_i$: 
+\begin{itemize}
+    \item Are fermionic, to obtain the correct determinant
+    \item Lorentz scalars in the adjoint representation, as must have same quantum number as $\pi$
+    \item They break the spin statistics theorem, and hence cannot appear in physical states. They cannot enter in/out states. 
+    \item This justify their names, ghosts and anti ghosts
+\end{itemize}
+
+We will study the Feynman rules that govern such theories presently. Consider again 
+\begin{equation}
+    Z'/V_G = = \int \mathcal D f \mathcal D A \mathcal D \phi e^{iS[A, \phi]} B[f] \delta(G[A]) \det \frac{\delta G[A^{ g}]}{\delta  g} \Bigg|_{ g = e} 
+\end{equation}
+Note: $Z$ and $Z'$ are related by a field independant constant for any choice of $B[f]$, $G[A]$. It reflects the freedom to choose any gauge we want. The choice 
+\begin{equation}
+    B_\xi[f] = e^{-\frac{i}{2\xi}\int \text{d}^4x f_if^i}\qquad G[A] = \delta (f - \partial_\nu A^\nu_i )
+\end{equation}
+are called a generalized $\xi$-gauges. How is it related to gauge fixing? A generalization thereof, but it reduces to standard notion in the limit $\xi \rightarrow 0$ limit. In this case, we can evaluate the $\mathcal D f$ integral via stationary phase ($B[f]$ oscillates rapidly except at f =0), where $ \delta (f - \partial_\nu A^\nu_i )$ becomes $ \delta (\partial_\nu A^\nu_i )$, imposing the Lorenz gauge. 
+
+\subsection{BRST symmetry}
+\subsubsection{The Fadeev Popov Lagrangian is BRST invariant}
+
+Symmetries constrain the form of counterterms required to renormalize the theory. What about gauge fixed gauge symmetries? 
+
+\begin{equation}
+    L_{FP} = L[A, \phi] - \frac{1}{2\xi}(\partial_\mu A^\mu_i)(\partial_\nu A^\nu_i) + \partial_\mu \bar{c}_i \mathcal D^\mu c_i
+\end{equation}
+The usual Lagrangian is invariant under gauge transformations, whilst $L_{GF} = - \frac{1}{2\xi}(\partial_\mu A^\mu_i)(\partial_\nu A^\nu_i) + \partial_\mu \bar{c}_i \mathcal D^\mu c_i$ corresponds to the gauge fixing Lagrangian. We would like to recover some derivative. What if we do a gauge transformation proportional to $c$? Actually, since $c$ is fermionic, we can't do it directly. But that is the general idea of BRST symmetry. Let's consider a gauge transformation of $L_{FP}$ with gauge parameter $\alpha(x) = \theta c(x)$, with $\theta$ a grassmanian variable and $c(x)$ a ghost which is Lie algebra valued, ie $c(x) = c^i(x)\tau_i$
+\begin{equation}
+    \begin{aligned}
+        A^\mu_i &\rightarrow A^\mu_i + \theta D^\mu c_i \\
+        - \frac{1}{2\xi}(\partial_\mu A^\mu_i)(\partial_\nu A^\nu_i) &\rightarrow - \frac{1}{2\xi}(\partial_\mu A^\mu_i)(\partial_\nu A^\nu_i) - 2\frac{\theta}{2\xi} (\partial_\mu A^\mu_i)(\partial_\nu D^\nu c_i)
+    \end{aligned}
+\end{equation}
+How should $\bar{c}_i, c_i$ transform to make $L_{FP}$ invariant? 
+\begin{equation}
+    \bar{c}_i \rightarrow \bar{c}_i - \frac{1}{\xi} \theta \partial_\mu A^\mu_i
+\end{equation}
+is almost good enough, except that the gauge covariant derivative in front of $c_i$ also transforms under the transformation due to its dependance in $A_\mu$, messing things up by a little bit. 
+\begin{equation}
+    \begin{aligned}
+        c &\rightarrow c + \theta \delta c \\ 
+        A^\mu &\rightarrow A^\mu + \theta D^\mu c\\
+        \mathcal D^\mu c = \partial^\mu c - i[A^\mu, c] &\rightarrow D^\mu c + \theta \partial^\mu \delta c - i[A^\mu, \theta \delta c ] - i [D^\mu \theta c, c]
+    \end{aligned}
+\end{equation}
+Where 
+\begin{equation}
+    D^\mu \theta c = \theta \partial^\mu c + i[\theta c, A^\mu]
+\end{equation}
+We need 
+\begin{equation}
+    \theta (\partial^\mu \delta c - i[A^\mu, \delta c ]) -i[\theta \partial^\mu c, c] + [[\theta c, A^\mu], c] = 0
+\end{equation}
+We just have to solve this for $\delta c$ ! 
+
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[a4paper]{book}
+
+% packages % 
+\usepackage[utf8]{inputenc} 
+\usepackage{fvextra}
+\usepackage{csquotes}
+\usepackage[french, italian, spanish, english]{babel}
+\usepackage[T1]{fontenc}   
+\usepackage{color}  
+\usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% graphics %
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% environments %
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+
+
+% bibliography %
+\bibliography{bibliography} 
+
+\begin{document}
+
+% title %
+\title{String theory}
+\author{Buisine Léo\\Ecole Normale Superieure of Paris}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+References: Tong, Polchinski, Green Schwarz Witten, \dots To read broadly, not everything is well explained everywhere \newline 
+
+Do the exercises: the exam will be easy. \par \medskip 
+
+What is string theory? Nobody knows 
+\begin{enumerate}
+    \item A framework unifying physics and maths 
+    \item A theory of quantum gravity 
+    \item A dual description of certain strongly coupled QFTs (geometrization of QFTs)
+\end{enumerate}
+
+Many good features: predicts qft and gr, seems coherent, no external parameter (gives the mass of the electron for exemple) \par \medskip 
+
+String theories 
+\begin{enumerate}
+    \item Bosonic string : 26D, predicts a tachyon which is a particle with negative mass, whichs is explained as produced by the decay of a brane into a new state which is unknown for now
+    \item Superstrings of type IIA : closed strings, 10D
+    \item Superstrings of type IIB : closed strings, 10D
+    \item Superstrings of type I : open or closed but unoriented strings, 10D
+    \item Heterotic superstrings : chiral strings, 10D
+    \item M-theory : a theory of every strings, unifies all types of strings, living in 11D, all strings are also all connected by dualities. Ends up with a membrane theory
+\end{enumerate}
+
+\chapter{Life on the worldline}
+
+A point is something that has a finite number of degrees of freedom. It can move but aside from spatial movement it only has a finite number of degrees of freedom. Basically, it is described by a finite-dimensional Hilbert space, and a position. \par \medskip 
+
+Interactions between strings is completely different from interactions between points. Points interact at a given point, and we must thus specify what happens at this points. This leads to having to define a potential, and external parameters. For strings, the interaction point is not well defined, and the exact time and point the interaction happens depends on the observer. There is thus nothing to define ! :) \par \medskip 
+
+Scalar particles. We consider the Klein-Gordon field. Particles don't have inner degrees of freedom. It can only exist somewhere. Described by $X^\mu$. We want to find the amplitude for starting at $x_1$ and ending at $x_2$.Classically, the point can only go straight. But at a quantum level it can take any path
+\begin{equation}
+    <x_2(\tau_2)|x_1(\tau_1)> = \int_{x_1}^{x_2} [DX]e^{iS[X]}
+\end{equation} 
+Actions in classical physics are something that you minimize to get the equations of motion. The most basic action would be the length of the  trajectory 
+\begin{equation}
+    S = -m\int_0^T \text{d}\tau \sqrt{-\eta_{\mu\nu} \frac{\partial x^\mu}{\partial \tau} \frac{\partial x^\nu}{\partial \tau}}
+\end{equation}
+it is reparametrization invariant, doesn't depend on the coordinates. 
+\end{document}

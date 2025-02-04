@@ -338,7 +338,7 @@ Identity from fermionic path integral:
 \end{equation}
 Such that 
 \begin{equation}
-    \det \partial_\mu \mathcal D _\mu = \int \mathcal D\bar{c}\mathcal D c~ e^{i\int \text{d}^4 x \bar c (-partial_\mu \mathcal D _\mu)c}
+    \det \partial_\mu \mathcal D _\mu = \int \mathcal D\bar{c}\mathcal D c~ e^{i\int \text{d}^4 x \bar c (-\partial_\mu \mathcal D _\mu)c}
 \end{equation}
 Such that we end up with new fermionic fields 
 \begin{equation}
@@ -397,6 +397,89 @@ We need
 \begin{equation}
     \theta (\partial^\mu \delta c - i[A^\mu, \delta c ]) -i[\theta \partial^\mu c, c] + [[\theta c, A^\mu], c] = 0
 \end{equation}
-We just have to solve this for $\delta c$ ! 
+We just have to solve this for $\delta c$! We find 
+\begin{equation}
+    \delta c = \frac{i}{2} c_i c_j [\tau^i, \tau^j]
+\end{equation}
+which guarantees that 
+\begin{equation}
+    \mathcal D_\mu c \rightarrow \mathcal D_\mu c
+\end{equation}
+Hence, we found a (fermionic) symmetry of the Lagrangian, the BRST symmetry.
 
+\begin{equation}
+    \begin{aligned}
+        &\delta_{\text{BRST}}A^\mu = \mathcal D^\mu \theta c \\ 
+        &\delta_{\text{BRST}} \phi = \delta_{\theta c}^{\text{gauge} }\phi = i \theta \pi(c) \phi \\ 
+        &\delta_{\text{BRST}} \bar{c} = -\frac{1}{\xi} \theta \partial_\mu A^\mu \\
+        &\delta_{\text{BRST}} c = \theta  \frac{i}{2} c_i c_j [\tau^i, \tau^j] = \theta  \frac{i}{2} \{c_i, c_j\} 
+    \end{aligned}
+\end{equation}
+for some representation $\pi$. Hence, the only counterterms required to renormalize this Lagrangian are BRST invariant. In particular, terms not involving ghosts are gauge invariants. 
+
+\subsection{BRST without FP}
+We will argue 
+\begin{enumerate}
+    \item There exist an operator $Q_{\text{BRST}}$ such that for $\phi$, $\phi_i$ physical fields (ie not ghosts?gauge?x?) 
+    \begin{equation}
+        \langle [Q_{\text{BRST}}, \phi ] \pi \phi_i\rangle = 0
+    \end{equation}
+    \item The gauge fixing part of the Lagrangian is of the form $[Q_{\text{BRST}}, \phi ]$. 
+\end{enumerate}
+Consider the transformation $\delta_{\text{BRST}}$ introduced above, but introduce an additional field $N = N_i \tau^i$ and replace $\delta_{\text{BRST}} \bar{ c} = \theta N$, $\delta_{\text{BRST}} N = 0$. We also introduce a multiplicative\footnote{the ghost number of the product of terms is the sum of the ghost numbers} grading called the ghost number: $c$ has a ghost number 1, $\bar c$ has a ghost number -1, and all other fields 0. We write 
+\begin{equation}
+    \delta_{\text{BRST}} \psi = \theta \triangle \psi
+\end{equation}
+Where $\triangle$ is the Slavnov operator. This operator increases the ghost number by one (except when it annihilates). 
+
+\begin{remark}
+    $\triangle$ is a graded differential, ie 
+    \begin{equation}
+        \triangle(\phi \psi) = (\triangle \phi)\psi + (-1)^{\text{ghost number of }\phi}\phi\triangle\psi
+    \end{equation}
+\end{remark}
+
+$\triangle ^2 = 0$, ie $\triangle$ is nilpotent (this is why we had to introduce $N$). Hence it acts as a differential with respect to the grading by the ghost number. It is also closed. Hence suppose we modify the action before gauge fixing by a BRST exact term 
+\begin{equation}
+    \mathcal L \rightarrow \mathcal L + \triangle \psi 
+\end{equation}
+By gauge invariance of $\mathcal L$ and nilpotency of $\triangle$, this modified Lagrangian density is BRST invariant. Let's introduce a charge $Q_{\text{BRST}}$ that implements the BRST transformation. 
+\begin{equation}
+    [Q_{\text{BRST}}, \psi]_{-s} =  \triangle \psi 
+\end{equation}
+where $[.,.]_{-1}$ is the anticommutator and $[.,.]_{+1}$ is the commutator, with $s = (-1)^{\text{ghost number of }\psi}$. \par\medskip 
+
+Assume a BRST invariant vacuum exists. Then 
+\begin{equation}
+    \langle 0| [Q_{\text{BRST}} , T{\pi\phi_i}]_{-s = \pi s_i} |0\rangle 
+\end{equation}
+Also assuming that $\phi_j$ with $j = 2, \dots n$ are BRST closed, ie $[Q_{\text{BRST}}, \phi_j]_{-s_j} = 0$, then 
+\begin{equation}
+    \langle 0| T(\phi \prod_{k\neq 1}\phi_k)|0\rangle = 0
+\end{equation}
+correlators of BRST closed operator with a BRST exact operator vanish. Hence. the modification 
+\begin{equation}
+    \mathcal L \rightarrow \mathcal L + \delta \mathcal L 
+\end{equation}
+with $\delta \mathcal L = [Q_{\text{BRST}}, \psi]_+ = \triangle \psi$ for any operator $\psi$ of ghost number -1 leave correlators of BRST invariant operators invariant. In particular, BRST invariant means gauge invariant for operators not involving ghosts. \par \medskip 
+
+We pick $\psi = \bar{c_i}(F_i + \frac{1}{2}\xi N_i)$, with $F_i$ a functional of ordinary fields (fields with ghost number 0 except $N$). Then 
+\begin{equation}
+    \delta \mathcal L = \triangle \psi = N_i F_i - \int \text{d}^4 y ~\bar{c}_i(x) \frac{\delta F_i}{\delta \phi_A(y)}[Q_{\text{BRST}}, \phi_A (y)]_- + \frac{1}{2}\xi N_i^2
+\end{equation}
+where the index $A$ runs over all ordinary fields. We can integrate out $N$ by completing the spinor/sphere/?? 
+\begin{equation}
+    \frac{1}{2}\xi N_i^2 + N_i F_i = \frac{1}{2}\xi (N_i + \frac{1}{\xi}F_i)^2 - \frac{1}{2}\frac{1}{\xi}F_i^2
+\end{equation}
+such that 
+\begin{equation}
+    \delta \mathcal L = - \int \text{d}^4 y ~ \bar{c}(x)\frac{\delta F_i(x)}{\delta \phi_A(y)}[Q_{\text{BRST}}, \phi_A(y)] - \frac{1}{2\xi}F_i^2
+\end{equation}
+Notice that $[Q_{\text{BRST}}, \phi_A(y)] \propto c$. The first term is the kinetic term for ghosts. \par \medskip 
+
+For exemple, for $F_i = \partial_\mu A^\mu _i$:
+\begin{equation}
+    \delta \mathcal L = \partial_\mu \bar{c}(x) \mathcal D ^\mu c(x) - \frac{1}{2\xi}(\partial_\mu A^\mu_i)^2 = \mathcal L _{GF} - \frac{1}{2\xi}(\partial_\mu A^\mu_i)^2 
+\end{equation}
+We recall that gauge invariant correlators are not modified by such a change in the Lagrangian. Note that we arrived at this result without invoking the FP procedure. 
 \end{document}

@@ -116,4 +116,103 @@ De meme que la dualite entre haute et basse temperature du modele d'Ising, on a 
     e^{(\beta J)_c} - 1 = \sqrt{Q}
 \end{equation}
 On retrouve (mais par pure coincidence, c'est pas le meme reseau) que pour Ising on a $(\beta J)_c = \ln (1 + \sqrt{2})$. Pour $Q \rightarrow 0$, on trouve des UST (uniform spanning tree). 
+
+\chapter{Stochastic Loewner evolution}
+
+$SLE_\kappa$ ( with parameter $\kappa$).\newline  
+See https://en.wikipedia.org/wiki/Schramm\%E2\%80\%93Loewner\_evolution \newline
+On cherche a aplatir la courbe avec $g_t(z)$ (une conformal map), qui obeit une equation differentielle avec $a_t = g_t(\gamma(t))$ est l'endroit ou est envoye le bout de la corde. 
+\begin{equation} 
+    \frac{\text{d}g_t(z)}{\text{d}t} = \frac{z}{g_t(z) - a_t}
+\end{equation}
+2 proprietes: le conditionnement et le transport conforme. 
+
+\begin{theorem}[Schramm] Si on a les 2 proprietes, plus la symetrie de reflexion, alors 
+    \begin{equation}
+        a_t = \sqrt{\kappa} B_t
+    \end{equation}
+\end{theorem}
+$a_t$ est proportionel a un mouvement brownien, avec $\kappa \geq 0$ le seul parametre qu'on peut varier. 
+\begin{remark}
+    \begin{equation}
+        <a_t> = 0
+    \end{equation}
+    \begin{equation}
+        <(a_{t_1} - a_{t_2})^2> = \kappa |t_1-t_2|
+    \end{equation}
+    $\kappa$ est relie a la charge centrale de la theorie conforme. 
+\end{remark}
+
+\section{Les phases de SLEk}
+On definit 
+\begin{equation}
+    x_t = g_t(x_0) - a_t
+\end{equation}
+Ou autrement dit, de maniere moins belle
+\begin{equation}
+    \text{d}x_t = \frac{2\text{d}t}{x_t} - \sqrt{\kappa}\text{d}B_t
+\end{equation}
+(ce qui en physique, donne le processus de Bessel avec equation de Langevin $\dot x = \frac{2}{x} - \eta_t$ avec $\eta_t$ un bruit blanc). 
+On voit que $x_t$ se fait expulser de l'origine. Qui gagne, entre le potentiel qui eloigne de l'origine et la force stochastique? who winnns \par \medskip 
+
+Sans la force aleatoire, on aurait 
+\begin{equation}
+    x_t^2 = 4t
+\end{equation}
+Alors que sans le terme repulsif, on aurait
+\begin{equation}
+    <x_t^2> = \kappa t 
+\end{equation}
+Donc le terme repulsif emporte ssi $\kappa < 4$. Dans ce cas, on peut aussi s'attendre a ce que la particule s'echappe a l'infini, qu'elle ne retourne pas sur ses pas et que la courbe soit simple. On s'attend donc aussi a ce qu'elle ne touche pas l'axe reel. Si par contre $\kappa > 4$, le bruit l'emporte. La particule colisionne avec 0 en temps fini et on a une singularite de $g_t$, vu que toute l'air disparait d'un coup. \par \medskip 
+
+On peut meme aller plus loin et calculer la dimension fractale de la courbe: 
+\begin{equation}
+    \begin{aligned}
+        d_f &= 1 + \frac{\kappa}{8} \text{ si } \kappa < 8 \\
+        &= 2 \text{ sinon}
+    \end{aligned}
+\end{equation}
+Pour pile $\kappa = 8$, on a un modele. C'est le modele de Potts
+\begin{equation}
+    Z = \sum_{A \subset E} (e^{K-1})^{|A|} Q^{K(A)}
+\end{equation}
+dans la limite $Q \rightarrow 0$. Points autodual sur le graph: $e^{K_c} - 1 = \sqrt{Q}$. \par \medskip 
+
+On a aussi une dualite entre courbes avec et sans point doubles: si on a une courbe pour $\kappa > 4$, on peut tracer son contours, qui donc n'aura pas de point double, et correspondra a une courbe avec $\tilde \kappa = \frac{16}{\kappa} < 4$. On remarque donc que $\kappa = 4$ est son autodual. C'est la dualite de Duplantier. On remarquera d'ailleurs que $\kappa$ et $\tilde \kappa$ decrivent la meme CFT avec la meme charge centrale, mais avec des observables differents. 
+\begin{equation}
+    c = 1 - \frac{6(g-1)^2}{g} \qquad g = \frac{4}{\kappa}
+\end{equation}
+Dans le discret, c'est equivalent a un modele de boucles avec $n = -2\text{cos}(\pi g)$
+\begin{equation}
+    Z_{O(n)} = \sum_{\text{boucles}} K^{\#\text{pas}} n^{\#\text{boucles}}
+\end{equation}
+On a aussi les equivalences 
+\begin{enumerate}
+    \item $\kappa = 2, n = -2$: Loop erased random walk
+    \item $\kappa = \frac{8}{3}, n = 0$: Polymeres (de Gennes)
+    \item $\kappa = 4, n = 2$: modele de hauteurs (champs libre Gaussien)
+    \item $\kappa = 6, n = 1$: Percolation (conformal invariance prouvee)
+    \item $\kappa = 8, n = 0$: Polymere avec $d_f = 2$
+\end{enumerate}
+
+Un exemple de calcul avec $SLE_k$: on place un point $\zeta$ dans le demi plan, et on pose la question de si $\gamma$ se situe a la gauche de $\zeta$? La probabilite depend de $\zeta$ et $\bar \zeta$, et de $a_0$. Evidemment, la technique est comme toujours de regarder l'evolution. On ecrit que la probabilite d'avoir une courbe a gauche en partant de $a_0$ est la meme que la moyenne de probabilite en partant de $a_0 + \sqrt{\kappa} B_t$ avec $B_t$ un element stochastique. On developpe a l'ordre $\text{d}t$. On obtient la formule de Schrawn pour $\kappa = 6$. \par \medskip 
+
+\chapter{Methodes algebriques}
+
+\section{L'algebre de Temperley-Lieb et modele de Potts}
+Un graph est decrit par $G = (V, E)$. On prend
+\begin{equation}
+    Z_\text{Potts} = \sum_{A \subset E} v^{|A|}Q^{k(A)}
+\end{equation}
+En TD, on a vu $k(A) = |V| - |A| + c(A)$. avec $c(A)$ les cycles de A, $|V|$ le nombre de sites du reseau, $k(A)$ le nombre de composantes connexes (un point [cad un site non couvert par un pas] est considere comme composante connexe, donc chaque point non couvert contribue a hauteur de $Q$), $|A|$ le nombre de pas. \par \medskip 
+
+Donne un graphe, on peut dessiner les boucles formees par le dessin. Le nombre de boucles $l(A)$ est donne par $l(A) = k(A) + c(A)$. On definit $x = \frac{v}{\sqrt{Q}}$. On a 
+\begin{equation}
+    Z_{\text{Potts}} = Q^{|V|/2}\sum_{A\subset E} x^{|A|} Q^{l(A)/2}
+\end{equation}
+Prenons $G$ un reseau carre. On a une dualite pour $x_c = 1$ (cf TD). A une constante globale pres a $x_c = 1$, on a 
+\begin{equation}
+    Z = \sum_{A\subset E} \beta^{l(A)} \quad \text{avec  } \beta = \sqrt{Q}
+\end{equation}
+Les regles pour tracer une boucles sont qu'a chaque lien entre 2 sites (vertex potentiel) on dessine un X (><) dont le sens depend de si le lien est occupe par le graph ou pas. En gros, on traverse les liens pas occupes et on ne traverse pas les liens occupes. 
 \end{document}

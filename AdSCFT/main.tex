@@ -126,6 +126,135 @@ THis describes a theory already interacting by itself. The theory is classically
 \begin{equation}
     \beta (g) = -\frac{11}{3}g^3 \frac{N}{16\pi^2}
 \end{equation}
-where $N$ is the Casimir invariant. 
+where $N$ is the Casimir invariant. \par \medskip 
 
+In SYM, $g$ is a true physical parameter of the theory. In QCD, we replace the coupling constant $g$ by a running coupling $g(\mu)$, so 1 QFT is actually a curve of QFTs in the parameter space, and we can follow the flow from high energy to low energy. In other words, the coupling constant depends on the scale of the experiment/measurement. In SYM, $g$ is a constant coupling, since it is invariant under the RG flow. In other words, CFT are fixed points of the RG flow. In other other words, CFTs are the end points of trajectories in RG space. A continuous family of CFTs correspond to an (absorbing?) line of fixed point in RG space, a horizon. From the point of view of operators, a CFT is a theory where all coupling which are positive in mass dimension are set to 0. RG gives the universality of physics at low energy. An operator which moves from a CFT to a CFT is called an (exactly) marginal operator. \par \medskip 
+
+We can move by infinitesimal transformations from SYM with weak coupling (which is solvable from perturbation theory) to SYM with strong coupling. The ground-breaking discovery is that SYM at strong coupling is dual to string theory (quantum gravity). 't Hoft discovered that we can reorganize the feynman diagram expansion of the correlation functions as feynman diagrams of string theory, in the large $N$ limit. 
+
+\section{Large N limit} 
+
+We are taking the SYM for $SU(N)$ with $N \rightarrow +\infty$, so $A_\mu$ is a matrix with $N^2-1$ real parameters. 
+\begin{equation}
+    \Lambda = \mu e^{-\frac{1}{b_0 g^2(\mu)}} \qquad b_0 = \frac{11N}{3} \qquad \beta(g) = -b_0 g^3
+\end{equation}
+Is there a way to bring $g$ to 0, while keeping $\Lambda$ constant? In other words, is there a way to approach a free field theory but still with strongly coupled behaviour? We want to define a new running coupling, which we want to keep finite:
+\begin{equation}
+    Ng^2(\mu) = \lambda(\mu)
+\end{equation}
+If we compute the beta function of $\lambda$, we see its linear expansion is independant of $N$. 
+\begin{equation}
+    \beta(\lambda) = -\frac{22}{3}\lambda^2
+\end{equation}
+
+Large-N theories: we take our elementary field to be a matrix, which we take to be in the adjoint of $SU(N)$ say. 
+\begin{equation}
+    M(x), \quad M^\dagger = M,\quad  \{M_i^j(x)\}_{i,j = 1\dots N} \text{ being scalar fields}
+\end{equation}
+\begin{equation}
+    S = \int \frac{1}{g^2}\left[\text{Tr}(\partial_\mu M^\dagger \partial^\mu M) + V(\{\text{Tr}(M^n)\})\right]
+\end{equation}
+the sum of the kinetic term and some potential, it is the most basic action invariant under $M \rightarrow U M U^{-1}$. When we have cubic potential term, we can always pull the coupling constant in fron as in above by a redifinition of the field. The field is not canonical, but idc we can always renormalize it. In YM, we can also use the same trick since the coupling in front of the quartic term is in $g^2$. \par \medskip 
+
+Consider a cubic lagrangian 
+\begin{equation}
+    \begin{aligned}
+        S &= \int \frac{1}{g^2}\text{Tr}\left\{[\partial_\mu M^\dagger \partial^\mu M] + M^3\right\} \\
+        &= \int \frac{N}{\lambda} [(\partial M)^2 + M^3]
+    \end{aligned}
+\end{equation}
+So in the large N limit, $S$ diverges, but we don't care. Expliciting the trace, we have 
+\begin{equation}
+    \frac{N}{\lambda} \left[\partial_\mu M_i^{~j} \partial^\lambda M_k^{~l}\delta_j^k \delta_l^i + M_j^{i}M_l^{~k} M_m^{~l}\delta_i^l \delta_k^m \delta^j_l\right]
+\end{equation}
+We can directly write Feynman rules for this thing. For the propagator between $M^i_j$ and $M^l_k$, we would have  $\frac{\delta_{jk}\delta^{il}}{p^2}\frac{\lambda}{N}$. But $j$ only connects with $k$, and $i$ with $l$. The idea of 't Hooft was to write the propagator as two lines, oriented in different directions. Each line is associated with a delta $\delta^{il}$ and $\delta_{jk}$, and the total double line is associated with $\frac{\lambda}{N}\frac{1}{p^2}$. We can see the propagator of the whole field as two propagators of field in the fundamental representations, of fields with indices between 1 and $N$. Interestingly enough, the exact same thing happens for the 3 point interaction. We can draw it as 3 lines which never cross, with consistency of the orientation of the propagators. In fact, the same thing would work for a quartic interaction: whenever we have a trace, the lines never cross. \par \medskip 
+
+Now, suppose we have a Feyman diagram, with $V$ vertices, $P$ propagators and $L$ loops. Vertices bring a factor $\left(\frac{N}{\lambda}\right)^V$, propatagors a factor $\left(\frac{N}{\lambda}\right)^{-P}$, and loops bring a factor $N^L$. So we would have an overall factor $\left(\frac{N}{\lambda}\right)^{V-P}N^L$. The number $V-P+L$ is the Euler index of the manifold associated to the Feyman diagram !!! wtf?\par \medskip 
+
+We have a double expansion (possible), in $\lambda$ and in $N$. We can keep $\lambda ~ 1$, but we can remove all diagrams which are of order lower than $N^2$ (leading order). At each order in $N$, we can then expand in $\lambda$. \par \medskip 
+
+The powerful result: terms in $N^2$ can be put on the 2-sphere, terms in $N^0$ can be put on the torus, etc etc. Actually, the power in $N$ is equal to $2-2g$, with $g$ the genus. Since we are looking at the vacuum diagrams, we are looking at a vacuum string propagation. The worldsheet of a string starting from the vacuum (a point) and ending similarly is a closed 2-manifold. The genus of this manifold is the number of splits of the string. So our expansion in the genus is exactly the expansion of the string propagation in the number  of splittings. In a string theory, the probability for a string to split is $g_S$. The idea from 't Hooft is to see the duality between SYM in the large N limit and weakly coupled string theory, with $g_s = \frac{1}{N}$. In general, the idea is hard to put into practice because the correlation functions are hard to compute. But in $N=4$ SYM, we can control the correlation functions pretty well, to the point that we can recognize the string theory. 
+
+\section{Correlation functions in (large N) CFTs}
+
+The basic objects of a CFT are the operators $\hat{O}(x)$. Then, the "observables" are correlation functions of these operators. We call them green functions, depending on the string of operators. 
+\begin{equation}
+    G_n(x) = \langle \hat{O}_i(x_i) \dots  \hat{O}_n(x_n)\rangle
+\end{equation}
+The conformal symmetry will give a huge quantity of constraints on these green functions. A primary operator is a primary weight of the representation of the Virasoro algebra. Iff we have 
+\begin{equation}
+    [\hat{D}, \hat{O}(x)] = -i(x^\mu \partial_\mu + \Delta) O(x)
+\end{equation}
+aka $\hat{O}'(x') = \lambda^{-\Delta}(x) O (x)$, then $\hat O(x)$ is a quasi primary operator of weight $\Delta$. \par \medskip 
+Since 
+\begin{equation}
+    \begin{aligned}
+        &[D, P_{\mu}] = -iP_\mu \\
+        &[D, K_\mu] = iK_\mu
+    \end{aligned}
+\end{equation}
+we see that we have a ladder algebra, where $P_\mu$ transforms a quasi-primary field into a quasi-primary field with conformal dimension $\Delta -1$ (it lowers the weight) and similarly for $K_\mu$ but raising the weight by 1. Since we want a physical representation, we must have a lowest weight operator. This is a primary operator. 
+\begin{definition}
+    A primary operator $O_{\Delta}$ is such that $[K_\mu, O_{\Delta}] = 0$
+\end{definition}
+The primary operator, when acted upon by the $P_\mu$ and $K_\mu$, generates a Verma module. In particular, the stress energy tensor is a quasi-primary field. But composite fields without derivatives ($P_\mu$ acts with derivatives) are primary. Note that we want a lowest weight and not a highest weight because if we were to choose a highest weight, it would become a nightmare in momentum space (taking the derivative annihilates the field). \par \medskip 
+
+"Theorem": if we do a local conformal transformation on the spacetime coordinates $x'_\mu = f_\mu (x_\nu)$, $\eta_{\mu\nu} \text{d} x^\mu \text{d} x^\nu = \Lambda^2(x) \eta_{\mu\nu} \text{d} x^\mu \text{d} x^\nu$, the green function transforms as 
+\begin{equation}
+    G_n(x_1, \dots, x_n) = \Lambda(x_1)^{\Delta_1}\dots \Lambda(x_n)^{\Delta_n} G_n(x'_1, \dots, x'_n)
+\end{equation}
+where the conformal weights are those of the associated operators. The operators must be quasi-primary for it to work. This is a highly non trivial statement: if we know the green function at some point, we know it everywhere. \par \medskip
+
+Let's see the consequences for a 2-point function. 
+\begin{equation}
+    \langle O_I(x_1)O_J(x_2) \rangle = G_{IJ}((x_1 - x_2)^2) = \frac{1}{(x_1 - x_2)^{2\Delta}}
+\end{equation}
+where $\Delta$ is the common conformal weight of both fields (if the conformal weights are not equal, the propagator must vanish). We obtain the factor 1 on top by a proper redefinition of the fields. \par \medskip 
+
+For the 3-point function, we have 
+\begin{equation}
+    <O_i(x_1)O_j(x_2)O_k(x_3)> = \frac{C_{ijk}}{(x_1 - x_2)^{\#}(x_3 - x_2)^{\#}(x_1 - x_3)^{\#}}
+\end{equation}
+where the $C_{ijk}$ are entirely determined by the conformal field theory. Now let's look at the stress energy tensor. 
+\begin{equation}
+    <T_{\mu\nu}(x)T_{\rho\sigma}(y)> = \Pi _{\mu\nu\rho\sigma}\frac{c}{(x-y)^{2d}}
+\end{equation}
+The stress-energy tensor is symmetric, traceless, and obeys conservation equations. This puts a whole lot of conditions on $\Pi _{\mu\nu\rho\sigma}$. $c$ is a constant, and is a property of the theory (fixed by the action, since the stress energy tensor is directly fixed by the action). It is often called the central charge (it is the central charge in $d=2$, the story is more difficult in general). \par \medskip 
+
+Now we want to define correlation functions in the large N limit. We want to compute the N point function. We can take operators as 
+\begin{equation}
+    O_1(x) = \text{Tr}(M(x)\dots M(x))
+\end{equation}
+or we could take 
+\begin{equation}
+    O_2(x) = \text{Tr}(M(x)\dots M(x))\text{Tr}(M(x)\dots M(x))
+\end{equation}
+Taking the trace is almost mandatory for $SU(N)$ invariance. But there are many ways to do it, we can write in general $O_n(x)$ a $n$-trace operator.\par \medskip 
+
+Let's consider first 1-trace operators. 
+\begin{equation}
+    <O_1(x)O_1(y)> = \frac{\delta}{\delta J(x)} \frac{\delta}{\delta J(y)}\text{log}\left[\int \mathcal D [M] e^{i\frac{N}{\lambda}\int L[M] + i \int J(x) O_1(x) }\right]
+\end{equation}
+But if $J$ is fixed, it gets suppressed by $N$. We thus want to keep $\tilde{J} = \frac{J}{N}$ fixed, aka we want to take the large $J$ limit together with the large $N$ limit. 
+\begin{equation}
+    <O_1(x)O_1(y)> =\left(\frac{\delta \tilde J}{\delta J}\right)^2 \frac{\delta}{\delta \tilde J(x)} \frac{\delta}{\delta\tilde  J(y)}\text{log}\left[ N^2 f_0(\lambda, \tilde J) + f_1(\lambda, \tilde J) + o(1/N)\right]
+\end{equation}
+with $\left(\frac{\delta \tilde J}{\delta J}\right)^2 = \frac{1}{N^2}$, which shows that the 2-point correlation function doesn't scale with $N$, in the large $N$ limit. $f_0$ is the contribution from planar diagrams, $f_1$ the contribution from genus 1 diagrams, etc...\par \medskip 
+
+This generalizes to $n$-point functions. 
+\begin{equation}
+    <O_1(x_1)\dots O_n(x_n)> \Big|_{\tilde{J} = 0} = \frac{1}{N^{n-2}} \sum h_0(\lambda) + \frac{1}{N^2} h_1(\lambda) + \dots 
+\end{equation}
+with $\sum h_0(\lambda)$ corresponding to planar diagrams. In particular, we see from this formula that in $N\rightarrow +\infty$, all connected correlation functions vanish except for the propagator, just like in free field theory. The theory is not free, since the propagator takes the form $\sim \frac{1}{|x-y|^{2\Delta}}$. Hence, we say it is a generalization of free field theories. We should see the states created by operators acting on the vacuum as "bound states" (though not exactly). \par \medskip
+
+We can also notice that the theory, although not free, has interactions with coupling of the order $\frac{1}{N}$ for the 3-point interaction, $\frac{1}{N^2}$ for the 4-point correlation, etc... So we can see this theory as a weakly coupled theory, with coupling $\frac{1}{N}$ (hints of the duality with strings). \par \medskip 
+
+What we just did was for single-trace operators. For multi-trace operators, let's take 
+\begin{equation}
+    O(x) = O_1(x)\dots O_n(x)
+\end{equation}
+where $O_i(x)$ are single trace operators. Suppose we take an $n$-point function of $O$. 
+\begin{equation}
+    \langle O(x_1)O(x_p)\rangle \simeq (np)\text{-point function} \sim \frac{1}{N^{np}} << \frac{1}{N^p}
+\end{equation}
 \end{document}

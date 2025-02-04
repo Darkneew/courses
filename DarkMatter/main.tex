@@ -125,6 +125,69 @@ He thus computed the size of the galaxy. But knowing the density of stars (assum
 
 \chapter{An expanding Universe}
 
+The metric changes with time. Universe is almost homogeneous => only dependance on time. Dependance on space at a scale $10^{-5}$.
+\section{The Friedmann equation}
+This is the way of Milne. We suppose a gas made of non-relativistic particles of mass density $\rho_m$ and total energy per mass $k$. We can write the conservation of energy 
+\begin{equation}
+    E = m\phi(r) + \frac{1}{2}mv^2 = mk
+\end{equation}
+We could write a potential as in gravity $\phi = -\frac{GM}{r}$ or a potential as $\phi_{\Lambda} = \frac{\Lambda r^2}{6}$. Using the first potential, 
+\begin{equation}
+-\frac{GM}{r} + \frac{v^2}{2} = k   
+\end{equation}
+We can also write $v=\dot r$
+\begin{equation}
+    -\frac{GM}{r} + \frac{\dot{r}^2}{2} = k   
+\end{equation}
+We also write the mass density $M = \frac{4\pi}{3}r^3 \rho_m$, and the planck mass $M_p$ given by $G = \frac{1}{M_p^2}$. The reduced planck mass is $M_{pr} = \frac{M_p}{\sqrt{8\pi}}$. 
+
+\begin{equation}
+    \left(\frac{\dot r}{r}\right)^2 = H^2 = \frac{\rho_m}{3M_{pl}^2} - \frac{k}{r^2}
+\label{eq:firsteq}\end{equation}
+If we add the second potential, it also adds a "cosmological constant term", it adds a term in $\frac{\Lambda}{6}$. The first potential is attractive, and creates the Schwarchild radius $r_S = \frac{M}{M^2_{pl}}$. Any light inside the Schwarchild radius is kept inside the radius and cannot escape, due to the attractive force a gavity. On the other side, the second potential is repulsive, and corresponds to the expansion of the universe. It also lead to a radius, $r_? = ?$. Any light farther than this radius will never enter it. The light is so far that it cannot keep up with the expansion of the universe, and can never come close to us. \par \medskip 
+
+We place ourselves in the comoving coordinates. $\chi$ is the factor of expansion, it is the length of a square which is appropriatly expanded with time. We take our position $r = R\times \chi = R_0 \times a(t) \times \chi$ with $R_0$ the radius of the universe at the beginning of time. We have 3 sources of matter in the universe, $\rho_m$ the matter, $\rho_\Lambda$ the cosmological constant (dark matter), and $\rho_R$ radiations, hence $\rho = \rho_m + \rho_\Lambda + \rho_R$. \par \medskip 
+
+Once again, we write the conservation of the internal energy (with $V$ the volume, $P$ the pressure)
+\begin{equation}
+   \begin{aligned}
+    U = \rho V,\quad \text{d}U &= \text{d}\rho ~V + \rho \text{d}V = -P\text{d}V \\
+    &= \frac{4\pi}{3}\text{d}\rho~ R^3 + 4\pi R^2 \text{d}R ~\rho \dots 
+   \end{aligned}
+\end{equation}
+And we end up finding 
+\begin{equation}
+    \dot \rho + 3H(\rho + P) = 0
+\label{eq:eq2}\end{equation}
+In this equation, we have no curvature but a pressure. It is nice since we don't have to know the curvature, but we need the pressure, in comparison with \eqref{eq:firsteq}. Derivating the hubble rate of \eqref{eq:firsteq} and inserting the above equation, 
+
+\begin{equation}
+    \dot H = -\frac{\rho + P}{2M_p^2} + \frac{k}{R^2}
+\end{equation}
+But since $H = \left(\frac{\dot R}{R}\right)^2 = \left(\frac{\dot a}{a}\right)^2$, we get 
+\begin{equation}
+    \dot H = \frac{\dot{\dot a}}{a} - \frac{\dot a^2}{a^2}
+\end{equation}
+But then 
+\begin{equation}
+    \frac{\dot {\dot a}}{a} = H^2 + \dot H = -\frac{\rho + 3P}{6M_p^2}
+\end{equation}
+Note that curvature is an output of the Hubble constant. \par \medskip
+
+Einstein introduced the cosmological constant in order to cancel $\dot{\dot a}$, as to have a static universe. He did so because he observed a static universe. But Edington noticed that this would make an unstable universe. \par \medskip 
+
+Equation of state: $P =w\rho$. For non-relativistic matter, $w = 0$. for the cosmological constant, $w = -1$. For relativistic particles, since the pressure is the quantity of momentum transferred on a unit of surface per second. For $E=pc$, $w = \frac{1}{3}$. For $E = \frac{1}{2}mv^2$, $w = \frac{2}{3}$. \par \medskip 
+
+A better, Einstein based approach is given in the slides. We write some general curved metric, the Friedmann metric which only depends on the curvature. Then we try to solve the Einstein equations. \par \medskip 
+
+From \eqref{eq:eq2}, we find 
+\begin{equation}
+    \rho \propto a^{-3(1 + w)}
+\end{equation}
+For dust, $\rho \propto a^{-3}$ is obvious since when the universe expand, the matter gets diluted. For radiation, $\rho \propto a^{-4}$ since the radiations gets diluted and redshifted, so they get diluted while loosing energy at the same time. For the cosmological constant, it stays constant. Notice that $k$ (the raw curvature, also possible to interpret as a field), evolves as $\rho \propto a^{-2}$. This means that at the beginning of time, there was no curvature. It is the flatness problem. The Hubble constant evolves as the square root of $\rho$, so 
+\begin{equation}
+    \dot a \propto a^{-\frac{1}{2} - \frac{3w}{2}} \Rightarrow a \propto t^{\frac{2}{3(1 + w)}}
+\end{equation}
 \chapter{The inflaton field}
 
 \chapter{Reheating}

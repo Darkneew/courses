@@ -8,6 +8,7 @@
 \usepackage[T1]{fontenc}   
 \usepackage{color}  
 \usepackage{amsmath, dsfont, amssymb, amsthm, stmaryrd}
+\usepackage{slashed}
 \usepackage[style=alphabetic]{biblatex}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
@@ -482,4 +483,202 @@ For exemple, for $F_i = \partial_\mu A^\mu _i$:
     \delta \mathcal L = \partial_\mu \bar{c}(x) \mathcal D ^\mu c(x) - \frac{1}{2\xi}(\partial_\mu A^\mu_i)^2 = \mathcal L _{GF} - \frac{1}{2\xi}(\partial_\mu A^\mu_i)^2 
 \end{equation}
 We recall that gauge invariant correlators are not modified by such a change in the Lagrangian. Note that we arrived at this result without invoking the FP procedure. 
+
+\section{Perturbation theory of Yang-Mills theory}
+
+\subsection{Feynman rules}
+\subsubsection{Introducing the gauge coupling}
+
+To introduce gauge coupling, replace 
+\begin{equation}
+    \mathcal D_\mu = \partial_\mu - i A_\mu \rightarrow \mathcal D_\mu = \partial_\mu - i g A_\mu 
+\end{equation}
+which can be seen as just renormalizing $A_\mu$. This change changes the gauge transformation. Before, we had 
+\begin{equation}
+    A'_\mu = \mathcal U(h)A_\mu \mathcal U^{-1}(h) - i\partial_\mu \mathcal{U}(h) ~ \mathcal{U}(h)^{-1}
+\end{equation}
+But now,
+\begin{equation}
+   g A'_\mu = g\mathcal U(h)A_\mu \mathcal U^{-1}(h) - i\partial_\mu \mathcal{U}(h) ~ \mathcal{U}(h)^{-1}
+\end{equation}
+Which means 
+\begin{equation}
+    A'_\mu = \mathcal U(h)A_\mu \mathcal U^{-1}(h) - \frac{i}{g}\partial_\mu \mathcal{U}(h) ~ \mathcal{U}(h)^{-1}
+\end{equation}
+Infinitesimally, 
+\begin{equation}
+    A'_\mu = A_\mu + \frac{1}{g}\partial_\mu \alpha + i [\alpha, A_\mu ]
+\end{equation}
+To remove the $g$ dependance of derivative term in $F^{\mu\nu}$, redefine 
+\begin{equation}
+    F_{\mu\nu} = \frac{i}{g}[\mathcal D_\mu, \mathcal D_\nu] = \partial_\mu A_\nu - \partial_\nu A_\mu - ig[A_\mu, A_\nu]
+\end{equation}
+
+\subsubsection{The Lagrangian}
+\begin{equation}
+        \begin{aligned}
+            \mathcal L =& -\frac{1}{4} \sum_{a} (F_a)_{\mu\nu}(F_a)^{\mu\nu} - \frac{1}{2\xi}\sum_a (\partial_\mu A_a^{~\mu})^2 + \partial_\mu \bar{c}_a (\delta_{ac}\partial^{\mu} + gf_{abc}A_b^{~\mu})c_c \\
+            &+ \bar{\psi_i}(\delta_{ij} i\slashed{\partial} + g\slashed{A}_aT_{ij}^a - m\delta_{ij})\psi_j  \\
+            &+ [(\delta_{ki}\partial_\mu - ig (A_a)_\mu T^a_{ki})\phi_i]^*[(\delta_{kj}\partial^\mu - ig A^\mu_a T^a_{kj})\phi_j] - M^2 \phi^*_i\phi_i
+        \end{aligned}
+\end{equation}
+The indices in greek letters are Lorentz indices, the beginning of the alphabet indices are Lie indices, and the middle of the alphabet indices are field indices. The $T$ are the representation of the Lie algebra in our theory. We can divide this Lagrangian into several parts. The kinetic term is 
+\begin{equation}
+    \begin{aligned}
+        \mathcal L_{\text{kin}} =& -\frac{1}{4}(\partial_\mu (A_a)_\nu - \partial_\nu (A_a)_\mu)(\partial^\mu (A_a)^\nu - \partial^\nu (A_a)^\mu) \\
+        &-\frac{1}{2\xi}\sum_a (\partial_\mu A_a^{~\mu})^2 + \bar \psi_i (i \slashed{\partial} - m)\psi_i \\ 
+        &- \phi^*_i (\square + M^2)\phi_i - \bar c_a \square c_a 
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Propagators}
+The Gauge boson. In momentum space, 
+\begin{equation}
+    \frac{1}{4}(p_\mu A_\nu - p_\nu A_\mu)^2 + \frac{1}{2\xi}(p_\mu A^\mu)^2 = -\frac{1}{2}A^a_\mu (-p^2g^{\mu\nu} + (1 - \frac{1}{\xi})p^{\mu\nu})\delta_{ab}A^b_\nu
+\end{equation}
+To find the propagator, we make the ansatz 
+\begin{equation}
+    \Pi^A_{\mu\nu} = A(p^2)p_{\mu}p_{\nu} + B(p^2)g_{\mu\nu}
+\end{equation}
+Writing $\Pi^A_{\mu\nu}(-p^2g^{\mu\nu} + (1 - \frac{1}{\xi})p^{\mu\nu}) = g_\mu^\rho$ gives 
+\begin{equation}
+    A = \frac{-(1 - \frac{1}{\xi})\frac{1}{p^2}}{\frac{1}{\xi}p^2} \qquad B = -\frac{1}{p^2}
+\end{equation}
+Which results in 
+\begin{equation}
+    i(\Pi^A_{ab})_{\mu\nu} = -i \frac{g_{\mu\nu}- (1-\xi)\frac{p_\mu p_\nu}{p^2}}{p^2 + i\epsilon} \delta_{ab}
+\end{equation}
+We draw the propagator as a bubbly line? as a cloud line going in spirals, labelled by a Lie index and a Lorentz index. For ghosts, we have 
+\begin{equation}
+  i\Pi^{\bar c c}_{ab} = \frac{i\delta_{ab}}{p^2 + i\epsilon}  
+\end{equation}
+We draw the propagator with a dotted line, oriented by an arrow from the bar ghost to the ghost. For the charged fermion, we draw a solid line oriented by the arrow and indexed by the field $i,j$ and the spin $\alpha, \beta$. The propagator is 
+\begin{equation}
+    i(\Pi_{ij}^{\psi \bar \psi})_{\alpha \beta} = \left(\frac{i\delta}{\slashed{p} - m + i\epsilon}\right)
+\end{equation}
+Finally, the charged scalar is represented by a dashed line with long dashes, oriented by an arrow and indexed by the fields.
+\begin{equation}
+    i\Pi^{\phi\phi^*}_{ij} = \frac{i\delta_{ij}}{p^2 - M^2 + i\epsilon}
+\end{equation}
+
+\subsubsection{Vertices}
+Gauge self interaction 
+\begin{equation}
+    \begin{aligned}
+        \mathcal{L}^{A^3}_{\text{int}} =& -\frac{1}{4}(F_a)_{\mu\nu}(F_a)^{\mu\nu} \big|_{A^3} \\ 
+        =& -g f_{abc}\partial_\mu (A_a)_\nu (A_b)^\mu (A_c)^\nu
+    \end{aligned}
+\end{equation}
+It is a cubic vertex where each line carries a Lorentz index and a Lie algebra index. Assume all momentums are inflowing, with $k,p, q$, and recall that a $\partial_\mu$ gives in momentum space a $-ik_\mu$. To give a value to the vertex, we should add a $i$ in front (as a result of expanding $e^{iS}$) and suppose we are contracting with 3 other fields. There are 6 ($3!$) possible contractions, and we get 
+\begin{equation}
+    \begin{aligned}
+        -g f_{abc}&(k_\nu \Pi^{\mu \kappa}_{ad}(k)\Pi^{\nu \lambda }_{be}(p)\Pi^{\rho\sigma}_{cf}(q) + \dots) \\
+        &= -g \Pi^{\mu \kappa}_{ad}(k)\Pi^{\nu \lambda }_{be}(p)\Pi^{\rho\sigma}_{cf}(q)(f_{abc} k_\nu g_{\mu\rho} + f_{abc}k_\rho g_{\mu\nu} + \dots) 
+    \end{aligned}
+\end{equation}
+such that when the dust settles, we get for the vertex 
+\begin{equation}
+    -g f_{abc}(g_{\mu\rho} (k_\nu - q_\nu) + g_{\mu\nu}(p_\rho - k_\rho) + g_{\nu\rho} (q_{\mu} - p_\mu))
+\end{equation}
+Now, let's look at the quartic term 
+\begin{equation}
+    \mathcal{L}^{A^3}_{\text{int}} = -\frac{1}{4}g^2 f_{eab}f_{ecd} (A_a)_\mu (A_b)_\nu (A_c)^\mu (A_d)^\nu
+\end{equation}
+We get for the vertex 
+\begin{equation}
+    \begin{aligned}
+        -ig^2 [ & f_{eab}f_{ecd}(g_{\mu\rho}g_{\nu\sigma} - g_{\mu \sigma}g_{\nu \rho}) \\ 
+        &+ f_{eac}f_{ebd}(g_{\mu\nu}g_{\rho\sigma} - g_{\mu\sigma}g_{\nu\rho}) \\
+        &+ f_{ead}f_{ebc}(g_{\mu\nu}g_{\rho\sigma} - g_{\mu\rho}g_{\nu\sigma}) ]
+    \end{aligned}
+\end{equation}
+Now, let's turn to the ghost-gauge boson interaction 
+\begin{equation}
+    \mathcal L^{ccA}_{\text{int}} = gf_{abc}\partial_\mu \bar c_a A^\mu_b c_c 
+\end{equation}
+which gives a factor 
+\begin{equation}
+    g f_{abc} p_\mu
+\end{equation}
+with $p$ the momentum of the outgoing ghost. For the fermion-gauge boson interaction, we find 
+\begin{equation}
+    \mathcal L^{\bar \psi A \psi}_{\text{int}} = g \bar \psi _i \slashed{A}_a \psi _j T^a_{ij}
+\end{equation}
+which gives 
+\begin{equation}
+    ig \gamma^\mu_{\alpha \beta}T^a_{ij}
+\end{equation}
+For the scalar field - gauge boson interaction, 
+\begin{equation}
+    \mathcal L_[\text{int}]^{\phi^2A} = -ig \partial_\mu \phi_k^* A^\mu_a \phi_j T^a_{kj} + ig A^\mu_a T^a_{ik}\phi_i^* \partial_\mu \phi_k = ig T^a_{ij}(q+k)_\mu
+\end{equation}
+where $k$ and $q$ are the momentum of the scalar fields flowing in the direction of their $U(1)$ current. Finally, for the last interaction, we have 
+\begin{equation}
+    \mathcal L^{\phi^2A^2}_{\text{int}} = g^2 (A_a)_\mu A^\mu_b T^a_{ik}T^b_{kj} \phi^*_i \phi_j
+\end{equation}
+such that we get 
+\begin{equation}
+    ig^2 g^{\mu\nu} \{T^a, T^b\}_{ij}
+\end{equation}
+\subsection{Taking the Feynman rules for a spin}
+\subsubsection{Fermion 2-point functions} 
+We have obviously a straight line, but also a diagram with a gauge loop, and a counter term. In the Feynman gauge ($\xi = 1$), we have for the diagram with a gauge loop 
+\begin{equation}
+    \begin{aligned}
+        &\int \frac{\text{d}^4k}{(2\pi)^4} ig T^a_{jk}\frac{i}{\slashed{k} - m + i\epsilon }ig \gamma^\mu T^b_{ki} i\frac{-g_{\mu\nu}\delta^{ab}}{(p-k)^2 + i\epsilon} \\ 
+        &= -g^2 \sum_a (T^a T^a)_{ji} \int \frac{\text{d}^4k}{(2\pi)^4}  \frac{\gamma_\mu (\slashed{k} + m)\gamma^\mu}{k^2 - m^2 + i\epsilon } \frac{1}{(p-k)^2 - i\epsilon} 
+    \end{aligned}
+\end{equation}
+We notice that $\sum_a (T^a T^a)_{ji}$ is the casimir element, and is equal to $C(\pi)\delta_{ij}$. For exemple, in the defining representation of $\mathfrak{su}(n)$, $C_D = \frac{n^2 - 1}{2n}$. 
+
+\begin{remark}
+    It coincides with the QED fermion self-energy up to a group theory factor $C(\pi)\delta_{ij}$.
+\end{remark}
+
+We can try to evaluate it in dimensional regularization. We first introduce the scale $\mu$ to keep $g$ dimensionless. We replace $g$ by $g\mu^{\frac{4-d}{2}}$ thanks to dimensional analysis. We have 
+\begin{equation}
+    -g^2 \mu^{4-d}C(\pi)\delta_{ij} \int \frac{\text{d}^4k}{(2\pi)^4}  \frac{\gamma_\mu (\slashed{k} + m)\gamma^\mu}{k^2 - m^2 + i\epsilon } \frac{1}{(p-k)^2 - i\epsilon} 
+\end{equation}
+Then we can do a bit of gamma algebra: $\gamma_\mu \gamma^\mu = g^\mu_\mu = d$. So 
+\begin{equation}
+    \gamma_\mu \slashed{k} \gamma^\mu = k_\rho \gamma_\mu \gamma^\rho \gamma^\mu = k_\rho(2g^{\mu\rho}\gamma_\mu-\gamma^\rho \gamma^\mu\gamma_\mu) = (2-d)\slashed{k}
+\end{equation}
+Hence
+\begin{equation}
+    \gamma_\mu (\slashed{k} + m) \gamma^\mu = (2-d)\slashed{k} + dm
+\end{equation}
+Then we introduce Feyman parameters. Recall that we have general formulas for integrals of the form 
+\begin{equation}
+    \int \frac{\text{d}^d k}{(2\pi)^d} \frac{k^{2a}}{(k^2 - \triangle)^b}
+\end{equation}
+Using 
+\begin{equation}
+    \frac{1}{AB} = \int_0^1 \text{d}x \frac{1}{[A + (B-A)x]^2}
+\end{equation}
+Writing $A = k^2 - m^2$, $B = (p-k)^2$, 
+\begin{equation}
+    A + (B-A)x = (k-xp)^2 - m^2 (1-x)
+\end{equation}
+
+Next shift the integration variable $k\rightarrow k + xp$, such that our expression becomes 
+\begin{equation}
+    -g^2 \mu^{4-d} C(\pi)\delta_{ij} \int_0^1 \text{d}x \int\frac{\text{d}^dk}{(2\pi)^d}\frac{(2-d)(\slashed{k} + x\slashed{p}) + dm}{(k^2 - \triangle + i\epsilon)^2}
+\end{equation}
+with $\triangle = (m^2 - p^2x)(1-x)$. We can then evaluate the whole expression in dimensional regularization, 
+\begin{equation}
+    \int\frac{\text{d}^dk}{(2\pi)^d}\frac{1}{(k^2 - \triangle + i\epsilon)^2} = \frac{2}{(4\pi)^{d/2}} \frac{1}{\triangle^{2-d/2}}\Gamma(\frac{4-d}{2}) \equiv (*)
+\end{equation}
+such that for the 1-loop term, we get 
+\begin{equation}
+    -g^2 \mu^{4-d} C(\pi) \delta_{ij} \int_0^1 \text{d}x ((2-d)\slashed{p}x + dm) (*)
+\end{equation}
+Now, we want to extract the divergences by setting $d = 4-\epsilon$ and by expanding around $\epsilon = 0^+$. We get
+\begin{equation}
+    ig^2 \mu^\epsilon C(\pi) \delta_{ij} \int_0^1 \text{d}x ((2-\epsilon )\slashed{p}x- (4-\epsilon)m)\frac{1}{(4\pi)^2}(4\pi)^{\epsilon/2} \triangle^{-\epsilon/2} (\frac{2}{\epsilon} - \gamma_E + \dots)
+\end{equation}
+which, expanded, gives 
+\begin{equation}
+    ig^2 C(\pi)\delta_{ij} \frac{1}{(4\pi)^2} [\frac{2}{\epsilon}\int_0^1 \text{d}x (2\slashed{p} - 4m) + \text{ finite terms}]
+\end{equation}
+The divergent part must be removed by the counterterm. 
 \end{document}

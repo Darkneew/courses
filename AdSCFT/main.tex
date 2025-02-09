@@ -257,4 +257,91 @@ where $O_i(x)$ are single trace operators. Suppose we take an $n$-point function
 \begin{equation}
     \langle O(x_1)O(x_p)\rangle \simeq (np)\text{-point function} \sim \frac{1}{N^{np}} << \frac{1}{N^p}
 \end{equation}
+
+\chapter{Anti de Sitter spacetime}
+
+\section{Geometry}
+
+\begin{equation}
+    \text{d}s^2 = \Omega ^2 (\tau, \theta) [-\text{d}\tau^2 + \text{d}\theta ^2 + \sin ^2(\theta) \text{d}\Omega^2_{d-2}]
+\end{equation}
+with $\theta \in [0, \pi]$, $|\tau \pm \theta| < \pi$. This is the flat Minkowski spacetime in $d$-dimension, but it is convenient because all infinities are at a finite distance. This is nice for physics because we can see physics in this space as physics in a box, except the boundaries can be reached only by massless particles, in infinite time. \par \medskip 
+
+Now, $d+1$ anti de Sitter space is a space naturally embedded in $\mathbb{R}^{2,d} \equiv <x_{-1}, x_0, x_1,\dots x_d>$ with metric $\text{d}s^2 = -\text{d}x_{-1}^2 - \text{d}_{0}^2 + \sum_i \text{d}x_i^2$. Inside this space, the AdS space is defined by the equation 
+\begin{equation}
+    - x_{-1}^2 - x_0 ^2 + \sum_i x_i^2 = -R
+\end{equation}. 
+Note that it is some kind of hyperboloid space. If the radius was positive, this would be some kind of hypersphere. We can hope to write global coordinates in the form 
+\begin{equation}
+    \begin{aligned}
+        &x_{-1} = F(\rho)\sin (\tau) \\ 
+        &x_0 = F(\rho) \cos(\tau) \\ 
+        &x_i = G(\rho) \Omega_i
+    \end{aligned}
+\end{equation}
+Where the $\Omega_i$ are coordinates on $\mathbb{S}_{d-1}$, verifying $\sum_i \Omega_i ^2 = 1$. Solving the equation of AdS for these equations, we get 
+\begin{equation}
+        -F^2(\rho) + G(\rho)^2 = -R^2
+\end{equation}
+Such that we can write 
+\begin{equation}
+    \begin{aligned}
+        F(\rho) = R\text{cosh}(\rho) \\ 
+        G(\rho) = R\text{sinh}(\rho)
+    \end{aligned}
+\end{equation}
+If we take all coordinates from $-\infty$ to $+\infty$, we would cover the space multiple times. Actually, a minimal range of coordinates is $\rho \in [0, +\infty[$ and $\tau \in [0, 2\pi]$. For these coordinates, the metric becomes 
+\begin{equation}
+    \text{d}s^2 = R^2\left(\text{cosh}^2(\rho)\text{d}\tau^2 + \text{d}\rho ^2 + \text{sinh}^2(\rho) \text{d}\Omega_{d-1}^2\right)
+\end{equation}
+We see it is a Lorentzian spacetime. Moreover, we have a time direction, $\tau$. However, we have closed time-like curves because $\tau \in [0, 2\pi]$. We don't want to do physics in such a space, so we take the universal cover, meaning we take $\tau \in ]-\infty, +\infty[$. This removes any closed time-like curve. \par \medskip 
+
+Now, we would like to compactify the space through conformal transformations. We write 
+\begin{equation}
+    \text{d}\rho = \text{sinh}(\rho) \text{d}\theta 
+\end{equation}
+so 
+\begin{equation}
+    \text{tan}(\theta) = \text{sinh}(\rho)
+\end{equation}
+with $\theta \in [0, \pi/2]$. The metric becomes 
+\begin{equation}
+    \text{d}s^2 = \frac{R^2}{\cos (\theta)} \left[-\text{d}\tau^2 + \text{d}\theta^2 + \sin (\theta)^2 \text{d}\Omega_{d-1}^2\right]
+\end{equation}
+This is just like a cylinder, except it is cut in 2 since $\theta \in [0, \pi/2]$. It is thus half a cylinder. Each time slice is half a sphere, a sphere cut at the equatorial line, a curved disk. This spacetime has a boundary, which is time-like. This means that massless particles really live in a box. They are confined by a boundary, and we need to define how they act upon reaching this boundary: are they reflected? absorbed? However, we will see that massless particle do not see the boundary, they never reach it (see TD). \par \medskip 
+
+So AdS is conformally half a cylinder, but it is not really a cylinder. Seeing the factor in front of the metric, we see that $\theta = \frac{\pi}{2}$ is out of the spacetime, since there is a coordinate singularity there. The equation giving AdS hints at the fact that AdS is a maximally symmetric spacetime. AdS is completely invariant under Lorentz transformations, but not under Poincare transformations. Since it is maximally symmetric, we can also guess it has constant curvature, in this case negative constant curvature. Btw this spacetime has a boundary, but is geodesic complete. Particles can reach the boundary only in infinite time. \par \medskip 
+
+In these coordinates, we see that AdS is conformally a half cylinder. But let's look at another set of coordinates, highlighting another property of the space. Let's define the Poincare coordinates $(z, \chi^\mu)_{\mu = 0, \dots, d-1}$ with $z>0$. We define in the embedding space $\mathbb{R}^{2,d} = <X_{-1}, \dots, X_d>$
+\begin{equation}
+   \begin{aligned}
+    X_{-1} &= \frac{R^2}{2z}(1 + \frac{z^2 + \chi_\mu \chi^\mu}{R^2})  \\
+    X_0 &= \frac{R}{z} \chi^0 \\ 
+    X_i &= \frac{R}{z} \chi^i \qquad i = 1, \dots, d-1 \\
+    X_d &= \frac{R^2}{2z}(1 + \frac{\chi_\mu \chi^\mu - z^2}{R^2})
+   \end{aligned}
+\end{equation}
+Using these, we find the metric 
+\begin{equation}
+    \text{d}s^2 = \frac{R^2}{z^2}\left[\text{d}z^2 + \eta_{\mu\nu}\text{d}x^\mu \text{d}x^\nu\right]
+\end{equation}
+We see that the AdS space here is conformally half a Minkowski space. We can clearly see Poincare invariance in $d$ dimensions (along every coordinates except $z$). In other words, we have a whole minkowski space times a half line. But these definitions do not cover all of the AdS space. We only see a part of the space, this is a local AdS. Note that before, the boundaries of the space where $\theta = \frac{\pi}{2}$ or in the other coordinates $\rho = + \infty$. Now, the boundary is $z = 0$. \par \medskip 
+
+After a few computations, we see that the algebra of symmetries of the $AdS_{d+1}$ space is the conformal algebra of a $d$ dimensional flat space. In term of vocabulary, the bulk is everything that is not the boundary. The $d$ dimensional conformal algebra acts in the bulk with some action, but act on the boundary (which is $d$ dimensional) exactly as it should, and leaves it invariant. In other words, the symmetry algebra of the space acts on the boundary as general conformal transformations. \par \medskip 
+
+A small variation of AdS is EAdS, Euclidian anti de Sitter space. Instead of taking the space embedded in $\mathbb{R}^{2,d}$, we take it inside $\mathbb{R}^{1,d+1}$. The space gets a euclidian metric, and the space of symmetries is the euclidian conformal algebra, acting on the boundary which is an Euclidian space by conformal transformations. To find the de Sitter space, we take the same embedding space as for EAdS but we put a $R^2$ instead of $-R^2$ on the right side of the equation. Looking at the Poincare metric, we can analytically go from AdS to EAdS by switching the Minkowski metric with the euclidian metric, and go from AdS to dS by switching the minkowski metric with a Euclidian one but flipping the sign in fron of the $\text{d}z^2$. \par \medskip 
+
+Now, the real question is does this space physically matter? The answer is yes, it is a solution of the Einstein equations in the absence of matter and with only a cosmological constant, which is negative. For a negative cosmological constant $\Lambda$, we have 
+\begin{equation}
+    R^2 = -\frac{d(d-1)}{2\Lambda}
+\end{equation} 
+In other words, $AdS_{d+1}$ is the maximally symmetric spacetime with constant negative curvature. Now, let's try to see the dynamics of physics inside anti de Sitter. 
+
+\section{The Scalar field}
+
+To put a scalar field in anti de Sitter, we can try to write an action 
+\begin{equation}
+    \mathcal S = \int \text{d}^{d+1}x \sqrt{g} \{g^{ab} \partial_a \phi \partial_b \phi - m^2 \phi^2\} 
+\end{equation}
+
 \end{document}

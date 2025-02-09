@@ -215,4 +215,76 @@ Prenons $G$ un reseau carre. On a une dualite pour $x_c = 1$ (cf TD). A une cons
     Z = \sum_{A\subset E} \beta^{l(A)} \quad \text{avec  } \beta = \sqrt{Q}
 \end{equation}
 Les regles pour tracer une boucles sont qu'a chaque lien entre 2 sites (vertex potentiel) on dessine un X (><) dont le sens depend de si le lien est occupe par le graph ou pas. En gros, on traverse les liens pas occupes et on ne traverse pas les liens occupes. 
+
+\section{The Temperley Lieb algebra}
+
+We have $TL_n$, generators $1, u_1, u_2, \dots, u_{n-1}$. 
+\begin{equation}
+    \begin{aligned}
+        &u_i ^2 = \beta u_i \\
+        &u_i u_{i+1} u_i = u_i \\ 
+        &u_i u_j = u_j u_i \quad \text{for } |i-j| > 1
+    \end{aligned}
+\label{eq:laws}\end{equation}
+where in terms of diagrams, $u_i$ is straight line everywhere except for between $i$ and $i+1$ where we have $\subset$ on both sides. \par \medskip 
+
+Imagine we have a large loop in 2D. Given two points, the probability that they belong to the same loop may be equal to 
+\begin{equation}
+    \mathbb{P}(x, y) = \frac{1}{|x-y|^{2\triangle}}
+\end{equation}
+Then the fractal dimension of the loop is $d_f = 2-\triangle$. \par \medskip 
+
+We look at $(n,p)$ link states, with $n$ points, $p$ pairings, $n-2p$ defect lines. Theses are in bijections with walk on $\mathbb{Z}$ from $(0, 0)$ to $(n-p,p)$ staying below the diagonal. We need to do the same for words made out of $u_i$. 
+
+\begin{lemma}
+    Let $U$ be a word made out of $u_i$, reduced by the laws \eqref{eq:laws} to some word as short as possible, then the max index $m$ only occurs once. 
+\end{lemma}
+Let $U$ be reduced maximally. We can write 
+\begin{equation}
+    U = U' . (u_m u_{m-1} u_{m-2} \dots u_{m-l})
+\end{equation}
+where $U'$ has max index lower than $m$, and the other term is a descending tail of length $l$. \par \medskip 
+
+Jones normal form: 
+\begin{equation}
+    U = (u_{j_1} u_{j_1 - 1} \dots u_{k_1}) (\dots ) (u_{j_\sigma} u_{j_\sigma - 1}\dots u_{k_\sigma})
+\end{equation}
+where comparing to the lemma above, $j_\sigma = m$, $k_\sigma = m-l$, and to make it a normal form: 
+\begin{equation}
+    \begin{aligned}
+        &0 < j_1 < j_2 < \dots < j_\sigma < n \\ 
+        &0 < k_1 < k_2 < \dots < k_\sigma < n \\ 
+    \end{aligned}
+\end{equation}
+Moreover, we can prove that 
+\begin{equation}
+    j_i \geq k_i
+\end{equation}
+The number of such possibilities is the Catalan number. Another way to see this is that the number of $(n,p)$ link states is 
+\begin{equation}
+    d_{n,p} = \binom{n}{p} - \binom{n}{p-1}
+\end{equation}
+In particular, 
+\begin{equation}
+    \dim TL_n = d_{2n,n} = \frac{1}{n+1}\binom{2n}{n} = C_n
+\end{equation}
+
+Standard representation: An $A$-module $(M,+,.)$ is a set with $+$ such that $(M,+)$ is an abelian group, and such that the dot is an action from $A$ to $M$. We will look at modules of the temperley lieb algebra. 
+
+We make $TL_n$ act on the links, by the most natural left action. Not that the number of pairings can only increase under the action. 
+
+\begin{definition}[Link Modules]
+    Let $M_n$ be the complex span of all $(n,p)$ link states. Then $M_n$ is a left-$TL_n$ module. 
+\end{definition}
+\begin{definition}
+    Let $M_{n,p}$ be $(n,p')$ links with $p'\geq p$. $M_{n,p}$ is stable under the left $TL_n$ action. 
+\end{definition}
+In particular, we have the following filtration 
+\begin{equation}
+    0 \subset M_{n, [\frac{n}{2}]} \subset \dots \subset M_{n,1} \subset M_n
+\end{equation}
+We define 
+\begin{equation}
+    V_{n,p} = \frac{M_{n,p}}{M_{n,p+1}}
+\end{equation}
 \end{document}

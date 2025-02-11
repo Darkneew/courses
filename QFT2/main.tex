@@ -681,4 +681,93 @@ which, expanded, gives
     ig^2 C(\pi)\delta_{ij} \frac{1}{(4\pi)^2} [\frac{2}{\epsilon}\int_0^1 \text{d}x (2\slashed{p} - 4m) + \text{ finite terms}]
 \end{equation}
 The divergent part must be removed by the counterterm. 
+
+\subsection{Renormalized perturbation theory}
+Strategy: Express $\mathcal L$ in terms of renormalized quantities $\rightarrow$ the difference between renormalized and bare quantities must be fixed order by order to satisfy renormalization conditions. 
+
+\subsubsection{Possible renormalization conditions}
+\begin{enumerate}
+    \item $MS$: we do dimensional regularization and only substract contributions $\propto \frac{1}{\epsilon}$. 
+    \item $\overline{MS}$: dimensional regularization, and substract contributions $\propto (\frac{2}{\epsilon} + \ln 4\pi e^{-\gamma_E})$
+    \item Physical (QED): We introduce the electron self energy $i\Sigma(p^2)$, such that with $m_R$ the renormalized mass, the 2-point fermionic correlator takes the for, 
+    \begin{equation}
+        iG(\slashed{p}) = \frac{i}{\slashed{p} - m_R + \Sigma(\slashed{p})}
+    \end{equation}
+    We similarly introduce the photon self energy $\pi(p^2)$ and the vertex (self energy?) $\Gamma^\mu$. From these, we can impose renormalization conditions such as 
+    \begin{enumerate}
+        \item $\Sigma(m_p) = 0$
+        \item $\Sigma'(m_p) = 0$
+        \item $\Pi(0) - 0$
+        \item $\Gamma^\mu(0) = \gamma^\mu$
+    \end{enumerate}
+    such that all of our quantities are the actual physical quantities at low energy. But this kind of conditions are not accessible in QCD, since we have asymptotic charged states. 
+\end{enumerate}
+
+\subsubsection{First encounter with a YM theory encountered in nature: QCD}
+The gauge group: $SU(3)$. This means we have 8 gauge bosons, or in other words $a,b,\dots = 1,\dots, 8$. The gauge fields are called gluons. \newline
+Matter (interacting strongly): quarks (fermions) \newline 
+Which representations? quarks transform in the defining representation of $SU(3)$. Each quark corresponds to a triplet of fields $q_i, i = 1, 2, 3$. Terminology: each quark comes in 3 colors. We assign each index to a color. \newline 
+
+We have 6 quarks (and their associated anti-quark). They are called flavors. They are divided into 3 generations, 
+\begin{equation}
+    \begin{pmatrix}
+        \text{up} \\ \text{down}
+    \end{pmatrix} \quad 
+    \begin{pmatrix}
+        \text{charm} \\ \text{strange}
+    \end{pmatrix} \quad 
+    \begin{pmatrix}
+        \text{top} \\ \text{bottom}
+    \end{pmatrix} \quad 
+\end{equation}
+From lighter to heavier. We will see more on the doublet structure later. They have electric charge $\begin{pmatrix}
+    +2/3 \\ -1/3
+\end{pmatrix}$
+We will see in the next subsubsection that $\alpha_s = \frac{g_s^2}{4\pi}$ is large at low energies, and small at high energies. It is called asymptotic freedom, since it is free at very high energy. It has an important consequence: strongly interacting particles are not observed at low energy. It is called confinement. Charged particles are confined in bound states: quarks and gluons do not arise as asymptotic states. In particular, the theory has a mass gap ie no massless states in the spectrum.\par \medskip 
+
+Intuitively, the energy in any configuration of separated strongly interacting particles is beyond particle creation threshold. Trying to pull apart a bound state will create a quark antiquark pair, creating 2 bound states. However, we have no theoretical proof of this, since perturbation breaks down. Showing that confinement occurs from first principles is an open problem: 1 million if we solve it. \par \medskip 
+
+Bound states of quarks (hadrons) are color singlets. It means that they are in the trivial representation of $SU(3)$ (ie neutral under the strong interaction). Baryons are bound states of 3 quarks. Indeed, the tensor product of 3 fundamental representations of $SU(3)$ is the sum of a 10 dimensional representation, two 8 dimensional representations, and one 1 trivial representation. We can thus have 3 quarks belonging to a trivial representation of $SU(3)$. By the same reasonning, we see that 2 quarks bound states are impossible. On the other hand, more than 3 quarks bound states are unstable and too short lived. A baryon with 2 quarks up and one down is a proton, a baryon with 2 quarks down and one up is a neutron. We can also have mesons, which are made of a quark and an antiquark since the tensor of the fundamental and conjugate fundamental representation make a 8 dimensional representation summed with a trivial one. For exemple, we have the following pions 
+\begin{equation}
+    \begin{aligned}
+        \frac{1}{\sqrt{2}}(u\bar{u} - d\bar{d}) &= \pi^0 \\
+        \bar{u}d &= \pi^- \\ 
+        u\bar{d} &= \pi^+
+    \end{aligned}
+\end{equation}
+But if quarks do not arise as asymptotic particles, how do we measure their physical properties? Collider experiments sensitive to quarks charges, quark masses, $\alpha_s$. \par \medskip 
+Let's consider $e^+ e^- \rightarrow \text{hadrons}$. This process factorizes as 
+\begin{equation}
+    e^+ e^- \rightarrow q\bar{q} \rightarrow \text{hadrons}
+\end{equation}
+We don't need the details of the hadronization when measuring the total cross-section. Electrons and Quarks are both electromagnetically and weakly charged, so we have two diagrams for the first part. We can compare it to the electron positron to muons diagrams. \par \medskip 
+
+How are quark masses defined if not asymptotically? They are renormalization scheme dependant. For exemple, in the $\overline{MS}$ scheme, we have the masses 4.7 MeV for the down, 2.82 MeV for the up, 93.5 MeV for the strange, 1.28 GeV for the charm, 4.18 GeV for the bottom, and 163 GeV for the top.  
+
+\subsubsection{\mathcal L = \mathcal L_{ren} + \mathcal L_{\text{counterterms}}}
+
+Consider YM coupled to a fermion. In the action written previously, 
+\begin{equation}
+    \begin{aligned}
+        A\rightarrow A_0 &\quad g \rightarrow g_0 \\ 
+        \psi \rightarrow\psi_0 &\quad m \rightarrow m_0 \\ 
+        c \rightarrow c_0 &
+    \end{aligned}
+\end{equation}
+We introduce the renormalized charge $g_0 = Z_g g_R$, the renormalized mass $m_0 = Z_m m_R$ and the renormalized fields $A_0 = \sqrt{Z_3}A_R$, $\psi_0 = \sqrt{Z_2}\psi_R$, $c_0 = \sqrt{Z_2^c}c_R$. \par \medskip 
+
+In term of these, $\mathcal L$ becomes 
+\begin{equation}
+    \begin{aligned}
+        \mathcal L =& -\frac{1}{4}Z_3 (\partial_\mu A^a_{R,\nu} - \partial_\nu A^a_{R, \mu})^2 - \frac{Z_3}{2\xi}(\partial_\mu A^\mu_R)^2 \\ 
+        &- Z_2 \bar \psi_R (i\slashed{\partial} - Z_m m_R)\psi_R - Z_2^c \bar{c}_R^a \square c_R \\ 
+        &- Z_g Z_3^{3/2}g_R f^{abc}(\partial_\mu A^a_{R,\nu}) A^{b,\mu}_R A^{c,\nu}_R \\ 
+        &-\frac{1}{4}Z^2_g Z^2_3 g^2_R (f^{eab}A^a_{R,\mu} A^b_{R,\nu})(f^{ecd} A^{c,\mu}_R A^{d,\nu}_R) \\ 
+        &+ Z_g Z^{1/2}_3 Z_2 A^a_{R,\mu} \bar \psi_R \gamma^\mu T^a \psi_R + Z_g Z^{1/3}_3 Z^c_2 f^{abc}(\partial_\mu \bar c^a_R) A^{b,\mu}_R c^c_R
+    \end{aligned}
+\end{equation}
+
+We introduce $Z^{A^3} = Z_g Z_3^{3/2}$, $Z^{A^4} = Z_g^2 Z_3^2$, $Z_1 = Z_gZ_3^{1/3}Z_2$, $Z^c_1 = Z_gZ_3^{1/2}Z^c_2$. The fact that the renormalization of these interaction terms can be expressed in terms of the renormalization of just the fields, the mass and one coupling is a consequence of gauge invariance. This leads to the notion of charge universality. \par \medskip 
+
+
 \end{document}

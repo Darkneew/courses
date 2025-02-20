@@ -744,7 +744,7 @@ We don't need the details of the hadronization when measuring the total cross-se
 
 How are quark masses defined if not asymptotically? They are renormalization scheme dependant. For exemple, in the $\overline{MS}$ scheme, we have the masses 4.7 MeV for the down, 2.82 MeV for the up, 93.5 MeV for the strange, 1.28 GeV for the charm, 4.18 GeV for the bottom, and 163 GeV for the top.  
 
-\subsubsection{\mathcal L = \mathcal L_{ren} + \mathcal L_{\text{counterterms}}}
+\subsubsection{$\mathcal L = \mathcal L_{ren} + \mathcal L_{\text{counterterms}}$}
 
 Consider YM coupled to a fermion. In the action written previously, 
 \begin{equation}
@@ -769,5 +769,94 @@ In term of these, $\mathcal L$ becomes
 
 We introduce $Z^{A^3} = Z_g Z_3^{3/2}$, $Z^{A^4} = Z_g^2 Z_3^2$, $Z_1 = Z_gZ_3^{1/3}Z_2$, $Z^c_1 = Z_gZ_3^{1/2}Z^c_2$. The fact that the renormalization of these interaction terms can be expressed in terms of the renormalization of just the fields, the mass and one coupling is a consequence of gauge invariance. This leads to the notion of charge universality. \par \medskip 
 
+We split the Lagrangian in $\mathcal L = \mathcal L_{\text{ren}} + \mathcal L_{\text{CT}}$. We also split $Z_* = 1 + \delta_*$. With these, 
 
+\begin{equation}
+    \begin{aligned}
+        \mathcal L =& L_{\text{ren}} -\frac{1}{4}\delta_3 (\partial_\mu A^a_{R,\nu} - \partial_\nu A^a_{R, \mu})^2  + \delta_2 \bar \psi_R i\slashed{\partial} \psi_R \\ 
+        &- (\delta_2 + \delta_m +\delta_2\delta_m)m_R \bar \psi_R\psi_R - \delta_2^c \bar{c}_R^a \square c_R \\ 
+        &- \delta_{A^3} g_R f^{abc}(\partial_\mu A^a_{R,\nu}) A^{b,\mu}_R A^{c,\nu}_R -\frac{1}{4}\delta_{A^4} g^2_R (f^{eab}A^a_{R,\mu} A^b_{R,\nu})(f^{ecd} A^{c,\mu}_R A^{d,\nu}_R) \\ 
+        &+ \delta_1 A^a_{R,\mu} \bar \psi_R \gamma^\mu T^a \psi_R + \delta_1^c f^{abc}(\partial_\mu \bar c^a_R) A^{b,\mu}_R c^c_R
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Feyman rules for renormalized perturbation theory}
+For all of the things already in the interacting Lagrangian before, there is no difference. For the gauge momentum counterterm vertex $-\frac{1}{4}\delta_3 (\partial_\mu A^a_{R,\nu} - \partial_\nu A^a_{R, \mu})^2$, we get 
+\begin{equation}
+    -i \delta_3 (p^2 g^{\mu\nu} - p^\mu p^\nu) \delta^{ab}
+\end{equation}
+For the fermion, we get 
+\begin{equation}
+    i(\slashed{p} \delta_2 - (\delta_2 + \delta_m + \delta_m\delta_2)m_R)\delta_{ij}
+\end{equation}
+For the ghosts, we get something similar. \par \medskip 
+
+Going back to the fermion 2-point function and adding the counterterm, we get 
+\begin{equation}
+    \frac{ig_R^2 C_D}{(4\pi)^2}\delta_{ij} \frac{2}{\epsilon}(\slashed{p} - 4m_r) + i(\slashed{p} \delta_2 - (\delta_2 + \delta_m + \delta_m\delta_2)m_R)\delta_{ij}
+\end{equation}
+If we want to cancel the term in $\slashed{p}$, we must have  
+\begin{equation}
+    \delta_2 = -\frac{1}{\epsilon} \frac{g_R^2 }{(4\pi)^2} 2C_D
+\end{equation}
+But then we must have 
+\begin{equation}
+    \delta_m = -\frac{1}{\epsilon} \frac{g_R^2 }{(4\pi)^2} 6C_D
+\end{equation}
+
+
+\subsection{Computing the beta function}
+Recall : The most intuitive renormalizing conditions involve a choice of scale $M$, such that 
+    \begin{equation}
+        \text{observable}(M) = \text{measured quantity}
+    \end{equation}
+It is intelligent to choose an energy scale close to the one of our experiment, otherwise it invalidates the perturbation theory. We hence want to study the scale dependance of the coupling constant via renormalization. The group equation is 
+\begin{equation}
+    \begin{aligned}
+        &g_R = \frac{1}{Z_R}g_0 \\ 
+        &\beta(g_R) = M\frac{\text{d}}{\text{d}M}g_R = M\left(\frac{\text{d}}{\text{d}M}\frac{1}{Z_R}\right)g_0
+    \end{aligned}
+\end{equation}
+In dimensional regularization, the artificial scale $\mu$ introduced to render the gauge coupling dimensionless plays role of the physical scale, ie it enters in logarithms to offset mass dim. of external momentum. \par \medskip 
+
+Let's write the scale explicitely. 
+\begin{equation}
+    g_0 = Z_g \mu ^{(4-d)/2}g_R = \mu^{(4-d)/2}(1 + \delta_g)g_R
+\end{equation}
+The total $\mu$ dependance (in $\delta_g$ and $g_R$) must cancel. So $g_0 \mu^{-\epsilon /2} = g_R(1+\delta_g)$
+Computing 
+\begin{equation}
+            \beta(g_r) = \mu \frac{\text{d}}{\text{d}\mu}g_R
+\end{equation}
+We see 
+\begin{equation}
+    \mu \frac{\text{d}}{\text{d}\mu}g_0 \mu^{-\epsilon /2} = \dots 
+\end{equation}
+And 
+\begin{equation}
+    -\frac{\epsilon}{2}g_R (1 + \delta_g) = \mu \frac{\text{d}}{\text{d}\mu}[g_R (1 + \delta_g)] = \beta(g_R) + \delta_g \beta(g_R) + g_R \mu \frac{\text{d}}{\text{d}\mu} \delta_g
+\end{equation}
+Since $\delta_g$ only depends on $\mu$ via $g_R$, 
+\begin{equation}
+    -\frac{\epsilon}{2}g_R (1 + \delta_g) = \mu \frac{\text{d}}{\text{d}\mu}[g_R (1 + \delta_g)] = \beta(g_R) + \delta_g \beta(g_R) + g_R \beta(g_R) \frac{\text{d}}{\text{d}g_R} \delta_g
+\end{equation}
+We want to solve this to subleading order. At leading order in $g_R$, $\delta_g \sim \frac{1}{\epsilon}$. We set $\tilde\delta_g = \epsilon \delta_g$ and $\beta(g_R) = A + B\epsilon$. At order $\epsilon$, 
+\begin{equation}
+    -\frac{1}{2}g_R = B 
+\end{equation}
+At order 1, 
+\begin{equation}
+    -\frac{1}{2}g_R \tilde \delta_g = A + \tilde \delta_g B + g_R B \frac{\text{d}}{\text{d}g_R} \tilde \delta_g
+\end{equation}
+So 
+\begin{equation}
+    A = \frac{1}{2}g_R^2 \frac{\text{d}}{\text{d}g_R} \tilde{\delta}_g
+\end{equation}
+Hence 
+\begin{equation}
+    \beta(g_r) = -\frac{\epsilon}{2}g_R + \frac{\epsilon}{2} g^2_R \frac{\text{d}}{\text{d}g_R}\delta_g
+\end{equation}
+Here, the second term is of the order $g_R^3$. Note that the terms of the order $\frac{1}{\epsilon}$ are of the order $g_R^5$, so we can rightfully neglect them. \par \medskip 
+
+To compute the beta function of YM coupled to a fermion, we need $g_R$ dependencies of $\delta_g$. At leading order, $Z_g = 1 + \delta_1 - \delta_2 -\frac{1}{2}\delta_3$. 
 \end{document}

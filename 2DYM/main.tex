@@ -1,4 +1,4 @@
-\documentclass[a4paper]{book}
+\documentclass[a4paper]{report}
 
 % packages % 
 \usepackage[utf8]{inputenc} 
@@ -36,13 +36,123 @@
 \begin{document}
 
 % title %
-\title{2D Yang Mills model}
+\title{La mesure de Yang-Mills en 2 dimensions}
 \author{Buisine Léo\\Ecole Normale Superieure of Paris}
 \maketitle
 
 \tableofcontents
 
 \chapter{Introduction}
+\section{Variete differentielle}
+\begin{definition}
+    Variete differentielle : variete topologique separe localement modelee sur $\mathbb{R}^n$ de maniere lisse, aka munit de cartes et de changements de cartes (un atlas).
+\end{definition}
+\begin{definition}
+    Espace tangent $T_pM$, l'espace des tangeantes a $M$ en $p$. Si $M$ est lisse de dim $n$, alors $T_pM$ est homeomorphe a $\mathbb{R}^n$.
+\end{definition}
 
+\begin{example}
+    Un groupe de Lie $G$ est un groupe munit d'une structure de variete differentielle compatible. $\mathfrak{g} = T_eG$ est l'algebre de Lie associee. 
+\end{example}
+
+\section{Fibre vectoriel}
+\begin{definition}
+    Un fibre vectoriel de base $M$ de rang $k$ est une variete $E$ munie d'une surjection lisse $\pi : E\rightarrow M$ qui ressemble localement a $M \times \mathbb{R}^k$. On note $E_x \equiv \pi^{-1}(x)$ la fibre au dessus de $x$. 
+\end{definition}
+
+\begin{example}
+    Le fibre tangeant $TM = \bigcup T_p M$. Le fibre cotangeant $T^*M$ en prenant le dual. 
+\end{example}
+
+\begin{definition}
+    Soit $E, \pi, M$ un fibre. Une section locale de $E$ est une application $\sigma: U \subset M \rightarrow E$ tq $\pi \circ \sigma = \text{id}$. On note $\Gamma(M)$ l'espace des sections de $M$. 
+\end{definition}
+
+\begin{example}
+    Les champs de vecteurs sur $M$: $\Gamma(TM) = \chi(M)$. Les 1-formes differentielles sur $M$: $\Gamma(T^*M) = \Omega^1(M)$. Par exemple, si $X\in \chi(M)$, $X_p = \sum_{i=1}^n X_i(x)\frac{\partial}{\partial x^i}$ et si $\omega \in \Omega^1(M)$, $\omega_p = \sum_{i=1}^n \omega_i(p) \text{d}x_i$
+\end{example}
+
+\section{Connexion}
+
+$\nabla$ est la generalisation des derivees directionelles $\nabla_X S$, avec $X \in \chi(M)$, $S \in \Gamma(E)$
+
+\begin{definition}
+    Une connexion sur $(E, \pi, M)$ est au choix 
+    \begin{itemize}
+        \item Une application bilineaire $\nabla: \chi(M) \times \Gamma(E) \rightarrow \Gamma(E)$ qui verifie 
+        \begin{equation}
+            \begin{aligned}
+                &\nabla_{f.X}S = f\nabla_X S \\ 
+                &\nabla_X (fS) = f\nabla_X s + (Xf).s 
+            \end{aligned}
+        \end{equation}
+        \item Une application lineaire $\nabla : \Gamma(E) \rightarrow \Omega^1(M,E)$ definit par $S\rightarrow (X \rightarrow \nabla_X S)$ qui verifie la formule de Leibniz juste au dessus  
+    \end{itemize}
+\end{definition}
+\begin{theorem}
+    L'espace $\mathcal A$ des connexions sur $E$ est un espace affine de direction $\Omega^1 (M, \text{End}(E))$. En d'autres termes, si $\nabla$ est une connexion et $A \in \Omega^1 (M, \text{End}(E))$, aors $A + \nabla$ est une connexion.
+\end{theorem}
+
+\section{Fibre principaux} 
+$G$ groupe de Lie. Il agit sur lui meme par conjugaison, et sur son algebre par le releve de la conjugaison. 
+\begin{definition}
+    Soit $G$ un groupe de Lie. Un $G$-fibre principal est une variete diff $P$ munie d'une action libre a droite $P\times G \rightarrow P$, $(p,g) \rightarrow p.g$ dont les fibres $\pi^{-1}(x)$, $x\in M$ sont les orbites de $P$ sous l'action de $G$. 
+\end{definition}
+
+\begin{definition}
+    Section: comme avant
+\end{definition}
+
+\begin{definition}
+    Soit $(P, \pi, M)$ un $G$-fibre principal. Une connexion sur $P$ est une application $p\in P \rightarrow H_p \subset T_p P$ qui verifie 
+    \begin{enumerate}
+        \item $T_p P = H_p \oplus V_p$ ou $V_p = \ker ((\text{d}\pi)_p)$
+        \item $H_p$, $p \in P$ est stable par action de $G$. 
+        \item $p \rightarrow H_p$ est lisse. 
+    \end{enumerate}
+\end{definition}
+
+Soit $X\in \mathfrak g$. On lui associe le champs de vecteurs fondamental $\tilde X$ sur $P$ defini par 
+\begin{equation}
+    \tilde X_p = \frac{\text{d}}{\text{d}t}\Big|_{t=0} p. e^{tX}
+\end{equation}
+
+\begin{definition}
+    2eme def. $(P, \pi, M)$. Une connexion sur $P$ est une 1-forme differentielle $\omega \in \Omega^1 (P, \mathfrak{g})$ tq 
+    \begin{enumerate}
+        \item $\omega(\tilde X_p) = X$ pour tout $p\in P, X \in \mathfrak{g}$
+        \item $(R_g)^{-1} \omega = \text{Ad}(g^{-1})\omega$ pour tout $g\in G$. 
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Les deux definitions coincident. 
+\end{theorem}
+
+\begin{theorem}
+    L'espace $\mathcal A$ des connexions sur $P$ est un espace affine de direction $\Omega^1 (M, \text{ad}(p))$ (c'est un fibre vectoriel de fibre $\mathfrak{g}$)
+\end{theorem}
+
+\begin{definition}
+    Soit $\omega$ une connexion sur $P$. Sa courbure est la 2-forme $\Omega \in \Omega^2 (P, \mathfrak{g})$ definie par $\Omega = \text{d}\omega + \frac{1}{2}[\omega \wedge \omega]$ ou $[\omega \wedge \omega]$ est definie par $[\omega \wedge \omega](x,y) = 2[\omega(x), \omega(y)]$. $\omega$ est dite plate si $\Omega = 0$. 
+\end{definition}
+
+\section{La mesure de Yang-Mills}
+La Theorie de Yang Mills est une theorie de jauge (des equa diff sur des sections de fibre) non-abelienne. La theorie de YM avec $G = SU(2)\times U(1) \times SU(3)$ est le modele standard ($U(1)$ pour la charge electrique, $SU(3)$ pour la couleur, et $SU(2)$ pour la charge faible). L'espace temps est la variete, l'espace des champs est le $G$-fibre principal.\par \medskip 
+
+La mesure de Yang Mills euclidienne est une mesure sur $\mathcal A$ definie par 
+
+\begin{equation}
+    d\mu _{YM} (\omega) = \frac{1}{Z} e^{-\frac{1}{2T} S_{YM}(\omega)} \text{d}\omega
+\end{equation}
+Avec $Z$ la fonction de partition, $T$ la constante de couplage et $S$ l'action de Yang Mills definie par  
+\begin{equation}
+    S_{YM}(\omega) = ||\Omega||^2 = \frac{1}{2} \int_M <\Omega \wedge *\Omega>
+\end{equation}
+\chapter{Construction de la mesure}
+
+\chapter{Calcul de la fonction de partition}
+
+\chapter{Etude asymptotique}
 
 \end{document}
